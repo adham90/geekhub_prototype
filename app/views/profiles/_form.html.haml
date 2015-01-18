@@ -1,0 +1,19 @@
+= simple_form_for(@profile, html: { class: 'form-horizontal' }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :username, required: true
+    = f.input :name, required: true, autofocus: true
+    = f.simple_fields_for :user do |o|
+      = o.error_notification
+      = o.input :email, required: true
+      = o.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
+      = o.input :password_confirmation, required: true
+
+    = f.input :phone, required: true
+    = f.input :age, required: true
+    = f.input :avatar
+    = f.input :bio
+    = f.input :gender
+  .form-actions
+    = f.button :submit
