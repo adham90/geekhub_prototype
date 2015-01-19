@@ -1,0 +1,27 @@
+@mixin box-shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+  box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+}
+
+@mixin rounded($radius: 0.5em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin skill-tags() {
+  list-style-position:inside;
+  border: 2px solid #EEEEEE;
+  margin-bottom: 10px;
+  @include rounded(1em);
+  cursor: pointer;
+  line-height: 30px;
+  font-weight: bold;
+  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+  a{
+    text-decoration:none;
+  }
+}
