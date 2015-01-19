@@ -1,20 +1,19 @@
 require 'rails_helper'
 
 describe Profile do
+
   describe "vaidations" do
-    it { should validates_presence_of :name }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:username) }
+    it { should validate_presence_of(:phone) }
+    it { should validate_presence_of(:age) }
 
-    it { should validates_presence_of :age }
-    it { should validates_numericality_of :age }
-    
-    it { should validates_presence_of :phone }
-    it { should validates_uniqueness_of :phone }
-
-    it { should validates_presence_of :username }
-    it { should validates_uniqueness_of :username }
+    it { should validate_uniqueness_of(:phone).scoped_to(:id) }
+    it { should validate_uniqueness_of(:username).scoped_to(:id) }
+    it { should validate_numericality_of(:age) }
   end
 
   describe 'association' do
-    it { should belongs_to :user }
+    it { should belong_to(:user) }
   end
 end

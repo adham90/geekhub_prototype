@@ -8,6 +8,6 @@ class Profile < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 50}
   validates :phone, presence: true, uniqueness: { case_sensitive: false }, length: {maximum: 50}
   validates :age, presence: true, length: {maximum: 4}
-  
+  validates_numericality_of :age
   
 end
