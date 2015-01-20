@@ -45,10 +45,15 @@ class ProfilesController < ApplicationController
 
   def add_skill
     unless params[:skill] == "" or params[:skill] == nil
+      flash.delete(:notice)
+      flash.delete(:error)
       if @profile.add_skill?(params[:skill])
         flash[:notice] = "Skill Added successfully"
       else
         flash[:error] = "Skill can't be added"
+      end
+      respond_to do |format|
+        format.js
       end
     end
   end
