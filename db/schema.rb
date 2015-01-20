@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118151958) do
+ActiveRecord::Schema.define(version: 20150120123019) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",   limit: 255,   null: false
@@ -35,6 +35,19 @@ ActiveRecord::Schema.define(version: 20150118151958) do
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
   add_index "profiles", ["username"], name: "index_profiles_on_username", using: :btree
+
+  create_table "profiles_skills", id: false, force: :cascade do |t|
+    t.integer "profile_id", limit: 4
+    t.integer "skill_id",   limit: 4
+  end
+
+  add_index "profiles_skills", ["profile_id", "skill_id"], name: "index_profiles_skills_on_profile_id_and_skill_id", using: :btree
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

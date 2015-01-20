@@ -4,12 +4,6 @@
 @import "variables";
 @import "mixins";
 
-
-body {
-  background: rgb(235, 238, 243);
-  // padding-top: 70px;
-}
-
 // make all images responsive by default
 img {
   @extend .img-responsive;
@@ -103,6 +97,9 @@ section {
   margin-bottom: 30px;
   @include box-shadow;
   border: none;
+  #brand{
+    color: $red;
+  }
   .navbar-brand {
     text-transform: uppercase;
     letter-spacing: -1px;

@@ -3,6 +3,8 @@
 
 %h1 Listing profiles
 
+= render 'add_skill_form'
+
 %table
   %thead
     %tr
@@ -14,9 +16,6 @@
     - @profiles.each do |profile|
       %tr
         %td= link_to 'Show', profile
-        %td= link_to 'Edit', edit_profile_path(profile)
-        %td= link_to 'Destroy', profile, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
 %br
 
 = link_to 'New Profile', new_profile_path

@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
+  before_action :authenticate_user!, except: [:index, :show, :new]
 
   respond_to :html
 
@@ -41,6 +41,16 @@ class ProfilesController < ApplicationController
   def destroy
     @profile.destroy
     respond_with(@profile)
+  end
+
+  def add_skill
+    unless params[:skill] == "" or params[:skill] == nil
+      if @profile.add_skill?(params[:skill])
+        flash[:notice] = "Skill Added successfully"
+      else
+        flash[:error] = "Skill can't be added"
+      end
+    end
   end
 
   private
