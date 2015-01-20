@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   respond_to :html
 
@@ -13,9 +14,14 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @profile = Profile.new
-    @profile.build_user
-    respond_with(@profile)
+    if user_signed_in?
+      flash[:error] = "You cannot perform this action."
+      redirect_to root_path
+    else
+      @profile = Profile.new
+      @profile.build_user
+      respond_with(@profile)
+    end
   end
 
   def edit
@@ -39,7 +45,7 @@ class ProfilesController < ApplicationController
 
   private
     def set_profile
-      @profile = Profile.find(params[:id])
+      @profile = current_user.profile if user_signed_in?
     end
 
     def profile_params
