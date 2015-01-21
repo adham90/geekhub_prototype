@@ -21,6 +21,6 @@ secrets.yml
 secrets
 
 # Ignore CarrierWave uploads
-/public/uploads
-/public/uploads/
-/public/uploads/*
+/public/system
+/public/system/
+/public/system/*
