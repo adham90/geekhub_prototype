@@ -1,8 +1,8 @@
-= simple_form_for(@profile, :validate => true, html: { class: 'form-horizontal', multipart: true }) do |f|
+= simple_form_for(@profile, :validate => true, html: { multipart: true }) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :username, required: true
+    = f.input :username, required: true, validate: { uniqueness: true }
     = f.input :name, required: true, autofocus: true
     = f.simple_fields_for :user do |o|
       = o.input :email, required: true
