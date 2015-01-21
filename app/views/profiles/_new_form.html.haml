@@ -1,4 +1,4 @@
-= simple_form_for(@profile, html: { class: 'form-horizontal', multipart: true }) do |f|
+= simple_form_for(@profile, :validate => true, html: { class: 'form-horizontal', multipart: true }) do |f|
   = f.error_notification
 
   .form-inputs

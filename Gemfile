@@ -4,7 +4,6 @@ gem 'rails', '4.2.0'
 gem 'mysql2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'active_model_serializers'
@@ -22,6 +21,8 @@ gem 'searchkick'
 gem 'open_uri_redirections'
 gem 'mini_magick'
 gem 'paperclip', '~> 4.2.1'
+gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
+gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
 
 ##  Geocoding & Map
 gem "geocoder"

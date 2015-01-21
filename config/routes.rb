@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :profiles, except: [:edit, :destroy]
-  get '/:username', to: 'profiles#show', as: 'show_profile'
+  get '@/:username', to: 'profiles#show', as: 'show_profile'
   get '/addskill', to: 'profiles#add_skill'
   get '/signup', to: 'profiles#new', as: 'signup'
   get '/profile/edit', to: 'profiles#edit', as: 'profile_edit'
