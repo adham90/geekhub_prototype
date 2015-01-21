@@ -5,7 +5,6 @@ class CreateProfiles < ActiveRecord::Migration
       t.string  :name,     null: false
       t.text    :bio
       t.string  :phone,    null: false, index: true, unique: true
-      t.string  :avatar
       t.integer :rank
       t.integer :age,     null: false
       t.boolean :gender,  null: false

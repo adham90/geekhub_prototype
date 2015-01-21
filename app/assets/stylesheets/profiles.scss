@@ -1,3 +1,39 @@
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+@import "mixins";
+
+#edit-profile-avatar{
+  margin-left: 0px;
+}
+
+
+#profile_info{
+  background: white;
+  @include box-shadow;
+  min-height: 300px;
+  max-height: 300px;
+  border-radius: 5px;
+  padding: 2em 8%;
+  h1 {
+    font-size: 36px;
+    font-weight: normal;
+    color: $red;
+  }
+  .description {
+    color: #8A8A8A;
+    font-size: 20px;
+  }
+}
+
+.profile_image {
+  height:300px;
+  width:300px;
+  float:left;
+  min-height: 300px;
+  max-height: 300px;
+  max-width: 100%;
+  border-radius: 5px;
+  @include box-shadow;
+}

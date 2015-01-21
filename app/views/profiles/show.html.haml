@@ -1,6 +1,20 @@
-%p#notice= notice
-
-
-= link_to 'Edit', profile_edit_path(@profile)
-\|
-= link_to 'Back', profiles_path
+.row
+  .col-md-3.col-sm-5
+    .image_wrapper
+      = image_tag @profile.avatar.url(:medium), class: "profile_image"
+  .col-md-9.col-sm-7
+    #profile_info
+      %h1= @profile.name
+      %p.description= @profile.bio
+      %p
+        = @profile.user.email
+%br/
+.row
+  .col-md-3
+    = render 'add_skill_form'
+%br/
+.row
+  .col-md-12
+    = link_to "Back", root_path, class: "btn btn-default"
+    - if @current_user
+      = link_to "Edit", profile_edit_path, class: "btn btn-default"

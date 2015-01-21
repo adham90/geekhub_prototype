@@ -1,4 +1,4 @@
-= simple_form_for(@profile, html: { class: 'form-horizontal' }) do |f|
+= simple_form_for(@profile) do |f|
   = f.error_notification
 
   .form-inputs
@@ -6,8 +6,11 @@
     = f.input :name, required: true, autofocus: true
     = f.input :phone, required: true
     = f.input :age, required: true
+    - if @profile.avatar?
+      = image_tag(@profile.avatar.url(:small), id: "edit-profile-avatar")
+      %em Currently uploaded avatar
     = f.input :avatar
     = f.input :bio
     = f.input :gender
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: "btn btn-default btn-lg btn-block"

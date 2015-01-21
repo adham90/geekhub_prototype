@@ -21,7 +21,7 @@ gem 'omniauth-facebook'
 gem 'searchkick'
 gem 'open_uri_redirections'
 gem 'mini_magick'
-gem 'carrierwave'
+gem 'paperclip', '~> 4.2.1'
 
 ##  Geocoding & Map
 gem "geocoder"

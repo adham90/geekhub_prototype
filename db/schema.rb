@@ -11,23 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120123019) do
+ActiveRecord::Schema.define(version: 20150121113002) do
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "username",   limit: 255,   null: false
-    t.string   "name",       limit: 255,   null: false
-    t.text     "bio",        limit: 65535
-    t.string   "phone",      limit: 255,   null: false
-    t.string   "avatar",     limit: 255
-    t.integer  "rank",       limit: 4
-    t.integer  "age",        limit: 4,     null: false
-    t.boolean  "gender",     limit: 1,     null: false
-    t.float    "latitude",   limit: 24
-    t.float    "longitude",  limit: 24
-    t.string   "address",    limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "username",            limit: 255,   null: false
+    t.string   "name",                limit: 255,   null: false
+    t.text     "bio",                 limit: 65535
+    t.string   "phone",               limit: 255,   null: false
+    t.integer  "rank",                limit: 4
+    t.integer  "age",                 limit: 4,     null: false
+    t.boolean  "gender",              limit: 1,     null: false
+    t.float    "latitude",            limit: 24
+    t.float    "longitude",           limit: 24
+    t.string   "address",             limit: 255
+    t.integer  "user_id",             limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
   end
 
   add_index "profiles", ["latitude"], name: "index_profiles_on_latitude", using: :btree

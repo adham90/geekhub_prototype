@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
-  before_action :authenticate_user!, except: [:index, :show, :new]
+  before_action :authenticate_user!, except: [:index, :show, :new, :create]
 
   respond_to :html
 
@@ -10,6 +10,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    if params[:username]
+      @profile = Profile.find_by_username(params[:username])
+    end
     respond_with(@profile)
   end
 
@@ -35,7 +38,7 @@ class ProfilesController < ApplicationController
 
   def update
     @profile.update(profile_params)
-    respond_with(@profile)
+    render :edit
   end
 
   def destroy
@@ -45,8 +48,7 @@ class ProfilesController < ApplicationController
 
   def add_skill
     unless params[:skill] == "" or params[:skill] == nil
-      flash.delete(:notice)
-      flash.delete(:error)
+      clear_flash
       if @profile.add_skill?(params[:skill])
         flash[:notice] = "Skill Added successfully"
       else
@@ -59,13 +61,18 @@ class ProfilesController < ApplicationController
   end
 
   private
+    def clear_flash
+      flash.delete(:notice)
+      flash.delete(:error)
+    end
+
     def set_profile
       @profile = current_user.profile if user_signed_in?
     end
 
     def profile_params
-      params.require(:profile).permit(:username, :name, :bit, :phone, 
+      params.require(:profile).permit(:username, :name, :bio, :phone, 
         :rank, :gender, :address, 
-        :latitude, :longitude, :age, :remote_avatar_url, user_attributes: [:email, :password, :password_confirmation])
+        :latitude, :longitude, :age, :avatar, user_attributes: [:email, :password, :password_confirmation])
     end
 end
