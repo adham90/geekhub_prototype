@@ -2,7 +2,7 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :username, required: true, validate: { uniqueness: true }
+    = f.input :username, required: true, uniqueness: true
     = f.input :name, required: true, autofocus: true
     = f.simple_fields_for :user do |o|
       = o.input :email, required: true
