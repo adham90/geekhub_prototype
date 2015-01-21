@@ -23,7 +23,6 @@ gem 'mini_magick'
 gem 'paperclip', '~> 4.2.1'
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
-
 ##  Geocoding & Map
 gem "geocoder"
 gem 'gmaps4rails', '~> 2.1.2'
@@ -49,6 +48,11 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+end
+
+group :development do
+  gem 'better_errors', '~> 2.1.1'
+  gem "binding_of_caller"
 end
 
 group :test do

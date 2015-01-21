@@ -5,14 +5,14 @@
     = f.input :username, required: true, uniqueness: true
     = f.input :name, required: true, autofocus: true
     = f.simple_fields_for :user do |o|
-      = o.input :email, required: true
+      = o.input :email, required: true, uniqueness: true
       = o.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
       = o.input :password_confirmation, required: true
 
-    = f.input :phone, required: true
+    = f.input :phone, required: true, uniqueness: true
     = f.input :age, required: true
     = f.input :avatar
     = f.input :bio
-    = f.input :gender
+    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true
   .form-actions
     = f.button :submit

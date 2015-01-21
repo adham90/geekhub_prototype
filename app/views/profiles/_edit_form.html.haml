@@ -11,6 +11,6 @@
       %em Currently uploaded avatar
     = f.input :avatar
     = f.input :bio
-    = f.input :gender
+    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
   .form-actions
     = f.button :submit, class: "btn btn-default btn-lg btn-block"

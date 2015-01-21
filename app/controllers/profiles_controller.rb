@@ -10,9 +10,6 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    if params[:username]
-      @profile = Profile.find_by_username(params[:username])
-    end
     respond_with(@profile)
   end
 
@@ -67,7 +64,13 @@ class ProfilesController < ApplicationController
     end
 
     def set_profile
-      @profile = current_user.profile if user_signed_in?
+      if params[:username]
+        @profile = Profile.find_by_username(params[:username])
+      elsif params[:id]
+        @profile = Profile.find(params[:id])
+      elsif user_signed_in?
+        @profile = current_user.profile
+      end
     end
 
     def profile_params
