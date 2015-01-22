@@ -1,18 +1,19 @@
-= simple_form_for(@profile, :validate => true, html: { multipart: true }) do |f|
+= simple_form_for(@profile, validate: true, html: { multipart: true }) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :username, required: true, uniqueness: true
     = f.input :name, required: true, autofocus: true
-    = f.simple_fields_for :user do |o|
+    = f.input :title_id, collection: Title.all,value_method: :id , label_method: :name, label: "Title", include_blank: false
+    = f.input :phone, required: true, uniqueness: true
+    = f.simple_fields_for :user, validate: true do |o|
       = o.input :email, required: true, uniqueness: true
       = o.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
       = o.input :password_confirmation, required: true
 
-    = f.input :phone, required: true, uniqueness: true
-    = f.input :age, required: true
+    = f.input :age, required: true, label: "Year of birth"
     = f.input :avatar
     = f.input :bio
-    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true
+    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
   .form-actions
-    = f.button :submit
+    = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"

@@ -11,7 +11,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.float   :latitude, index: true
       t.float   :longitude, index: true
       t.string  :address
-      
+      t.references :title, index: true
       t.belongs_to :user, index: true
       t.timestamps null: false
     end

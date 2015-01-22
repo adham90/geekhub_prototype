@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121113002) do
+ActiveRecord::Schema.define(version: 20150122113327) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150121113002) do
     t.float    "latitude",            limit: 24
     t.float    "longitude",           limit: 24
     t.string   "address",             limit: 255
+    t.integer  "title_id",            limit: 4
     t.integer  "user_id",             limit: 4
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150121113002) do
   add_index "profiles", ["latitude"], name: "index_profiles_on_latitude", using: :btree
   add_index "profiles", ["longitude"], name: "index_profiles_on_longitude", using: :btree
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree
+  add_index "profiles", ["title_id"], name: "index_profiles_on_title_id", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
   add_index "profiles", ["username"], name: "index_profiles_on_username", using: :btree
 
@@ -47,9 +49,11 @@ ActiveRecord::Schema.define(version: 20150121113002) do
   add_index "profiles_skills", ["profile_id", "skill_id"], name: "index_profiles_skills_on_profile_id_and_skill_id", using: :btree
 
   create_table "skills", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string "name", limit: 255, null: false
+  end
+
+  create_table "titles", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
   end
 
   create_table "users", force: :cascade do |t|

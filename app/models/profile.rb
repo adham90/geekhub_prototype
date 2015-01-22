@@ -2,15 +2,34 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   # has_and_belongs_to_many :skills, -> { uniq }
 
+  belongs_to :title
+
   accepts_nested_attributes_for :user
 
   # validates_uniqueness_of :skills
 
   validates_presence_of :user
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, length: {maximum: 50}
+
+  validates_presence_of :title
+
+  validates :username, presence: true,
+                       uniqueness: { case_sensitive: false },
+                       length: {maximum: 50},
+                       format: /\A[a-zA-Z\d]*\z/
+
   validates :name, presence: true, length: {maximum: 50}
-  validates :phone, presence: true, uniqueness: { case_sensitive: false }, length: {maximum: 50}
-  validates :age, presence: true, length: {maximum: 4}, numericality: {only_integer: true, greater_than_or_equal_to: Date.today.year - 90 , less_than_or_equal_to: Date.today.year + 90}
+
+  validates :phone, presence: true,
+                    uniqueness: { case_sensitive: false },
+                    length: {maximum: 50}
+
+  validates :age, presence: true, 
+                  length: {maximum: 4}, 
+                  numericality: {only_integer: true,
+                    greater_than_or_equal_to: Date.today.year - 90 , 
+                    less_than_or_equal_to: Date.today.year + 90}
+
+
   # validates_numericality_of :rank
 
   has_attached_file :avatar, styles: {
@@ -29,4 +48,5 @@ class Profile < ActiveRecord::Base
       false
     end
   end
+
 end
