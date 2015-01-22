@@ -5,6 +5,7 @@ gem 'mysql2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 gem 'turbolinks'
 gem 'active_model_serializers'
 gem 'devise'
@@ -23,6 +24,8 @@ gem 'mini_magick'
 gem 'paperclip', '~> 4.2.1'
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
+gem 'rails4-autocomplete'
+
 ##  Geocoding & Map
 gem "geocoder"
 gem 'gmaps4rails', '~> 2.1.2'

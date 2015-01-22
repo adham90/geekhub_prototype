@@ -4,6 +4,12 @@ class Profile < ActiveRecord::Base
 
   belongs_to :title
 
+  has_many :companies, through: :jobs
+
+  has_many :jobs
+
+  # autocomplete :company, :name
+
   accepts_nested_attributes_for :user
 
   # validates_uniqueness_of :skills

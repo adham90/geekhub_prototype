@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122113327) do
+ActiveRecord::Schema.define(version: 20150122160105) do
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",        limit: 255,   null: false
+    t.float    "latitude",    limit: 24
+    t.float    "longitude",   limit: 24
+    t.string   "address",     limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "companies_skills", force: :cascade do |t|
+    t.integer "company_id", limit: 4
+    t.integer "skill_id",   limit: 4
+  end
+
+  add_index "companies_skills", ["company_id"], name: "index_companies_skills_on_company_id", using: :btree
+  add_index "companies_skills", ["skill_id"], name: "index_companies_skills_on_skill_id", using: :btree
+
+  create_table "jobs", force: :cascade do |t|
+    t.integer  "company_id",     limit: 4
+    t.integer  "title_id",       limit: 4
+    t.text     "description",    limit: 65535
+    t.boolean  "currently_work", limit: 1,     default: false
+    t.integer  "profile_id",     limit: 4
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
