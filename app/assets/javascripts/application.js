@@ -15,13 +15,13 @@
 //= require jquery-ui
 //= require jquery.turbolinks
 //= require autocomplete-rails
-//= require underscore
-//= require gmaps/google
-//= require gmaps-auto-complete
 //= require bootstrap-sprockets
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require turbolinks
+//= require underscore
+//= require gmaps/google
+//= require gmaps-auto-complete
 //= require_tree .
 
 jQuery(function() {
