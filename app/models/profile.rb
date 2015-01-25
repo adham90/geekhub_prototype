@@ -1,12 +1,14 @@
 class Profile < ActiveRecord::Base
+
   belongs_to :user
   # has_and_belongs_to_many :skills, -> { uniq }
-
   belongs_to :title
-
+  belongs_to :university
   has_many :companies, through: :jobs
-
   has_many :jobs
+
+  geocoded_by :address
+  after_validation :geocode
 
   # autocomplete :company, :name
 
@@ -29,10 +31,10 @@ class Profile < ActiveRecord::Base
                     uniqueness: { case_sensitive: false },
                     length: {maximum: 50}
 
-  validates :age, presence: true, 
-                  length: {maximum: 4}, 
+  validates :age, presence: true,
+                  length: {maximum: 4},
                   numericality: {only_integer: true,
-                    greater_than_or_equal_to: Date.today.year - 90 , 
+                    greater_than_or_equal_to: Date.today.year - 90 ,
                     less_than_or_equal_to: Date.today.year + 90}
 
 
@@ -55,4 +57,12 @@ class Profile < ActiveRecord::Base
     end
   end
 
+
+  def university_name
+    university.try(:name)
+  end
+
+  def university_name=(name)
+    self.university = University.find_or_create_by(name: name) if name.present?
+  end
 end
