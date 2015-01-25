@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.turbolinks
 //= require autocomplete-rails
 //= require underscore
 //= require gmaps/google
