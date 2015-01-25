@@ -116,7 +116,6 @@ GEM
       activesupport (>= 4.1.0)
     gmaps-autocomplete-rails (0.1.4)
       rails (>= 3.1.0)
-    gmaps4rails (2.1.2)
     gon (5.2.3)
       actionpack (>= 2.3.0)
       json
@@ -153,6 +152,7 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    leaflet-rails (0.7.4)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -308,7 +308,6 @@ DEPENDENCIES
   factory_girl_rails
   geocoder
   gmaps-autocomplete-rails
-  gmaps4rails (~> 2.1.2)
   gon
   haml
   haml-rails
@@ -316,6 +315,7 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   kaminari
+  leaflet-rails
   mini_magick
   mysql2
   omniauth

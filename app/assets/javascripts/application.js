@@ -19,20 +19,15 @@
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require turbolinks
-//= require underscore
-//= require gmaps/google
 //= require gmaps-auto-complete
+//= require leaflet-google
 //= require_tree .
 
-jQuery(function() {
-    var completer;
-
-      completer = new GmapsCompleter({
-            inputField: '#gmaps-input-address',
-                    errorField: '#gmaps-error'
-          });
-
-        completer.autoCompleteInit({
-              country: "us"
-            });
+$(function() {
+  var googleLayer, map, marker;
+  map = L.map("profile-map").setView([parseFloat(gon.lat), parseFloat(gon.log)], 13);
+  googleLayer = new L.Google("ROADMAP");
+  map.addLayer(googleLayer);
+  return marker = L.marker([parseFloat(gon.lat), parseFloat(gon.log)]).addTo(map);
 });
+

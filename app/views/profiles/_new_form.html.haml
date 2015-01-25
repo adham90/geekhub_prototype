@@ -19,3 +19,5 @@
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
   .form-actions
     = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
+
+= render 'layouts/autocomplete'

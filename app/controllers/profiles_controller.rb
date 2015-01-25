@@ -13,6 +13,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    gon.lat = @profile.latitude
+    gon.log = @profile.longitude
+
     respond_with(@profile)
   end
 
