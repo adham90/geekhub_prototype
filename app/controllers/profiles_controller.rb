@@ -1,8 +1,11 @@
 class ProfilesController < ApplicationController
+
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
-  before_action :authenticate_user!, except: [:index, :show, :new, :create]
+  before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name]
+  autocomplete :university, :name
 
   respond_to :html
+
 
   def index
     @profiles = Profile.all
@@ -74,8 +77,8 @@ class ProfilesController < ApplicationController
     end
 
     def profile_params
-      params.require(:profile).permit(:username, :name, :title_id, :bio, :phone, 
-        :rank, :gender, :address, 
+      params.require(:profile).permit(:username,:university_name, :name, :title_id, :bio, :phone,
+        :rank, :gender, :address,
         :latitude, :longitude, :age, :avatar, user_attributes: [:email, :password, :password_confirmation])
     end
 end

@@ -8,7 +8,7 @@ class Profile < ActiveRecord::Base
   has_many :jobs
 
   geocoded_by :address
-  after_validation :geocode
+  after_validation :geocode, if: :address_changed?
 
   # autocomplete :company, :name
 

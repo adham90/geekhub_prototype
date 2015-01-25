@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :profiles, except: [:edit, :destroy]
+  resources :profiles, except: [:edit, :destroy] do
+    get :autocomplete_university_name, :on => :collection
+  end
   resources :jobs do
     get :autocomplete_company_name, :on => :collection
   end

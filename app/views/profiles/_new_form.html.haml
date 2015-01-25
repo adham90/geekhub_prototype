@@ -13,6 +13,8 @@
 
     = f.input :age, required: true, label: "Year of birth"
     = f.input :avatar
+    = f.input :address
+    = f.input :university_name, :url => autocomplete_university_name_profiles_path, :as => :autocomplete, input_html: { class: "form-control" }
     = f.input :bio
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
   .form-actions

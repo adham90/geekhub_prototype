@@ -114,6 +114,8 @@ GEM
     geocoder (1.2.6)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
+    gmaps-autocomplete-rails (0.1.4)
+      rails (>= 3.1.0)
     gmaps4rails (2.1.2)
     gon (5.2.3)
       actionpack (>= 2.3.0)
@@ -302,6 +304,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   geocoder
+  gmaps-autocomplete-rails
   gmaps4rails (~> 2.1.2)
   gon
   haml

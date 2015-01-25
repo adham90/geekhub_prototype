@@ -11,7 +11,9 @@
       = image_tag(@profile.avatar.url(:small), id: "edit-profile-avatar")
       %em Currently uploaded avatar
     = f.input :avatar
+    = f.input :address, :input_html =>{:id => 'gmaps-input-address'}, :placeholder => 'Start typing a place...'
     = f.input :bio
+    = f.input :university_name, :url => autocomplete_university_name_profiles_path, :as => :autocomplete, input_html: { class: "form-control" }
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
   .form-actions
     = f.button :submit, class: "btn btn-default btn-lg btn-block"

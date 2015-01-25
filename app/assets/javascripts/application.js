@@ -14,8 +14,24 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
+//= require underscore
+//= require gmaps/google
+//= require gmaps-auto-complete
 //= require bootstrap-sprockets
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require turbolinks
 //= require_tree .
+
+jQuery(function() {
+    var completer;
+
+      completer = new GmapsCompleter({
+            inputField: '#gmaps-input-address',
+                    errorField: '#gmaps-error'
+          });
+
+        completer.autoCompleteInit({
+              country: "us"
+            });
+});

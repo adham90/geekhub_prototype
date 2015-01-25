@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122160105) do
+ActiveRecord::Schema.define(version: 20150122231533) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",        limit: 255,   null: false
@@ -60,12 +60,14 @@ ActiveRecord::Schema.define(version: 20150122160105) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+    t.integer  "university_id",       limit: 4
   end
 
   add_index "profiles", ["latitude"], name: "index_profiles_on_latitude", using: :btree
   add_index "profiles", ["longitude"], name: "index_profiles_on_longitude", using: :btree
   add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree
   add_index "profiles", ["title_id"], name: "index_profiles_on_title_id", using: :btree
+  add_index "profiles", ["university_id"], name: "index_profiles_on_university_id", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
   add_index "profiles", ["username"], name: "index_profiles_on_username", using: :btree
 
@@ -82,6 +84,11 @@ ActiveRecord::Schema.define(version: 20150122160105) do
 
   create_table "titles", force: :cascade do |t|
     t.string "name", limit: 255, null: false
+  end
+
+  create_table "universities", force: :cascade do |t|
+    t.string "name",        limit: 255
+    t.text   "description", limit: 65535
   end
 
   create_table "users", force: :cascade do |t|
