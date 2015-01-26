@@ -46,3 +46,14 @@ ul.ui-autocomplete {
 }
 
 .ui-helper-hidden-accessible { display:none; }
+
+.map_canvas { 
+  width: 600px; 
+  height: 400px; 
+  margin: 10px 20px 10px 0;
+}
+
+#multiple li { 
+  cursor: pointer; 
+  text-decoration: underline; 
+}

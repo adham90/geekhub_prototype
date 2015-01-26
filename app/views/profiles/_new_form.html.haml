@@ -1,4 +1,3 @@
-= render 'layouts/autocomplete'
 = simple_form_for(@profile, validate: true, html: { multipart: true }) do |f|
   = f.error_notification
 
@@ -14,11 +13,13 @@
 
     = f.input :age, required: true, label: "Year of birth"
     = f.input :avatar
-    = f.input :address, input_html: {id: 'gmaps-input-address'}, placeholder: 'Start typing a place...'
+    = f.input :address, input_html: {id: 'geocomplete'}, placeholder: 'Start typing a place...'
     = f.input :university_name, url: autocomplete_university_name_profiles_path, as: :autocomplete, input_html: { class: "form-control" }
     = f.input :bio
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
   .form-actions
     = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
+
+= render 'layouts/autocomplete'
 
 
