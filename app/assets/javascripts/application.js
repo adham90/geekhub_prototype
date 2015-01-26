@@ -14,10 +14,9 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.turbolinks
-
 //= require autocomplete-rails
 //= require jquery-geocomplete
-
+//= reuqire gmaps
 //= require bootstrap-sprockets
 //= require rails.validations
 //= require rails.validations.simple_form

@@ -1,5 +1,24 @@
-
+/ $("#geocomplete").geocomplete("find", latLng.toString());
 :javascript
-  $(function(){
-    $("#geocomplete").geocomplete();
+  $("#geocomplete").geocomplete({
+    map: ".map_canvas",
+    details: "form",
+    markerOptions: {
+      draggable: true
+    }
   });
+  
+  $("#geocomplete").bind("geocode:dragged", function(event, latLng){
+    $("#lat").val(latLng.lat());
+    $("#lng").val(latLng.lng());
+  });
+  
+  $("#reset").click(function(){
+    $("#geocomplete").geocomplete("resetMarker");
+    $("#reset").hide();
+    return false;
+  });
+  
+  $("#find").click(function(){
+    $("#geocomplete").trigger("geocode");
+  }).click();
