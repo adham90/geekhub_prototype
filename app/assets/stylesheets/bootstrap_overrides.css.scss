@@ -5,14 +5,14 @@
 @import "mixins";
 
 // make all images responsive by default
-img {
-  @extend .img-responsive;
-  margin: 0 auto;
-  }
+// img {
+//   @extend .img-responsive;
+//   margin: 0 auto;
+// }
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
-  }
+}
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
@@ -20,19 +20,19 @@ img {
 .column {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .form {
   @extend .col-md-6;
-  }
+}
 .form-centered {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .submit {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-lg;
-  }
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
@@ -41,11 +41,11 @@ main {
   padding-top: 10px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
-  }
+}
 section {
   @extend .row;
   margin-top: 20px;
-  }
+}
 
 // Styles for form views
 // using Bootstrap
@@ -93,6 +93,11 @@ section {
   font-weight: bold;
 }
 
+.navbar-default {
+  background-color: #1DB285;
+  border-color: #E7E7E7;
+}
+
 .navbar {
   margin-bottom: 30px;
   @include box-shadow;
@@ -110,3 +115,4 @@ section {
     }
   }
 }
+

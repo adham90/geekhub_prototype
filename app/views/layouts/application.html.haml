@@ -4,8 +4,6 @@
     %title= "#{content_for?(:title) ? yield(:title) : 'Rails Devise'} - GEEKHUB.IO" 
     = include_gon
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    %link{:href => "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css", :rel => "stylesheet"}
-    %script{:src => "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"}
     %script{:src => "https://maps.googleapis.com/maps/api/js", :type => "text/javascript"}
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags

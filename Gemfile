@@ -30,7 +30,7 @@ gem 'jquery-turbolinks'
 
 ##  Geocoding & Map
 gem "geocoder"
-gem 'leaflet-rails'
+# gem 'leaflet-rails'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 

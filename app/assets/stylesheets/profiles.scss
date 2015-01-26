@@ -41,13 +41,12 @@
 
 #profile-map {
   width: 100%;
-  height: 600px;
+  height: 400px;
+  // .leaflet-google-layer {
+  //   z-index: 0;
+  // }
 
-  .leaflet-google-layer {
-    z-index: 0;
-  }
-
-  .leaflet-map-pane {
-    z-index: 100;
-  }
+  // .leaflet-map-pane {
+  //   z-index: 100;
+  // }
 }

@@ -152,7 +152,6 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    leaflet-rails (0.7.4)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -315,7 +314,6 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   kaminari
-  leaflet-rails
   mini_magick
   mysql2
   omniauth

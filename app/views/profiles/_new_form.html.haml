@@ -1,3 +1,4 @@
+= render 'layouts/autocomplete'
 = simple_form_for(@profile, validate: true, html: { multipart: true }) do |f|
   = f.error_notification
 
@@ -20,4 +21,4 @@
   .form-actions
     = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
 
-= render 'layouts/autocomplete'
+
