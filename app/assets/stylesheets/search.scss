@@ -1,0 +1,26 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#search-map {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+.map-fixed {
+  padding: 9x 0;
+  position: fixed;
+  width : 50%;
+}
+
+.side-map {
+  position: fixed;
+  bottom: 40px;
+  top: 53px;
+  right: 0;
+  height: 100%;
+  background-color: white;
+  width: 50%;
+}

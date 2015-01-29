@@ -6,11 +6,11 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
     = javascript_include_tag 'application'
+    %script{:src => "/assets/jquery.jscroll.min.js"}
     = csrf_meta_tags
 
   %body
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      = render 'layouts/messages'
       = yield

@@ -37,8 +37,9 @@
 // to make views framework-neutral
 main {
   @extend .container;
-  padding-bottom: 80px;
-  padding-top: 10px;
+  // padding-bottom: 80px;
+  padding-top: 20px;
+  background-size: cover;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
 }
@@ -56,6 +57,8 @@ section {
   margin: 0 auto;
 }
 .authform form {
+  background: white;
+  @include box-shadow;
   @extend .well;
   @extend .well-lg;
   padding-bottom: 30px;
@@ -91,11 +94,6 @@ section {
   @include box-shadow;
   background: white;
   font-weight: bold;
-}
-
-.navbar-default {
-  background-color: #1DB285;
-  border-color: #E7E7E7;
 }
 
 .navbar {

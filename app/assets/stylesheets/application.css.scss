@@ -19,7 +19,9 @@
 @import "mixins";
 
 body {
-  background: #EDF0F5; //rgb(235, 238, 243);
+  background:#ECF0F1; // #EDF0F5; //rgb(235, 238, 243);
+  width:100%;
+  height:100%;
 }
 
 ul.ui-autocomplete {

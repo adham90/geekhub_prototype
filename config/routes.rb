@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get '/signup', to: 'profiles#new', as: 'signup'
   get '/profile/edit', to: 'profiles#edit', as: 'profile_edit'
   devise_for :users
-  root "profiles#index"
+  root "search#index"
 end

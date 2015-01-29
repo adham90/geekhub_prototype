@@ -1,46 +1,33 @@
-.row
-  .col-md-3.col-sm-5
-    .image_wrapper
-      = image_tag @profile.avatar.url(:medium), class: "profile_image"
-  .col-md-9.col-sm-7
-    #profile_info
-      %h1= @profile.name
-      %p.description= @profile.bio
-      %p
-        = @profile.user.email
-%br/
-.row
-  .col-md-3
-    = render 'add_skill_form'
-%br/
-.row
-  .col-md-12
-    = link_to "Back", root_path, class: "btn btn-default"
-    - if @current_user
-      = link_to "Edit", profile_edit_path, class: "btn btn-default"
-
-.row
-  #profile-map
+.side-map
+  #search-map
+.span5.offset7
+  = render 'layouts/messages'
+  %div= render(@search)
 
 :javascript
   var mapOptions = {
-  zoom: 16,
-  center: new google.maps.LatLng(parseFloat(gon.lat), parseFloat(gon.log)),
-
+  zoom: 5,
+  center: new google.maps.LatLng(30,21),
   styles: [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#b5cbe4"}]},{"featureType":"landscape","stylers":[{"color":"#efefef"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#83a5b0"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#bdcdd3"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e3eed3"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}]
   };
-  
-  var mapElement = document.getElementById('profile-map');
+
+
+  var mapElement = document.getElementById('search-map');
+
   var map = new google.maps.Map(mapElement, mapOptions);
+
   var infowindow = new google.maps.InfoWindow({
       content: "name"
   });
+
+  
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(parseFloat(gon.lat), parseFloat(gon.log)),
+    position: new google.maps.LatLng(30,21),
     map: map,
-    icon: "/images/geek_marker.png",
-    title: gon.profile_name
+    icon: '/images/geek_marker.png',
+    title: "title"
   });
+
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);
   });
