@@ -147,9 +147,12 @@ GEM
       railties (>= 3.2.16)
     json (1.8.2)
     jwt (1.2.0)
-    kaminari (0.16.1)
+    kaminari (0.16.2)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -310,7 +313,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
-  kaminari
+  kaminari-bootstrap
   mini_magick
   mysql2
   omniauth

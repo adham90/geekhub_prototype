@@ -1,6 +1,6 @@
 / $("#geocomplete").geocomplete("find", latLng.toString());
 :javascript
-  $("#geocomplete").geocomplete({
+  $("#profile_address").geocomplete({
     map: ".map_canvas",
     details: "form",
     markerOptions: {
@@ -8,17 +8,17 @@
     }
   });
   
-  $("#geocomplete").bind("geocode:dragged", function(event, latLng){
+  $("#profile_address").bind("geocode:dragged", function(event, latLng){
     $("#lat").val(latLng.lat());
     $("#lng").val(latLng.lng());
   });
   
   $("#reset").click(function(){
-    $("#geocomplete").geocomplete("resetMarker");
+    $("#profile_address").geocomplete("resetMarker");
     $("#reset").hide();
     return false;
   });
   
   $("#find").click(function(){
-    $("#geocomplete").trigger("geocode");
+    $("#profile_address").trigger("geocode");
   }).click();

@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
-  before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name]
+  before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete :university, :name
 
   respond_to :html
@@ -13,9 +13,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    gon.lat = @profile.latitude
-    gon.log = @profile.longitude
-    gon.profile_name = @profile.name
+    # gon.lat = @profile.profile_location.latitude
+    # gon.log = @profile.profile_location.longitude
+    # gon.profile_name = @profile.name
     respond_with(@profile)
   end
 
@@ -63,6 +63,10 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def locations
+    render json: Profile.find(params[:id]).profile_locations
+  end
+
   private
     def clear_flash
       flash.delete(:notice)
@@ -80,7 +84,7 @@ class ProfilesController < ApplicationController
     end
 
     def profile_params
-      params.require(:profile).permit(:username,:university_name, :name, :title_id, :bio, :phone,
+      params.require(:profile).permit(:username,:university_name, :name, :title, :bio, :phone,
         :rank, :gender, :address,
         :latitude, :longitude, :age, :avatar, user_attributes: [:email, :password, :password_confirmation])
     end

@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.infinitescroll
+//= require selectize.min
 //= require jquery.turbolinks
 //= require autocomplete-rails
 //= require jquery-geocomplete

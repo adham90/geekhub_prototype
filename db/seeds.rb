@@ -8,23 +8,23 @@
 
 User.destroy_all
 
-100.times do |n|
+20.times do |n|
 
   User.create(
     email: "email#{n}@email.com",
-    password: "aaaaaaaa",
-    password_confirmation: "aaaaaaaa"
+    password: "password",
+    password_confirmation: "password"
   )
 
   Profile.create(
     user: User.last, 
     username: "user#{n}", 
     name: "name#{n}", 
-    phone: "000011100#{n}", 
+    phone: "000-000-00#{n}", 
     age: 1990, 
-    gender: true, 
-    address: "cairo, egypt", 
-    title_id: 1
+    gender: true,
+    address: "cairo, egypt",
+    title: "web dev" 
   )
 
 end

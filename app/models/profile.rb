@@ -2,14 +2,10 @@ class Profile < ActiveRecord::Base
 
   belongs_to :user
   # has_and_belongs_to_many :skills, -> { uniq }
-  belongs_to :title
+
   belongs_to :university
   has_many :companies, through: :jobs
   has_many :jobs
-
-  geocoded_by :address
-  reverse_geocoded_by :latitude, :longitude
-  after_validation :geocode, if: :address_changed?
 
   # autocomplete :company, :name
 
@@ -17,16 +13,19 @@ class Profile < ActiveRecord::Base
 
   # validates_uniqueness_of :skills
 
-  validates_presence_of :user
+  geocoded_by :address
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode, if: :address_changed?
 
-  validates_presence_of :title
+
+  validates_presence_of :user
 
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: {maximum: 50},
                        format: /\A[a-zA-Z\d]*\z/
 
-  validates :name, presence: true, length: {maximum: 50}
+  validates :first_name, presence: true, length: {maximum: 50}
 
   validates :phone, presence: true,
                     uniqueness: { case_sensitive: false },
@@ -58,6 +57,9 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  def name
+    "#{first_name} #{last_name}"
+  end
 
   def university_name
     university.try(:name)

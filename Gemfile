@@ -14,7 +14,7 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'simple_form'
-gem 'kaminari'
+gem 'kaminari-bootstrap'
 gem 'gon'
 gem "omniauth"
 gem 'omniauth-facebook'
@@ -25,7 +25,6 @@ gem 'paperclip', '~> 4.2.1'
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
 gem 'rails4-autocomplete'
-# gem 'gmaps-autocomplete-rails'
 gem 'jquery-turbolinks'
 
 ##  Geocoding & Map

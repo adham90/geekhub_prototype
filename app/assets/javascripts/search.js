@@ -1,2 +1,5 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+// $(window).scroll(function () {
+//   if($(window).scrollTop() == $(document).height() - $(window).height()){
+//     console.log('ok');
+//   }
+// });
