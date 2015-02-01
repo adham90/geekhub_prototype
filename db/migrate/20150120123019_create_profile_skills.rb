@@ -1,6 +1,6 @@
-class CreateProfilesSkills < ActiveRecord::Migration
+class CreateProfileSkills < ActiveRecord::Migration
   def change
-    create_table :profiles_skills, id: false do |t|
+    create_table :profile_skills, id: false do |t|
       t.integer :profile_id
       t.integer :skill_id
       t.integer :rank
@@ -8,6 +8,6 @@ class CreateProfilesSkills < ActiveRecord::Migration
       t.date    :started_at
       t.string  :description
     end
-    add_index :profiles_skills, [:profile_id, :skill_id]
+    add_index :profile_skills, [:profile_id, :skill_id]
   end
 end

@@ -4,7 +4,7 @@
   .form-inputs
     = f.input :username, required: true, uniqueness: true
     = f.input :name, required: true, autofocus: true
-    / = f.input :title, collection: ["one", "two"], placeholder: 'Select or type your title...'
+    = f.input :title, collection: ["one", "two"], placeholder: 'Select or type your title...'
     = f.input :phone, hint: 'Private', required: true, uniqueness: true
 
     = f.simple_fields_for :user, validate: true, required: true do |o|

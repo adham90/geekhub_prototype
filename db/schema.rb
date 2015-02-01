@@ -16,12 +16,18 @@ ActiveRecord::Schema.define(version: 20150129121453) do
   create_table "companies", force: :cascade do |t|
     t.string   "name",                limit: 255,   null: false
     t.text     "description",         limit: 65535
+    t.float    "latitude",            limit: 24
+    t.float    "longitude",           limit: 24
+    t.string   "address",             limit: 255
     t.integer  "company_account_id",  limit: 4
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
   end
+
+  add_index "companies", ["latitude"], name: "index_companies_on_latitude", using: :btree
+  add_index "companies", ["longitude"], name: "index_companies_on_longitude", using: :btree
 
   create_table "companies_skills", force: :cascade do |t|
     t.integer "company_id", limit: 4
@@ -49,18 +55,6 @@ ActiveRecord::Schema.define(version: 20150129121453) do
   add_index "company_accounts", ["email"], name: "index_company_accounts_on_email", unique: true, using: :btree
   add_index "company_accounts", ["reset_password_token"], name: "index_company_accounts_on_reset_password_token", unique: true, using: :btree
 
-  create_table "company_locations", force: :cascade do |t|
-    t.float   "latitude",   limit: 24
-    t.float   "longitude",  limit: 24
-    t.string  "address",    limit: 255
-    t.string  "name",       limit: 255
-    t.integer "company_id", limit: 4
-  end
-
-  add_index "company_locations", ["company_id"], name: "index_company_locations_on_company_id", using: :btree
-  add_index "company_locations", ["latitude"], name: "index_company_locations_on_latitude", using: :btree
-  add_index "company_locations", ["longitude"], name: "index_company_locations_on_longitude", using: :btree
-
   create_table "identities", force: :cascade do |t|
     t.string  "uid",        limit: 255
     t.string  "provider",   limit: 255
@@ -79,6 +73,17 @@ ActiveRecord::Schema.define(version: 20150129121453) do
     t.integer "profile_id",   limit: 4
   end
 
+  create_table "profile_skills", id: false, force: :cascade do |t|
+    t.integer "profile_id",  limit: 4
+    t.integer "skill_id",    limit: 4
+    t.integer "rank",        limit: 4
+    t.boolean "primary",     limit: 1
+    t.date    "started_at"
+    t.string  "description", limit: 255
+  end
+
+  add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
+
   create_table "profile_universities", force: :cascade do |t|
     t.integer "university_id",   limit: 4
     t.integer "profile_id",      limit: 4
@@ -90,7 +95,8 @@ ActiveRecord::Schema.define(version: 20150129121453) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
-    t.string   "name",                limit: 255,   null: false
+    t.string   "first_name",          limit: 255,   null: false
+    t.string   "last_name",           limit: 255
     t.text     "bio",                 limit: 65535
     t.string   "phone",               limit: 255,   null: false
     t.integer  "rank",                limit: 4
@@ -115,18 +121,16 @@ ActiveRecord::Schema.define(version: 20150129121453) do
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
   add_index "profiles", ["username"], name: "index_profiles_on_username", using: :btree
 
-  create_table "profiles_skills", id: false, force: :cascade do |t|
-    t.integer "profile_id", limit: 4
-    t.integer "skill_id",   limit: 4
-    t.integer "rank",       limit: 4
-    t.boolean "primary",    limit: 1
-  end
-
-  add_index "profiles_skills", ["profile_id", "skill_id"], name: "index_profiles_skills_on_profile_id_and_skill_id", using: :btree
-
   create_table "skills", force: :cascade do |t|
-    t.string "name", limit: 255, null: false
+    t.string   "name",                limit: 255, null: false
+    t.date     "created_at"
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
   end
+
+  add_index "skills", ["name"], name: "index_skills_on_name", using: :btree
 
   create_table "universities", force: :cascade do |t|
     t.string   "name",                limit: 255

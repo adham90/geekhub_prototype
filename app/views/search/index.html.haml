@@ -2,7 +2,7 @@
   #search-map
 .span5.offset7
   = render 'layouts/messages'
-  = render partial: "profile_search", collection: @search, as: :item
+  = render partial: "profile_search", collection: @search, as: :profile
   = paginate @search
   #more
 

@@ -4,12 +4,15 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete :university, :name
 
-  respond_to :html
+  respond_to :html, :js
 
 
   def index
     @profiles = Profile.all.page(params[:page]).per(10)
     respond_with(@profiles)
+  end
+
+  def about
   end
 
   def show
@@ -84,7 +87,7 @@ class ProfilesController < ApplicationController
     end
 
     def profile_params
-      params.require(:profile).permit(:username,:university_name, :name, :title, :bio, :phone,
+      params.require(:profile).permit(:username,:university_name, :first_name, :last_name, :title, :bio, :phone,
         :rank, :gender, :address,
         :latitude, :longitude, :age, :avatar, user_attributes: [:email, :password, :password_confirmation])
     end

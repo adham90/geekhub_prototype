@@ -1,17 +1,17 @@
 class Profile < ActiveRecord::Base
 
   belongs_to :user
-  # has_and_belongs_to_many :skills, -> { uniq }
+
+  has_many :skills, through: :profile_skills
 
   belongs_to :university
-  has_many :companies, through: :jobs
-  has_many :jobs
+
+  # has_many :companies, through: :jobs
+  # has_many :jobs
 
   # autocomplete :company, :name
 
   accepts_nested_attributes_for :user
-
-  # validates_uniqueness_of :skills
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude

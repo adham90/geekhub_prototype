@@ -2,7 +2,7 @@ class CreateCompanies < ActiveRecord::Migration
   def change
     create_table :companies do |t|
       t.string :name, null: false
-      t.text :description
+      t.text   :description
       t.float  :latitude, index: true
       t.float  :longitude, index: true
       t.string :address

@@ -3,7 +3,6 @@ class CreateUniversities < ActiveRecord::Migration
     create_table :universities do |t|
       t.string :name
       t.string :country
-      t.text :description
     end
     add_attachment :universities, :avatar
   end

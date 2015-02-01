@@ -8,7 +8,7 @@ class SearchController < ApplicationController
     # skill  = params[:skill]  || nil
 
     # @search = search *(set_params) || Profile.all
-    @search = Profile.all.page(params[:page]).per(2)
+    @search = Profile.all.page(params[:page]).per(10)
     # @search = Profile.all.page(1).per(50)
     respond_with(@search)
   end

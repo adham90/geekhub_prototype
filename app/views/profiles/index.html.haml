@@ -4,7 +4,7 @@
   Listing profiles
 
 - @profiles.each do |profile|
-  = profile.name
+  = link_to profile.name, show_profile_path(profile.username)
   %br/
 = paginate @profiles
 = link_to 'New Profile', new_profile_path

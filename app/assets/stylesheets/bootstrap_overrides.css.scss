@@ -38,7 +38,7 @@
 main {
   @extend .container;
   // padding-bottom: 80px;
-  padding-top: 20px;
+  padding-top: 0px;
   background-size: cover;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
@@ -95,6 +95,7 @@ section {
   background: white;
   font-weight: bold;
 }
+
 
 .navbar {
   margin-bottom: 30px;

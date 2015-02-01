@@ -19,7 +19,8 @@ User.destroy_all
   Profile.create(
     user: User.last, 
     username: "user#{n}", 
-    name: "name#{n}", 
+    first_name: "first#{n}",
+    last_name: "last",
     phone: "000-000-00#{n}", 
     age: 1990, 
     gender: true,
