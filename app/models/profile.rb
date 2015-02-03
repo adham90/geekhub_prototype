@@ -39,7 +39,6 @@ class Profile < ActiveRecord::Base
 
 
   # validates_numericality_of :rank
-
   has_attached_file :avatar, styles: {
    medium: "300x300>",
    small:  "100x100>",
@@ -66,6 +65,6 @@ class Profile < ActiveRecord::Base
   end
 
   def university_name=(name)
-    self.university = University.find_or_create_by(name: name) if name.present?
+    self.university_id = University.find_or_create_by(name: name).id if name.present?
   end
 end

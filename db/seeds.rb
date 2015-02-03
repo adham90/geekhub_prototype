@@ -10,18 +10,18 @@ User.destroy_all
 Skill.destroy_all
 University.destroy_all
 
-100.times do |n|
+20.times do |n|
   Skill.create(
     name: "skill#{n}",
   )
 end
 
-20.times do |n|
+3.times do |n|
 
-  University.create(name: "uny#{n}")
+  University.create(name: Faker::Lorem.word)
 
   User.create(
-    email: "email#{n}@email.com",
+    email: n.to_s + Faker::Internet.email,
     password: "password",
     password_confirmation: "password"
   )
@@ -29,12 +29,15 @@ end
   Profile.create(
     user: User.last,
     username: "user#{n}",
-    first_name: "first#{n}",
-    last_name: "last",
-    phone: "000-000-00#{n}",
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    phone: "#{n}" + Faker::PhoneNumber.phone_number,
     age: 1990,
     gender: true,
-    address: "cairo, egypt",
+    address: Faker::Address.country,
+    bio: Faker::Lorem.sentence,
+    avatar: Faker::Avatar.image,
+    university_id: n,
     title: "title#{n}"
   )
 

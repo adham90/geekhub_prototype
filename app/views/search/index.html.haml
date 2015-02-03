@@ -4,7 +4,7 @@
     .search-filter
       - if params[:location_address] != ""; @loc = "near #{params[:location_address]}" end
       %p= "#{params[:skill_search]} Geeks " + "#{@loc}"
-    %lu
+    %lu.list-unstyled
       = render partial: "profile_search", collection: @search, as: :profile
     = paginate @search
   .side-map
@@ -12,7 +12,8 @@
 
 
 :javascript
-
+  var obj = #{@search.to_json};
+  
   $(".search-items li").click(function() {
     $("li").addClass('has-hover');
     $("li").removeClass("active");
