@@ -84,15 +84,6 @@ ActiveRecord::Schema.define(version: 20150129121453) do
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
 
-  create_table "profile_universities", force: :cascade do |t|
-    t.integer "university_id",   limit: 4
-    t.integer "profile_id",      limit: 4
-    t.boolean "currently_in",    limit: 1
-    t.string  "degree",          limit: 255
-    t.integer "enrollment_year", limit: 4
-    t.integer "graduation_year", limit: 4
-  end
-
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
     t.string   "first_name",          limit: 255,   null: false
@@ -106,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150129121453) do
     t.float    "latitude",            limit: 24
     t.float    "longitude",           limit: 24
     t.string   "address",             limit: 255
+    t.integer  "university_id",       limit: 4
     t.integer  "user_id",             limit: 4
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
@@ -135,7 +127,7 @@ ActiveRecord::Schema.define(version: 20150129121453) do
   create_table "universities", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.string   "country",             limit: 255
-    t.text     "description",         limit: 65535
+    t.integer  "profile_id",          limit: 4
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4

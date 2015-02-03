@@ -1,0 +1,24 @@
+#search-controls
+  = form_tag(search_path, method: 'get', class: 'form-inline') do
+    .form-group
+      = text_field_tag :skill_search,"" , class: "form-control", placeholder: 'Skills: rails, ruby, java'
+      = text_field_tag :location_address,"" , class: "form-control"
+      = submit_tag "SEARCH", class: "btn"
+
+
+
+:javascript
+  $("#location_address").geocomplete({
+    details: "form",
+    markerOptions: {
+      draggable: true
+    }
+  });
+
+  jQuery(function() {
+    return $("#skill_search").autocomplete({
+      source: "/autocompletes/skill",
+      delay: 300,
+      minLength: 2
+    });
+  });

@@ -7,8 +7,18 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.destroy_all
+Skill.destroy_all
+University.destroy_all
+
+100.times do |n|
+  Skill.create(
+    name: "skill#{n}",
+  )
+end
 
 20.times do |n|
+
+  University.create(name: "uny#{n}")
 
   User.create(
     email: "email#{n}@email.com",
@@ -17,15 +27,15 @@ User.destroy_all
   )
 
   Profile.create(
-    user: User.last, 
-    username: "user#{n}", 
+    user: User.last,
+    username: "user#{n}",
     first_name: "first#{n}",
     last_name: "last",
-    phone: "000-000-00#{n}", 
-    age: 1990, 
+    phone: "000-000-00#{n}",
+    age: 1990,
     gender: true,
     address: "cairo, egypt",
-    title: "web dev" 
+    title: "title#{n}"
   )
 
 end

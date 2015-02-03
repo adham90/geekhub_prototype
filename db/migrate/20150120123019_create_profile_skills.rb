@@ -1,8 +1,8 @@
 class CreateProfileSkills < ActiveRecord::Migration
   def change
     create_table :profile_skills, id: false do |t|
-      t.integer :profile_id
-      t.integer :skill_id
+      t.belongs_to :profile
+      t.belongs_to :skill
       t.integer :rank
       t.boolean :primary
       t.date    :started_at

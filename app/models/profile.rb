@@ -2,13 +2,13 @@ class Profile < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :profile_skills
   has_many :skills, through: :profile_skills
 
   belongs_to :university
 
   # has_many :companies, through: :jobs
   # has_many :jobs
-
   # autocomplete :company, :name
 
   accepts_nested_attributes_for :user

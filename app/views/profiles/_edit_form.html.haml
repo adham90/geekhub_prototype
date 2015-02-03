@@ -5,22 +5,28 @@
     = f.input :username, required: true
     = f.input :first_name, required: true
     = f.input :last_name
-    = f.input :title, collection: ["one", "two"], placeholder: 'Select or type your title...'
+    = f.input :title, collection: Profile.all.map(&:title), placeholder: 'Select or type your title...'
     = f.input :phone, required: true
     = f.input :age, required: true, label: "Year of birth"
     - if @profile.avatar?
       = image_tag(@profile.avatar.url(:small), id: "edit-profile-avatar")
       %em Currently uploaded avatar
     = f.input :avatar
-    = f.input :address, :input_html =>{:id => 'geocomplete'}, :placeholder => 'Start typing a place...'
-    = f.input :latitude, :as => :hidden, :input_html =>{:id => 'lat'}
-    = f.input :longitude, :as => :hidden, :input_html =>{:id => 'lng'}
+    = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
+    -# = f.input :address, :input_html =>{:id => 'geocomplete'}, :placeholder => 'Start typing a place...'
+    -# = f.input :latitude, :as => :hidden, :input_html =>{:id => 'lat'}
+    -# = f.input :longitude, :as => :hidden, :input_html =>{:id => 'lng'}
     = f.input :university_name, :url => autocomplete_university_name_profiles_path, :as => :autocomplete, input_html: { class: "form-control" }
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
+    = f.input :bio
   .form-actions
     = f.button :submit, class: "btn btn-default btn-lg btn-block"
 
-%div.map_canvas
-= render 'layouts/autocomplete'
+= render 'autocomplete'
 
-
+:javascript
+  $('#profile_title').selectize({
+    create: true,
+    hideSelected: true,
+    sortField: 'text'
+  });

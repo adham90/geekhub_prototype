@@ -1,24 +1,23 @@
 / $("#geocomplete").geocomplete("find", latLng.toString());
 :javascript
   $("#profile_address").geocomplete({
-    map: ".map_canvas",
     details: "form",
     markerOptions: {
       draggable: true
     }
   });
-  
+
   $("#profile_address").bind("geocode:dragged", function(event, latLng){
     $("#lat").val(latLng.lat());
     $("#lng").val(latLng.lng());
   });
-  
+
   $("#reset").click(function(){
     $("#profile_address").geocomplete("resetMarker");
     $("#reset").hide();
     return false;
   });
-  
+
   $("#find").click(function(){
     $("#profile_address").trigger("geocode");
   }).click();

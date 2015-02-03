@@ -31,6 +31,7 @@ ul.ui-autocomplete {
   list-style: none;
   margin: 0;
   padding: 0;
+  z-index:2000 !important;
   border: solid 1px #999;
   cursor: default;
   li {
@@ -51,13 +52,28 @@ ul.ui-autocomplete {
 
 .ui-helper-hidden-accessible { display:none; }
 
-.map_canvas { 
-  width: 600px; 
-  height: 400px; 
+.map_canvas {
+  width: 600px;
+  height: 400px;
   margin: 10px 20px 10px 0;
 }
 
-#multiple li { 
-  cursor: pointer; 
-  text-decoration: underline; 
+#multiple li {
+  cursor: pointer;
+  text-decoration: underline;
+  z-index: 0;
+}
+
+.box {
+  background: white;
+  @include box-shadow;
+  @extend .well;
+  @extend .well-lg;
+  padding-bottom: 30px;
+}
+
+.pac-container { z-index:2000 !important; }
+
+.selectize-input.not-full > input {
+  width: 100% !important;
 }

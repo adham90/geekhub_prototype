@@ -27,6 +27,8 @@ gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_
 gem 'rails4-autocomplete'
 gem 'jquery-turbolinks'
 
+# gem 'soulmate_rails'
+
 ##  Geocoding & Map
 gem "geocoder"
 # gem 'leaflet-rails'

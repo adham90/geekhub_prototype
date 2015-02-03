@@ -1,4 +1,4 @@
-.row
+#profile-top
   #profile-map
   .profile-head
     %h2.profile-name= @profile.name.capitalize
@@ -6,50 +6,47 @@
       %ul.nav
         %li#about
           %a{:href => "#"}
-            %span PAIRED WITH
+            %span ABOUT
             %br/
-            %p 22
+            %p ......
         %li#pair
           %a{:href => "#"}
             %span PAIRED WITH
             %br/
             %p 13
-        %li 
+        %li
           %a{:href => "#"}
             %span PAIRED WITH
             %br/
             %p 104
-        %li 
-          %a{:href => "#"}
-            %span PAIRED WITH
-            %br/
-            %p 5            
     .profile-image-box
       .image_wrapper
         = image_tag @profile.avatar.url(:medium), class: "profile_img"
-  .authform
-    #pro
-      = render 'about'
+#profile-main
+  .col-md-2.box
+  .col-md-9.box#profile-content
+    = render 'about'
 
 :javascript
 
   $( "#about" ).click(function() {
     $(document).find('#in').remove();
-    $('#pro').prepend('#{j render "about", :object => @profile}');
-    $("html, body").animate({ scrollTop: 160 });
+    $('#profile-content').prepend('#{j render "about", :object => @profile}');
+    $("html, body").animate({ scrollTop: 160 }, 1);
   });
 
   $( "#pair" ).click(function() {
     $(document).find('#in').remove();
-    $('#pro').prepend('#{j render "pair", :object => @profile}');
-    $("html, body").animate({ scrollTop: 160 });
+    $('#profile-content').prepend('#{j render "pair", :object => @profile}');
+    $("html, body").animate({ scrollTop: 160 }, 1);
   });
+
   (function(window, google, mapster) {
 
     var options = mapster.profile_map,
     element = document.getElementById("profile-map"),
     map = new google.maps.Map(element, options);
-    
+
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(37.791350,-122.435883),
       map: map,
@@ -78,5 +75,3 @@
 /     = link_to "Back", root_path, class: "btn btn-default"
 /     - if @current_user
 /       = link_to "Edit", profile_edit_path, class: "btn btn-default"
-
-

@@ -4,8 +4,9 @@
   .form-inputs
     = f.input :username, required: true, uniqueness: true
     = f.input :name, required: true, autofocus: true
-    = f.input :title, collection: ["one", "two"], placeholder: 'Select or type your title...'
+    = f.input :title, collection: Profile.all.map(&:title), placeholder: 'Select or type your title...'
     = f.input :phone, hint: 'Private', required: true, uniqueness: true
+    = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
 
     = f.simple_fields_for :user, validate: true, required: true do |o|
       = o.input :email, required: true, uniqueness: true
@@ -14,15 +15,13 @@
 
     = f.input :age, required: true, label: "Year of birth", placeholder: "1990"
     / = f.input :avatar
-    = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
     / = f.input :university_name, url: autocomplete_university_name_profiles_path, as: :autocomplete, input_html: { class: "form-control" }
     / = f.input :bio
     / = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
   .form-actions
     = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
 
-%div.map_canvas
-= render 'layouts/autocomplete'
+= render 'autocomplete'
 
 
 :javascript

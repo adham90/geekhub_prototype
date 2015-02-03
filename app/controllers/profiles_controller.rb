@@ -2,10 +2,8 @@ class ProfilesController < ApplicationController
 
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
-  autocomplete :university, :name
-
-  respond_to :html, :js
-
+  autocomplete  :university, :name
+  respond_to    :html, :js
 
   def index
     @profiles = Profile.all.page(params[:page]).per(10)
@@ -16,9 +14,6 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    # gon.lat = @profile.profile_location.latitude
-    # gon.log = @profile.profile_location.longitude
-    # gon.profile_name = @profile.name
     respond_with(@profile)
   end
 

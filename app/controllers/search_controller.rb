@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  autocomplete :skill, :name
 
   respond_to :html, :json
   def index
@@ -8,10 +9,16 @@ class SearchController < ApplicationController
     # skill  = params[:skill]  || nil
 
     # @search = search *(set_params) || Profile.all
-    @search = Profile.all.page(params[:page]).per(10)
+    # .where("skills.name" => "skill1")
+
+    @search = Profile.near(params[:location_address], 20).joins(:skills).where(skills: {:name => params[:skill_search]}).page(1).per(20)
+    if params[:skill_search] == "" || params[:skill_search] == nil
+      @search = Profile.all.page(1).per(20)
+    end
     # @search = Profile.all.page(1).per(50)
     respond_with(@search)
   end
+
 
   private
 

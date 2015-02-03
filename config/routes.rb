@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     get :autocomplete_company_name, :on => :collection
   end
 
+  resources :skills do
+    get :autocomplete_skill_name, :on => :collection
+  end
+
   resources :profile_locations
   resources :companies, only: [:index]
   get 'profiles/locations/:id', to: 'profiles#locations'
@@ -18,4 +22,11 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'profiles#edit', as: 'profile_edit'
   devise_for :users
   root "search#index"
+
+  # search
+  get '/search', to: 'search#index'
+
+  # autocompletes
+  get '/autocompletes/skill', to: 'autocompletes#skill', as: 'autocompletes_skill'
+
 end

@@ -10,9 +10,6 @@
       = link_to 'GEEKHUB.IO', root_path, class: 'navbar-brand', id: "brand"
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li= link_to 'GEEKs', profiles_path
-        %li= link_to 'HUBs', "#"
+        %li= render 'layouts/navigation_search'
       %ul.nav.navbar-nav.navbar-right
         = render 'layouts/navigation_links'
-
-            
