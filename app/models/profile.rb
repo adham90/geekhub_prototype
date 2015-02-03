@@ -1,15 +1,10 @@
+require 'uri'
 class Profile < ActiveRecord::Base
 
   belongs_to :user
 
   has_many :profile_skills
   has_many :skills, through: :profile_skills
-
-  belongs_to :university
-
-  # has_many :companies, through: :jobs
-  # has_many :jobs
-  # autocomplete :company, :name
 
   accepts_nested_attributes_for :user
 
@@ -43,7 +38,7 @@ class Profile < ActiveRecord::Base
    medium: "300x300>",
    small:  "100x100>",
    thumb:  '64x64!'
-  }, :default_url => "/images/unknown_user.png"
+  }, :default_url => lambda { |attach| "https://robohash.org/:name/#{attach.instance.username}.png" }
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
@@ -58,13 +53,5 @@ class Profile < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
-  end
-
-  def university_name
-    university.try(:name)
-  end
-
-  def university_name=(name)
-    self.university_id = University.find_or_create_by(name: name).id if name.present?
   end
 end

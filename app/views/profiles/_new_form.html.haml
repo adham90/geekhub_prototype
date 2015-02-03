@@ -3,8 +3,9 @@
 
   .form-inputs
     = f.input :username, required: true, uniqueness: true
-    = f.input :name, required: true, autofocus: true
-    = f.input :title, collection: Profile.all.map(&:title), placeholder: 'Select or type your title...'
+    = f.input :first_name, required: true
+    = f.input :last_name
+    = f.input :title, placeholder: 'Select or type your title...'
     = f.input :phone, hint: 'Private', required: true, uniqueness: true
     = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
 
@@ -14,19 +15,11 @@
       = o.input :password_confirmation, required: true
 
     = f.input :age, required: true, label: "Year of birth", placeholder: "1990"
-    / = f.input :avatar
-    / = f.input :university_name, url: autocomplete_university_name_profiles_path, as: :autocomplete, input_html: { class: "form-control" }
-    / = f.input :bio
-    / = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
+    = f.input :avatar
+    = f.input :university, input_html: { class: "form-control" }
+    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
   .form-actions
     = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
 
-= render 'autocomplete'
+=# render 'autocomplete'
 
-
-:javascript
-  $('#profile_title').selectize({
-    create: true,
-    hideSelected: true,
-    sortField: 'text'
-  });

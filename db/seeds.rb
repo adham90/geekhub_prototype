@@ -8,37 +8,35 @@
 
 User.destroy_all
 Skill.destroy_all
-University.destroy_all
 
-20.times do |n|
+2.times do |n|
   Skill.create(
     name: "skill#{n}",
   )
 end
 
-3.times do |n|
+10.times do |n|
 
-  University.create(name: Faker::Lorem.word)
 
   User.create(
-    email: n.to_s + Faker::Internet.email,
+    email: Faker::Internet.safe_email,
     password: "password",
     password_confirmation: "password"
   )
 
   Profile.create(
     user: User.last,
-    username: "user#{n}",
+    username: Faker::Internet.user_name,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     phone: "#{n}" + Faker::PhoneNumber.phone_number,
     age: 1990,
     gender: true,
-    address: Faker::Address.country,
+    # address: Faker::Address.country,
     bio: Faker::Lorem.sentence,
-    avatar: Faker::Avatar.image,
-    university_id: n,
-    title: "title#{n}"
+    # avatar: "https://robohash.org/" + Random.rand(1000).to_s,
+    university: Faker::Lorem.word,
+    title: Faker::Name.title
   )
 
 end

@@ -28,5 +28,6 @@ Rails.application.routes.draw do
 
   # autocompletes
   get '/autocompletes/skill', to: 'autocompletes#skill', as: 'autocompletes_skill'
+  get '/autocompletes/university', to: 'autocompletes#university', as: 'autocompletes_university'
 
 end

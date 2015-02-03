@@ -11,9 +11,9 @@ class SearchController < ApplicationController
     # @search = search *(set_params) || Profile.all
     # .where("skills.name" => "skill1")
 
-    @search = Profile.near(params[:location_address], 20).joins(:skills).where(skills: {:name => params[:skill_search]}).page(1).per(20)
+    @search = Profile.near(params[:location_address], 20).joins(:skills).where(skills: {:name => params[:skill_search]}).page(params[:page]).per(10)
     if params[:skill_search] == "" || params[:skill_search] == nil
-      @search = Profile.all.page(1).per(20)
+      @search = Profile.all.page(params[:page]).per(10)
     end
     # @search = Profile.all.page(1).per(50)
     respond_with(@search)

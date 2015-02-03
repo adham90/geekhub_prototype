@@ -39,30 +39,22 @@
   // margin-top: 20px;
   margin-bottom: 0;
   padding: 0;
-
-  li{
-    // margin-bottom: -20px;
-    background-color: #fff;
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    float: left;
-    margin-left: 5px;
-    margin-right: 5px;
-    // a {
-    //   display: block;
-    //   top: 0;
-    //   left: 0;
-    //   width: 100%;
-    //   height: 100%;
-    //   cursor: default;
-    // }
-  }
-  .has-hover:hover { 
-    background-color: #F4F9FC;
-  }
-  .active{
-    background-color: #E6EBF6;
+  .items-list{
+    li{
+      background-color: #fff;
+      height: 100%;
+      width: 100%;
+      margin: 0px;
+      float: left;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    .has-hover:hover { 
+      background-color: #F4F9FC;
+    }
+    .active{
+      background-color: #E6EBF6;
+    }
   }
 }
 

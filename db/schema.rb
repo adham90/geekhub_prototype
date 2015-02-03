@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20150129121453) do
     t.float    "latitude",            limit: 24
     t.float    "longitude",           limit: 24
     t.string   "address",             limit: 255
-    t.integer  "university_id",       limit: 4
+    t.string   "university",          limit: 255
     t.integer  "user_id",             limit: 4
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
@@ -123,16 +123,6 @@ ActiveRecord::Schema.define(version: 20150129121453) do
   end
 
   add_index "skills", ["name"], name: "index_skills_on_name", using: :btree
-
-  create_table "universities", force: :cascade do |t|
-    t.string   "name",                limit: 255
-    t.string   "country",             limit: 255
-    t.integer  "profile_id",          limit: 4
-    t.string   "avatar_file_name",    limit: 255
-    t.string   "avatar_content_type", limit: 255
-    t.integer  "avatar_file_size",    limit: 4
-    t.datetime "avatar_updated_at"
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
