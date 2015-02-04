@@ -39,11 +39,15 @@ ActiveRecord::Schema.define(version: 20150204113749) do
     t.float    "latitude",                 limit: 24
     t.float    "longitude",                limit: 24
     t.string   "address",                  limit: 255
+    t.string   "address_details",          limit: 255
     t.text     "details",                  limit: 65535
     t.boolean  "type",                     limit: 1,     default: false
     t.string   "hangout_url",              limit: 255
     t.integer  "last_updated_by",          limit: 4
     t.boolean  "last_update_confirmation", limit: 1
+    t.integer  "cancelled",                limit: 4,     default: 0
+    t.datetime "cancelled_at"
+    t.boolean  "done",                     limit: 1,     default: false
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
   end
@@ -75,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150204113749) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_15bad2f916", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_261d9cb5f8", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false

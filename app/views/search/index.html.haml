@@ -7,17 +7,19 @@
     .items-list
       %lu.list-unstyled
         = render partial: "profile_search", collection: @search, as: :profile
-    = paginate @search
+    .text-center= paginate @search
+    .text-center.about
+      %p Made by GEEK With <3 for GEEKS
   .side-map
     #search-map
 
 
 :javascript
   var obj = #{@search.to_json};
-  
-  $(".search-items li").click(function() {
-    $("li").addClass('has-hover');
-    $("li").removeClass("active");
+
+  $(".items-list li").click(function() {
+    $(".items-list li").addClass('has-hover');
+    $(".items-list li").removeClass("active");
     $(this).addClass( "active" );
     $(this).removeClass('has-hover');
   });

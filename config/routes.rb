@@ -3,11 +3,17 @@ Rails.application.routes.draw do
   resources :profiles, except: [:edit, :destroy] do
     get :autocomplete_university_name, :on => :collection
     collection do
-      post 'create_pair'
       get '/locations/:id', to: 'profiles#locations'
       get '/edit', to: 'profiles#edit'
     end
   end
+
+  # pair
+
+  resources :pairs do
+    post 'set_status'
+  end
+
 
   resources :jobs do
     get :autocomplete_company_name, :on => :collection

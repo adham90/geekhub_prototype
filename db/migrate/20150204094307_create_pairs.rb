@@ -10,11 +10,15 @@ class CreatePairs < ActiveRecord::Migration
       t.float   :latitude, index: true
       t.float   :longitude, index: true
       t.string  :address
+      t.string  :address_details
       t.text    :details
       t.boolean :type, default: false #fales => offline, true => online
       t.string  :hangout_url
       t.integer :last_updated_by
       t.boolean :last_update_confirmation
+      t.integer :cancelled, default: false
+      t.datetime :cancelled_at
+      t.boolean :done, default: false
       t.timestamps null: false
     end
   end

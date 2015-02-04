@@ -65,6 +65,8 @@ class ProfilesController < ApplicationController
     render json: Profile.find(params[:id]).profile_locations
   end
 
+
+
   private
     def clear_flash
       flash.delete(:notice)

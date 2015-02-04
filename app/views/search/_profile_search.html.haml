@@ -4,6 +4,12 @@
     .name= link_to profile.name, show_profile_path(profile.username)
     .title=   profile.title
     .address= profile.address
-    .bio=     profile.bio
+    .hidden-xs.bio=     profile.bio
     %p.skills= profile.skills.name
-  
+    - if user_signed_in?
+      - pairs_requstes = current_user.profile.drives.where(navigator_id: profile.id)
+      - if pairs_requstes.count > 0
+        - if pairs_requstes.last.done == false
+          = link_to "EDIT PAIR", edit_pair_path(pairs_requstes.last), :class => "btn btn-default"
+      - else
+        = link_to "PAIR", new_pair_path(navigator_id: profile.id), :class => "btn btn-default"

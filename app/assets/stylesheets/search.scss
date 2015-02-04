@@ -35,6 +35,7 @@
 }
 
 .search-items{
+  background-color: #fff;
   @extend .col-md-6;
   // margin-top: 20px;
   margin-bottom: 0;
@@ -42,15 +43,12 @@
   .items-list{
     li{
       background-color: #fff;
-
       height: 100%;
       width: 100%;
       margin: 0px;
       float: left;
-      // margin-left: 5px;
-      // margin-right: 5px;
     }
-    .has-hover:hover { 
+    .has-hover:hover {
       background-color: #F4F9FC;
     }
     .active{

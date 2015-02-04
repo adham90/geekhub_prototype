@@ -2,6 +2,12 @@
   = f.error_notification
 
   .form-inputs
-
+    = f.input :pair_date, as: :date, class: "form-control"
+    = f.input :pair_time, as: :time
+    = f.input :navigator_id, as: :hidden, :input_html => { :value => "#{params[:navigator_id]}" }
+    = f.input :address
+    = f.input :address_details
+    = f.input :details
+    = f.input :type
   .form-actions
     = f.button :submit

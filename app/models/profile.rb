@@ -4,6 +4,9 @@ class Profile < ActiveRecord::Base
 
   has_many :profile_skills
   has_many :skills, through: :profile_skills
+  has_many :navigats, class_name: "Pair", foreign_key: :navigator_id
+  has_many :drives,   class_name: "Pair", foreign_key: :driver_id
+
 
   accepts_nested_attributes_for :user
 

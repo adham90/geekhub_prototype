@@ -16,6 +16,9 @@ class SearchController < ApplicationController
       @search = Profile.all.page(params[:page]).per(10)
     end
     # @search = Profile.all.page(1).per(50)
+    if user_signed_in?
+      @search = @search.where.not(id: current_user.profile.id)
+    end
     respond_with(@search)
   end
 
