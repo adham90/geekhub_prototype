@@ -28,6 +28,7 @@
     = render 'about'
 
 :javascript
+  var profile = #{@profile.to_json};
 
   $( "#about" ).click(function() {
     $(document).find('#in').remove();
@@ -47,31 +48,12 @@
     element = document.getElementById("profile-map"),
     map = new google.maps.Map(element, options);
 
+    map.setCenter(new google.maps.LatLng(profile.latitude,profile.longitude));
+
     var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(37.791350,-122.435883),
+      position: new google.maps.LatLng(profile.latitude,profile.longitude),
       map: map,
       icon: '/images/geek_marker.png',
-      title: "#{@profile.name}"
+      title: profile.first_name + " " + profile.last_name
     });
   }(window, google, window.Mapster || (window.Mapster = {})));
-
-/ .row
-/   .col-md-3.col-sm-5
-/     .image_wrapper
-/       = image_tag @profile.avatar.url(:medium), class: "profile_image"
-/   .col-md-9.col-sm-7
-/     #profile_info
-/       %h1= @profile.name
-/       %p.description= @profile.bio
-/       %p
-/         = @profile.user.email
-/ %br/
-/ .row
-/   .col-md-3
-/     = render 'add_skill_form'
-/ %br/
-/ .row
-/   .col-md-12
-/     = link_to "Back", root_path, class: "btn btn-default"
-/     - if @current_user
-/       = link_to "Edit", profile_edit_path, class: "btn btn-default"
