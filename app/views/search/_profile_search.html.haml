@@ -1,11 +1,14 @@
 %li.has-hover.search-item-box{id: "#{profile.id}"}
-  = link_to image_tag(profile.avatar.url(:medium), class: "item-img"), show_profile_path(profile.username)
+  = link_to image_tag(profile.avatar.url(:medium), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
   .info
-    .name= link_to profile.name, show_profile_path(profile.username)
+    .name
+      = link_to profile.name, show_profile_path(profile.username)
+      .username= "@#{profile.username}"
     .title=   profile.title
     .address= profile.address
     .hidden-xs.bio=     profile.bio
-    %p.skills= profile.skills.name
+    %p.skills.button-xs= profile.skills.name
+  .pait-btn
     - if user_signed_in?
       - pairs_requstes = current_user.profile.drives.where(navigator_id: profile.id)
       - if pairs_requstes.count > 0

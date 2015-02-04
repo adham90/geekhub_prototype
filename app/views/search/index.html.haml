@@ -15,25 +15,46 @@
 
 
 :javascript
-  var obj = #{@search.to_json};
-
-  $(".items-list li").click(function() {
-    $(".items-list li").addClass('has-hover');
-    $(".items-list li").removeClass("active");
-    $(this).addClass( "active" );
-    $(this).removeClass('has-hover');
-  });
+  var profiles = #{@search.to_json};
+  var init_lan = 0;
+  var init_lng = 0;
+  for (i = 0; i < profiles.length; i++){
+   init_lan = init_lan + profiles[i].latitude;
+   init_lng = init_lng + profiles[i].longitude;
+  };
+  init_lan = init_lan/profiles.length;
+  init_lng = init_lng/profiles.length;
 
   (function(window, google, mapster) {
-
-    var options = mapster.search_map,
-    element = document.getElementById("search-map"),
+    var markers = [];
+    var options = mapster.search_map;
+    element = document.getElementById("search-map");
     map = new google.maps.Map(element, options);
-
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(37.791350,-122.435883),
-      map: map,
-      icon: '/images/geek_marker.png',
-      title: "name"
+    map.setCenter(new google.maps.LatLng(init_lan, init_lng));
+    $(".items-list li").click(function() {
+      $(".items-list li").addClass('has-hover');
+      $(".items-list li").removeClass("active");
+      $(this).addClass( "active" );
+      $(this).removeClass('has-hover');
+      for(var i= 0; i < markers.length; i++){
+        markers[i].setIcon("/images/geek_marker.png");
+        if (markers[i]["id"] == this.id) {
+          map.setCenter(new google.maps.LatLng(markers[i]["position"]["k"], markers[i]["position"]["D"]));
+          markers[i].setIcon("/images/black_marker.png");
+        }
+      }
     });
+
+    for (var i = 0; i < profiles.length; i++) {
+      var latLng = new google.maps.LatLng(profiles[i].latitude,profiles[i].longitude);
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        icon: '/images/geek_marker.png',
+        title: profiles[i].first_name + " " + profiles[i].last_name
+      });
+      marker.id = profiles[i].id;
+      markers.push(marker);
+    }
+
   }(window, google, window.Mapster || (window.Mapster = {})));

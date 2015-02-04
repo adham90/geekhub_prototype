@@ -11,6 +11,11 @@
     .name{
       font-size: 1.5em;
     }
+    .username{
+      font-size: 0.6em;
+      color: #9D9D9D;
+      display:inline;
+    }
     .title{
       font-size: 0.9em;
       padding: 0;
@@ -26,7 +31,13 @@
       color: #9D9D9D;
     }
     .skills{
+      font-size: 1em;
       // margin-top: 50px;
     }
   }
+
+  .pait-btn{
+    margin-bottom: 0;
+  }
+
 }
