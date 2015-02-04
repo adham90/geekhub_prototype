@@ -1,4 +1,9 @@
-%li.has-hover{id: "#{profile.id}"}
-  = link_to profile.name, show_profile_path(profile.username)
-  = image_tag profile.avatar.url(:medium), class: "profile_img"
-
+%li.has-hover.search-item-box{id: "#{profile.id}"}
+  = link_to image_tag(profile.avatar.url(:medium), class: "item-img"), show_profile_path(profile.username)
+  .info
+    .name= link_to profile.name, show_profile_path(profile.username)
+    .title=   profile.title
+    .address= profile.address
+    .bio=     profile.bio
+    %p.skills= profile.skills.name
+  

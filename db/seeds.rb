@@ -32,9 +32,8 @@ end
     phone: "#{n}" + Faker::PhoneNumber.phone_number,
     age: 1990,
     gender: true,
-    # address: Faker::Address.country,
+    address: Faker::Address.country,
     bio: Faker::Lorem.sentence,
-    # avatar: "https://robohash.org/" + Random.rand(1000).to_s,
     university: Faker::Lorem.word,
     title: Faker::Name.title
   )

@@ -42,12 +42,13 @@
   .items-list{
     li{
       background-color: #fff;
+
       height: 100%;
       width: 100%;
       margin: 0px;
       float: left;
-      margin-left: 5px;
-      margin-right: 5px;
+      // margin-left: 5px;
+      // margin-right: 5px;
     }
     .has-hover:hover { 
       background-color: #F4F9FC;

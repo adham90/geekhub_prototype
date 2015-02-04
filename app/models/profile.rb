@@ -1,4 +1,3 @@
-require 'uri'
 class Profile < ActiveRecord::Base
 
   belongs_to :user
@@ -38,7 +37,7 @@ class Profile < ActiveRecord::Base
    medium: "300x300>",
    small:  "100x100>",
    thumb:  '64x64!'
-  }, :default_url => lambda { |attach| "https://robohash.org/:name/#{attach.instance.username}.png" }
+  }, :default_url => lambda { |attach| "https://robohash.org/#{attach.instance.username}.png" }
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
