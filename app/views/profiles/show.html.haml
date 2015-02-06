@@ -43,13 +43,10 @@
   });
 
   (function(window, google, mapster) {
-
-    var options = mapster.profile_map,
-    element = document.getElementById("profile-map"),
+    var options = mapster.profile_map;
+    element = document.getElementById("profile-map");
     map = new google.maps.Map(element, options);
-
     map.setCenter(new google.maps.LatLng(profile.latitude,profile.longitude));
-
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(profile.latitude,profile.longitude),
       map: map,

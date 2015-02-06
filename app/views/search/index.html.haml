@@ -5,7 +5,7 @@
       - if params[:location_address] != ""; @loc = "near #{params[:location_address]}" end
       %p= "#{params[:skill_search]} Geeks " + "#{@loc}"
     .items-list
-      %lu.list-unstyled
+      %lu.list-unstyled#search-ul
         = render partial: "profile_search", collection: @search, as: :profile
     .text-center= paginate @search
     .text-center.about
@@ -16,45 +16,85 @@
 
 :javascript
   var profiles = #{@search.to_json};
-  var init_lan = 0;
-  var init_lng = 0;
-  for (i = 0; i < profiles.length; i++){
-   init_lan = init_lan + profiles[i].latitude;
-   init_lng = init_lng + profiles[i].longitude;
-  };
-  init_lan = init_lan/profiles.length;
-  init_lng = init_lng/profiles.length;
 
   (function(window, google, mapster) {
+    var infowindows = [];
     var markers = [];
+    var bounds = new google.maps.LatLngBounds();
     var options = mapster.search_map;
     element = document.getElementById("search-map");
     map = new google.maps.Map(element, options);
-    map.setCenter(new google.maps.LatLng(init_lan, init_lng));
+
+    //click event for search result items
     $(".items-list li").click(function() {
+      //change the item
       $(".items-list li").addClass('has-hover');
       $(".items-list li").removeClass("active");
       $(this).addClass( "active" );
       $(this).removeClass('has-hover');
+      //change the marker
       for(var i= 0; i < markers.length; i++){
         markers[i].setIcon("/images/geek_marker.png");
+        infowindows[i].close();
         if (markers[i]["id"] == this.id) {
-          map.setCenter(new google.maps.LatLng(markers[i]["position"]["k"], markers[i]["position"]["D"]));
+          infowindows[i].open(map, markers[i]);
+          console.log(infowindows);
+          map.setCenter((markers[i].getPosition()));
           markers[i].setIcon("/images/black_marker.png");
         }
       }
     });
 
     for (var i = 0; i < profiles.length; i++) {
+      //get the user location
       var latLng = new google.maps.LatLng(profiles[i].latitude,profiles[i].longitude);
+
+      //set marker
       var marker = new google.maps.Marker({
         position: latLng,
         map: map,
+        animation: google.maps.Animation.DROP,
         icon: '/images/geek_marker.png',
         title: profiles[i].first_name + " " + profiles[i].last_name
       });
       marker.id = profiles[i].id;
+
+      //set infowindow
+      var infowindow = new google.maps.InfoWindow();
+      var contentString = "<h4>" + profiles[i].first_name + ' ' + profiles[i].last_name + '</h4>' + "Address: " + profiles[i].address;
+      infowindow.setContent(contentString);
+      infowindow.id = profiles[i].id;
+      infowindows.push(infowindow);
+
+      //set maeker click event
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          //reset all markers
+          for (var m = 0; m < profiles.length; m++) {
+            markers[m].setIcon("/images/geek_marker.png");
+            marker.setIcon("/images/black_marker.png");
+            infowindows[m].close();
+          }
+
+          //get the clicked marker element by ID
+          var marker_li = document.getElementById(marker.id);
+
+          //change the marker with click event
+          infowindows[i].open(map, marker);
+          $('html, body').animate({
+               scrollTop:$(marker_li).offset().top -55
+          }, 1000);
+          $(".items-list li").addClass('has-hover');
+          $(".items-list li").removeClass("active");
+          $(marker_li).addClass( "active" );
+        }
+      })(marker, i));
+      bounds.extend(marker.getPosition());
       markers.push(marker);
     }
+
+    //calculate center and zoom
+    map.setCenter(bounds.getCenter());
+    map.fitBounds(bounds);
 
   }(window, google, window.Mapster || (window.Mapster = {})));

@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   root "search#index"
 
   # search
-  get '/search', to: 'search#index'
+  get '/search', to: 'search#index', as: 'search'
 
   # autocompletes
   get '/autocompletes/skill', to: 'autocompletes#skill', as: 'autocompletes_skill'

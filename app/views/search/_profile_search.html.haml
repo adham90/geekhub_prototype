@@ -4,10 +4,10 @@
     .name
       = link_to profile.name, show_profile_path(profile.username)
       .username= "@#{profile.username}"
-    .title=   profile.title
+    .title= profile.title
     .address= profile.address
-    .hidden-xs.bio=     profile.bio
-    %p.skills.button-xs= profile.skills.name
+    .hidden-xs.bio= profile.bio
+    = render partial: "profile_skills_search", collection: profile.skills, as: :skill
   .pait-btn
     - if user_signed_in?
       - pairs_requstes = current_user.profile.drives.where(navigator_id: profile.id)
