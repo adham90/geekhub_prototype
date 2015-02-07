@@ -113,3 +113,38 @@ section {
     }
   }
 }
+
+.btn-gray {
+  color: #000;
+  background-color: #DDDDDD;
+  border-color: #DDDDDD;
+}
+.btn-gray:hover,
+.btn-gray:focus,
+.btn-gray:active,
+.btn-gray.active {
+  color: #000;
+  background-color: #d0d0d0;
+  border-color: #c4c4c4;
+}
+.btn-gray.disabled:hover,
+.btn-gray.disabled:focus,
+.btn-gray.disabled:active,
+.btn-gray.disabled.active,
+.btn-gray[disabled]:hover,
+.btn-gray[disabled]:focus,
+.btn-gray[disabled]:active,
+.btn-gray[disabled].active,
+fieldset[disabled] .btn-gray:hover,
+fieldset[disabled] .btn-gray:focus,
+fieldset[disabled] .btn-gray:active,
+fieldset[disabled] .btn-gray.active {
+  background-color: #DDDDDD;
+  border-color: #DDDDDD;
+}
+
+
+
+* {
+  border-radius: 0 !important;
+}

@@ -15,6 +15,7 @@
  *= require_tree .
  *= require_self
  */
+@import 'ionicons';
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "variables";
@@ -77,3 +78,57 @@ ul.ui-autocomplete {
 .selectize-input.not-full > input {
   width: 100% !important;
 }
+input[id^='profile_age'] {
+  width: 100px;
+}
+
+.nav-user{
+  border-right: solid 1px #ECF0F1;
+  .navbar-profile-img{
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin-right: 5px;
+    float: left;
+  }
+}
+
+.nav{
+  .badge{
+    font-size: 14px;      
+    margin:auto;
+    text-align:center;
+    vertical-align:middle;
+    background-color: $red;
+  }
+  .ion-android-notifications, 
+  .ion-android-settings, 
+  .ion-person-stalker{
+    margin:auto;
+    text-align:center;
+    vertical-align:middle;
+    font-size: 18px;      
+  }
+  .ion-search{
+    font-size: 15px;
+  }
+  .search-btn{
+    max-height: 34px;
+  }
+  #skill_search{
+    max-width: 150px;
+  }
+  #location_address{
+    max-width: 200px;
+  }
+}
+
+.nav-line{
+  border-right: solid 1px #ECF0F1;
+}
+
+//
+// .btn-default {
+//   // @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+//   @include button-variant(#000, #c3d2ff, #000);
+// }

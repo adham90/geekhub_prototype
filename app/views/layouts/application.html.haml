@@ -1,7 +1,7 @@
 !!!
 %html{"ng-app" => "app"}
   %head
-    %title= "#{content_for?(:title) ? yield(:title) : 'Rails Devise'} - GEEKHUB.IO" 
+    %title= "#{content_for?(:title) ? yield(:title) : 'Rails Devise'} - GEEKHUB.IO"
     = include_gon
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
@@ -13,5 +13,5 @@
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      = render 'layouts/messages'
+      /= render 'layouts/messages'
       = yield

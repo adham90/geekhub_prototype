@@ -1,9 +1,12 @@
 #search-controls
   = form_tag(search_path, method: 'get', class: 'form-inline') do
     .form-group
-      = text_field_tag :skill_search,"" , class: "form-control", placeholder: 'Skills: rails, ruby, java'
+      = text_field_tag :skill_search,"" , class: "form-control", placeholder: 'ruby, go, python'
       = text_field_tag :location_address,"" , class: "form-control"
-      = submit_tag "SEARCH", class: "btn"
+      %button.search-btn.btn.btn-gray{:type => "submit"}
+        %i.ion-search
+        SEARCH
+      / = submit_tag "SEARCH", class: ""
 
 
 

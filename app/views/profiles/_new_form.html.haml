@@ -14,7 +14,7 @@
       = o.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
       = o.input :password_confirmation, required: true
 
-    = f.input :age, required: true, label: "Year of birth", placeholder: "1990"
+    = f.input :age, required: true, label: "Year of birth", placeholder: "1990", size: "4"
     = f.input :avatar
     = f.input :university, input_html: { class: "form-control" }
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
@@ -22,4 +22,3 @@
     = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
 
 =# render 'autocomplete'
-

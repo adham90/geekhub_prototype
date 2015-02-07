@@ -7,9 +7,19 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to 'GEEKHUB.IO', root_path, class: 'navbar-brand', id: "brand"
+      = link_to 'GEEKHUB', root_path, class: 'navbar-brand', id: "brand"
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li= render 'layouts/navigation_search'
       %ul.nav.navbar-nav.navbar-right
-        = render 'layouts/navigation_links'
+        - if user_signed_in?
+          = render 'layouts/navigation_signin_links'
+        - else
+          %li.nav-line= link_to 'Sign in', new_user_session_path
+          %li.nav-line= link_to 'Sign up', signup_path
+
+
+:javascript
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

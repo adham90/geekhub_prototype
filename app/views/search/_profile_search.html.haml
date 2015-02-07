@@ -1,18 +1,21 @@
 %li.has-hover.search-item-box{id: "#{profile.id}"}
-  = link_to image_tag(profile.avatar.url(:medium), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
-  .info
-    .name
-      = link_to profile.name, show_profile_path(profile.username)
-      .username= "@#{profile.username}"
-    .title= profile.title
-    .address= profile.address
-    .hidden-xs.bio= profile.bio
-    = render partial: "profile_skills_search", collection: profile.skills, as: :skill
+  = link_to image_tag(profile.avatar.url(:small), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
   .pait-btn
     - if user_signed_in?
       - pairs_requstes = current_user.profile.drives.where(navigator_id: profile.id)
       - if pairs_requstes.count > 0
         - if pairs_requstes.last.done == false
-          = link_to "EDIT PAIR", edit_pair_path(pairs_requstes.last), :class => "btn btn-default"
+          %a{:href => "#{edit_pair_path(pairs_requstes.last)}", :class => "btn btn-default"}
+            EDIT PAIR
+            =image_tag("/images/pair.png")
       - else
-        = link_to "PAIR", new_pair_path(navigator_id: profile.id), :class => "btn btn-default"
+        %a{:href => "#{new_pair_path(navigator_id: profile.id)}", :class => "btn btn-default"}
+          =image_tag("/images/pair.png")
+          PAIR
+  .info
+    .name
+      = link_to profile.name, show_profile_path(profile.username)
+      .username= "@#{profile.username}"
+    .title= profile.title
+    .hidden-xs.bio= profile.bio
+    = render partial: "profile_skills_search", collection: profile.skills, as: :skill

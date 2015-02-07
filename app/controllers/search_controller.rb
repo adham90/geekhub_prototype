@@ -24,6 +24,7 @@ class SearchController < ApplicationController
     else
       @search = Profile.joins(:skills).where(skills: {:name => params[:skill_search]}).page(params[:page]).per(10)
     end
+    # @search = Profile.near(params[:location_address], 400).page(params[:page]).per(10)
 
     if user_signed_in?
       # @search = @search.where.not(id: current_user.profile.id)

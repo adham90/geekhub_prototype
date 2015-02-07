@@ -1,12 +1,23 @@
 .search-item-box{
+  border-bottom: 1px solid #ECF0F1;
   .item-img{
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     background-color: #F8F8F8;
     margin: 5px;
     float: left;
   }
   .info{
+    // display: inline-block;
+    .bio {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      line-height: 16px;     /* fallback */
+      max-height: 32px;      /* fallback */
+      -webkit-line-clamp: 2; /* number of lines to show */
+      -webkit-box-orient: vertical;
+    }
     padding-bottom: 5px;
     .name{
       font-size: 1.5em;
@@ -32,12 +43,15 @@
     }
     .skills{
       font-size: 1em;
+      margin-top: 5px;
       // margin-top: 50px;
     }
   }
 
   .pait-btn{
-    margin-bottom: 0;
+    // position: absolute;
+    margin-right: 5px;
+    margin-top: 5px;
+    float: right;
   }
-
 }
