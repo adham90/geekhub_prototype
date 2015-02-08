@@ -22,12 +22,24 @@
           %span{"aria-hidden" => "true"} ×
         %h4#exampleModalLabel.modal-title New message
       .modal-body
-        = render "pairs/form", pair: Pair.new
+        -if user_signed_in?
+          = render "pairs/form", pair: Pair.new()
 
 
 :javascript
   $(function () {
     $('#pair_pair_date').datetimepicker();
+  });
+
+  $(document).ready(function() {
+    $('#pair_hangout_url').prop('disabled', true);
+    $('#pair_type').change(function() {
+      if($(this).is(":checked")) {
+        $('#pair_hangout_url').prop('disabled', false);
+      } else {
+        $('#pair_hangout_url').prop('disabled', true);
+      }
+    });
   });
 
   $('#exampleModal').on('show.bs.modal', function (event) {

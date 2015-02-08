@@ -5,6 +5,9 @@ class Pair < ActiveRecord::Base
   belongs_to  :driver,    class_name: "Profile", foreign_key: :driver_id
   has_and_belongs_to_many :skills
 
+  accepts_nested_attributes_for :skills
+
+
   validate :navigator_not_the_same
 
   def navigator_not_the_same

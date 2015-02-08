@@ -6,5 +6,10 @@
       = f.input :password, required: false
       = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
     .form-actions
-      = f.button :submit, "Log in", class: "btn btn-primary btn-block btn-lg"
+      = f.button :submit, "Log in", class: "btn btn-itunes btn-block btn-lg"
+      %a.btn.btn-lg.btn-block.btn-facebook-inversed
+        %i.ion-social-facebook
+        Connect with Facebook
+        %i.ion-chevron-right
+
   = render "devise/shared/links"

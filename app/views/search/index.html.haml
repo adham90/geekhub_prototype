@@ -1,9 +1,9 @@
 .row
   .search-items
     = render 'layouts/messages'
-    .search-filter
-      - if params[:location_address] != ""; @loc = "near #{params[:location_address]}" end
-      %p= "#{params[:skill_search]} Geeks " + "#{@loc}"
+    / .search-filter
+    /   - if params[:location_address] != ""; @loc = "near #{params[:location_address]}" end
+    /   %p= "#{params[:skill_search]} Geeks " + "#{@loc}"
     .items-list
       %lu.list-unstyled#search-ul
         = render partial: "profile_search", collection: @search, as: :profile
