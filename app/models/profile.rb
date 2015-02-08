@@ -37,7 +37,7 @@ class Profile < ActiveRecord::Base
 
   # validates_numericality_of :rank
   has_attached_file :avatar, styles: {
-   medium: "300x300>",
+   medium: "200x200>",
    small:  "100x100>",
    thumb:  '64x64!'
   }, :default_url => lambda { |attach| "https://robohash.org/#{attach.instance.username}.png" }

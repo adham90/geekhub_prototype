@@ -2,16 +2,10 @@
   = link_to image_tag(profile.avatar.url(:small), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
   .pait-btn
     - if user_signed_in?
-      - pairs_requstes = current_user.profile.drives.where(navigator_id: profile.id)
-      - if pairs_requstes.count > 0
-        - if pairs_requstes.last.done == false
-          %a{:href => "#{edit_pair_path(pairs_requstes.last)}", :class => "btn btn-default"}
-            EDIT PAIR
-            =image_tag("/images/pair.png")
-      - else
-        %a{:href => "#{new_pair_path(navigator_id: profile.id)}", :class => "btn btn-default"}
-          =image_tag("/images/pair.png")
-          PAIR
+      %a{:href => "#", :type => "button", "data-target" => "#exampleModal", "data-toggle" => "modal", "data-navigator-name" => "#{profile.name}", "data-navigator_id" => "#{profile.id}", :class => "btn btn-itunes"}
+        %span.ion-code-working
+        PAIR
+
   .info
     .name
       = link_to profile.name, show_profile_path(profile.username)
@@ -19,3 +13,29 @@
     .title= profile.title
     .hidden-xs.bio= profile.bio
     = render partial: "profile_skills_search", collection: profile.skills, as: :skill
+
+#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#exampleModalLabel.modal-title New message
+      .modal-body
+        = render "pairs/form", pair: Pair.new
+
+
+:javascript
+  $(function () {
+    $('#pair_pair_date').datetimepicker();
+  });
+
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var navigator_id = button.data('navigator_id');
+    var navigator_name = button.data('navigator-name');
+
+    var modal = $(this);
+    modal.find('.modal-title').text('New pair with ' + navigator_name);
+    modal.find('#pair_navigator_id').val(navigator_id);
+  });

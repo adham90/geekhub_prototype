@@ -1,8 +1,8 @@
 class Pair < ActiveRecord::Base
 
   self.inheritance_column = nil
-  belongs_to :profile, inverse_of: :driver
-  has_one    :profile, inverse_of: :navigator
+  belongs_to  :navigator, class_name: "Profile", foreign_key: :navigator_id
+  belongs_to  :driver,    class_name: "Profile", foreign_key: :driver_id
   has_and_belongs_to_many :skills
 
   validate :navigator_not_the_same

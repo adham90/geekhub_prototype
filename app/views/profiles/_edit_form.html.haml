@@ -8,10 +8,20 @@
     = f.input :title, placeholder: 'Select or type your title...'
     = f.input :phone, required: true
     = f.input :age, required: true, label: "Year of birth"
-    - if @profile.avatar?
-      = image_tag(@profile.avatar.url(:small), id: "edit-profile-avatar")
-      %em Currently uploaded avatar
-    = f.input :avatar
+
+    .fileinput.fileinput-new{"data-provides" => "fileinput"}
+      .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
+        - if @profile.avatar?
+          = image_tag(@profile.avatar.url, id: "edit-profile-avatar")
+        -else
+          %img{"src" => "/images/200.gif"}
+      .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 200px;"}
+      %div
+        %span.btn.btn-default.btn-file
+          %span.fileinput-new Select image
+          %span.fileinput-exists Change
+          = f.file_field :avatar
+        %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
     = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
     = f.input :university, input_html: { class: "form-control" }
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons

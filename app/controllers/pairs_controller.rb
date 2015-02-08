@@ -1,7 +1,7 @@
 class PairsController < ApplicationController
   before_action :set_pair, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @pairs = Pair.all
@@ -13,8 +13,8 @@ class PairsController < ApplicationController
   end
 
   def new
-    @pair = Pair.new
-    respond_with(@pair)
+    # @pair = Pair.new(navigator_id: params[:navigator_id])
+    # respond_with(@pair)
   end
 
   def edit
@@ -22,7 +22,7 @@ class PairsController < ApplicationController
 
   def create
     @pair = Pair.new(pair_params)
-    @pair.driver_id = current_user.id
+    @pair.driver_id = current_user.profile.id
     @pair.save
     respond_with(@pair)
   end

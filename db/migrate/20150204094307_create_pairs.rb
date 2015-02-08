@@ -3,7 +3,7 @@ class CreatePairs < ActiveRecord::Migration
     create_table :pairs do |t|
       t.integer :driver_id, null: false, index: true
       t.integer :navigator_id, null: false, index: true
-      t.date    :pair_date, null: false
+      t.datetime :pair_date, null: false
       t.time    :pair_time, null: false
       t.datetime :confirmed_at
       t.boolean :confirmation_status #true => accepted, fales => denied

@@ -7,14 +7,14 @@
     .items-list
       %lu.list-unstyled#search-ul
         = render partial: "profile_search", collection: @search, as: :profile
-    .text-center= paginate @search
+    .text-center= paginate @search, :outer_window => 0
     .text-center.about
-      %p Made by GEEK With <3 for GEEKS
+      %p MADE BY GEEK WITH <3 FOR GEEKS
   .side-map
     #search-map
 
-
 :javascript
+
   var profiles = #{@search.to_json};
 
   (function(window, google, mapster) {
@@ -38,7 +38,8 @@
         infowindows[i].close();
         if (markers[i]["id"] == this.id) {
           infowindows[i].open(map, markers[i]);;
-          map.setCenter((markers[i].getPosition()));
+          map.setZoom(8);
+          map.panTo(markers[i].getPosition());
           markers[i].setIcon("/images/red_marker.png");
         }
       }
@@ -95,5 +96,5 @@
     //calculate center and zoom
     map.setCenter(bounds.getCenter());
     map.fitBounds(bounds);
-
+    var mc = new MarkerClusterer(map, markers);
   }(window, google, window.Mapster || (window.Mapster = {})));

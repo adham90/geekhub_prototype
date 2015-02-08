@@ -1,13 +1,15 @@
-= simple_form_for(@pair) do |f|
+= simple_form_for(pair, remote: true) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :pair_date, as: :date, class: "form-control"
-    = f.input :pair_time, as: :time
-    = f.input :navigator_id, as: :hidden, :input_html => { :value => "#{params[:navigator_id]}" }
+    = f.input :pair_date, as: :string, class:"form-control"
+    = f.input :pair_time, as: :string, input_html: {"data-mask" => "99:99"}
+    = f.input :navigator_id,  as: :hidden
     = f.input :address
     = f.input :address_details
     = f.input :details
     = f.input :type
-  .form-actions
-    = f.button :submit
+  .modal-footer
+    .form-actions
+      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+      = f.button :submit, 'Send pair request', class: "btn btn-primary"

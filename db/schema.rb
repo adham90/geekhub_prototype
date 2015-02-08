@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150204113749) do
   create_table "pairs", force: :cascade do |t|
     t.integer  "driver_id",                limit: 4,                     null: false
     t.integer  "navigator_id",             limit: 4,                     null: false
-    t.date     "pair_date",                                              null: false
+    t.datetime "pair_date",                                              null: false
     t.time     "pair_time",                                              null: false
     t.datetime "confirmed_at"
     t.boolean  "confirmation_status",      limit: 1
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150204113749) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_261d9cb5f8", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_e6d044ccb4", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false

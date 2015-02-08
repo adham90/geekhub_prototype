@@ -19,6 +19,10 @@
 //= require jquery-geocomplete
 //= reuqire gmaps
 //= require bootstrap-sprockets
+//= require moment
+//= require bootstrap-datetimepicker
+//= require jasny-bootstrap.min
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require markerclusterer_compiled
 //= require_tree .
