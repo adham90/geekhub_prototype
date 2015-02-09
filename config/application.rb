@@ -13,8 +13,7 @@ Bundler.require(*Rails.groups)
 
 module Geekhub
   class Application < Rails::Application
-    config.assets.initialize_on_precompile = false
-    config.assets.precompile = ["*.js"]
+    config.serve_static_assets = true
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
