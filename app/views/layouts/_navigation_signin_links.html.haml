@@ -4,15 +4,13 @@
     = image_tag(current_user.profile.avatar.url(:thumb), class: "navbar-profile-img")
 %li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}
-    %span.badge 3
-    %span.ion-person-stalker
+    %span.ion-code
   %ul.dropdown-menu{:role => "menu"}
     =render 'layouts/notification'
 
 %li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Notifications"}
   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}
-    / %span.badge 3
-    %span.ion-android-notifications
+    %span.ion-android-notifications-none
   %ul.dropdown-menu{:role => "menu"}
     =render 'layouts/notification'
 

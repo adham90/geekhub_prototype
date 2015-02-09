@@ -2,9 +2,10 @@
   = link_to image_tag(profile.avatar.url(:small), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
   .pait-btn
     - if user_signed_in?
-      %a{:href => "#", :type => "button", "data-target" => "#exampleModal", "data-toggle" => "modal", "data-navigator-name" => "#{profile.name}", "data-navigator_id" => "#{profile.id}", :class => "btn btn-itunes"}
-        %span.ion-code-working
-        PAIR
+      / %a{:href => "#{new_pair_path(navigator_id: profile.id)}" , :type => "button", "data-target" => "#exampleModal", "data-toggle" => "modal", "data-navigator-name" => "#{profile.name}", "data-navigator_id" => "#{profile.id}", :class => "btn btn-itunes"}
+      /   %span.ion-code-working
+      /   PAIR
+      = link_to "PAIR", new_pair_path(navigator_id: profile.id), :class => "btn btn-itunes"
 
   .info
     .name
@@ -13,41 +14,3 @@
     .title= profile.title
     .hidden-xs.bio= profile.bio
     = render partial: "profile_skills_search", collection: profile.skills, as: :skill
-
-#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4#exampleModalLabel.modal-title New message
-      .modal-body
-        -if user_signed_in?
-          = render "pairs/form", pair: Pair.new()
-
-
-:javascript
-  $(function () {
-    $('#pair_pair_date').datetimepicker();
-  });
-
-  $(document).ready(function() {
-    $('#pair_hangout_url').prop('disabled', true);
-    $('#pair_type').change(function() {
-      if($(this).is(":checked")) {
-        $('#pair_hangout_url').prop('disabled', false);
-      } else {
-        $('#pair_hangout_url').prop('disabled', true);
-      }
-    });
-  });
-
-  $('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var navigator_id = button.data('navigator_id');
-    var navigator_name = button.data('navigator-name');
-
-    var modal = $(this);
-    modal.find('.modal-title').text('New pair with ' + navigator_name);
-    modal.find('#pair_navigator_id').val(navigator_id);
-  });

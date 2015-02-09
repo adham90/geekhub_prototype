@@ -1,9 +1,6 @@
 .row
   .search-items
     = render 'layouts/messages'
-    / .search-filter
-    /   - if params[:location_address] != ""; @loc = "near #{params[:location_address]}" end
-    /   %p= "#{params[:skill_search]} Geeks " + "#{@loc}"
     .items-list
       %lu.list-unstyled#search-ul
         = render partial: "profile_search", collection: @search, as: :profile
@@ -13,8 +10,44 @@
   .side-map
     #search-map
 
+
 :javascript
 
+  $(function () {
+    $('#pair_pair_date').datetimepicker();
+  });
+
+  $(document).ready(function() {
+    $('#pair_hangout_url').prop('disabled', true);
+    $('#pair_type').change(function() {
+      if($(this).is(":checked")) {
+        $('#pair_hangout_url').prop('disabled', false);
+      } else {
+        $('#pair_hangout_url').prop('disabled', true);
+      }
+    });
+  });
+
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var navigator_id = button.data('navigator_id');
+    var navigator_name = button.data('navigator-name');
+    var gon = {};
+    gon.navigator_id = navigator_id;
+    console.log(gon.navigator_id)
+    var modal = $(this);
+    modal.find('.modal-title').text('New pair with ' + navigator_name);
+    modal.find('#pair_navigator_id').val(navigator_id);
+  });
+
+
+
+
+
+
+
+
+  //the map
   var profiles = #{@search.to_json};
 
   (function(window, google, mapster) {

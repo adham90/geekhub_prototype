@@ -1,6 +1,5 @@
-= simple_form_for(pair, remote: true) do |f|
+= simple_form_for(@pair, remote: true) do |f|
   = f.error_notification
-
   .form-inputs
     = f.input :pair_date, as: :string, class:"form-control"
     = f.input :pair_time, as: :string, input_html: {"data-mask" => "99:99"}
@@ -8,8 +7,8 @@
     = f.input :address
     = f.input :address_details, label: "Location details"
 
-    = f.simple_fields_for :skill, validate: true, required: true do |s|
-      = s.input :email, collection: current_user.profile.skills, as: :check_boxes
+    / = f.simple_fields_for :skill, validate: true, required: true do |s|
+    /   = s.input :email, collection: current_user.profile.skills & Profile.find(pair.navigator_id).skills, as: :check_boxes
 
     = f.input :details, label: "Reason of pairing"
     = f.input :type, label: "Online/Offline"

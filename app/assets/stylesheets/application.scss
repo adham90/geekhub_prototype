@@ -106,11 +106,15 @@ input[id^='profile_age'] {
   }
   .ion-android-notifications,
   .ion-android-settings,
-  .ion-person-stalker{
+  .ion-person-stalker,
+  .ion-android-notifications-none,
+  .ion-ios-person-outline,
+  .ion-ios-person,
+  .ion-code{
     margin:auto;
     text-align:center;
     vertical-align:middle;
-    font-size: 18px;
+    font-size: 21px;
   }
   .ion-search{
     font-size: 15px;
@@ -129,9 +133,3 @@ input[id^='profile_age'] {
 .nav-line{
   border-right: solid 1px #ECF0F1;
 }
-
-//
-// .btn-default {
-//   // @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
-//   @include button-variant(#000, #c3d2ff, #000);
-// }

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get :autocomplete_skill_name, :on => :collection
   end
 
+  get '/pairwith/:navigator_id', to: 'pairs#create', as: "pair_with"
   get '/@:username', to: 'profiles#show', as: 'show_profile'
   get '/@:username/about', to: 'profiles#about', as: 'profile_about'
   get '/addskill', to: 'profiles#add_skill'

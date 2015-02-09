@@ -8,7 +8,7 @@ class JobsController < ApplicationController
 
   def new
     @job = current_user.profile.jobs.new
-    respond_with(@job)
+    redirect_to(@job)
   end
 
   def create

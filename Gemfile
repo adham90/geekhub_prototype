@@ -20,7 +20,7 @@ gem 'kaminari-bootstrap'
 gem 'gon'
 gem "omniauth"
 gem 'omniauth-facebook'
-gem 'searchkick'
+# gem 'searchkick'
 gem 'open_uri_redirections'
 gem 'mini_magick'
 gem 'paperclip', '~> 4.2.1'
@@ -55,7 +55,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # gem 'spring'
   gem 'pry'
 end
 

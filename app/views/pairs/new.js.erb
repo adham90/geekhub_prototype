@@ -1,2 +1,3 @@
-$('.modal-body').html('<%= escape_javascript(render :partial => 'form', :navigator_id => navigator_id) %>');
-$('.modal-header').remove(); // don't need a header here
+$(".search-items").append("<%= escape_javascript(render :partial => 'form') %>");
+$('#exampleModal').modal('show');
+console.log("<%= escape_javascript(@common_skills.first) %>");

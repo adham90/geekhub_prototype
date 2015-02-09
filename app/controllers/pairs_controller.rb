@@ -9,12 +9,13 @@ class PairsController < ApplicationController
   end
 
   def show
-    respond_with(@pair)
+
   end
 
   def new
-    # @pair = Pair.new(navigator_id: params[:navigator_id])
-    # respond_with(@pair)
+    @pair = Pair.new(navigator_id: params[:navigator_id])
+    @common_skills = Profile.find(params[:navigator_id]).skills
+    respond_with(@pair)
   end
 
   def edit
@@ -24,7 +25,7 @@ class PairsController < ApplicationController
     @pair = Pair.new(pair_params)
     @pair.driver_id = current_user.profile.id
     @pair.save
-    respond_with(@pair)
+    redirect_to :root_path
   end
 
   def update
