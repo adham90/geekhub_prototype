@@ -15,7 +15,7 @@ Skill.destroy_all
   )
 end
 
-500.times do |n|
+35.times do |n|
   User.create(
     email: Faker::Internet.safe_email,
     password: "password",

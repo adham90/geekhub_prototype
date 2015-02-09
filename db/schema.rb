@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204113749) do
+ActiveRecord::Schema.define(version: 20150204094307) do
 
   create_table "identities", force: :cascade do |t|
     t.string  "uid",        limit: 255
@@ -20,14 +20,6 @@ ActiveRecord::Schema.define(version: 20150204113749) do
   end
 
   add_index "identities", ["profile_id"], name: "index_identities_on_profile_id", using: :btree
-
-  create_table "pair_skills", force: :cascade do |t|
-    t.integer "pair_id",  limit: 4
-    t.integer "skill_id", limit: 4
-  end
-
-  add_index "pair_skills", ["pair_id"], name: "index_pair_skills_on_pair_id", using: :btree
-  add_index "pair_skills", ["skill_id"], name: "index_pair_skills_on_skill_id", using: :btree
 
   create_table "pairs", force: :cascade do |t|
     t.integer  "driver_id",                limit: 4,                     null: false
@@ -79,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150204113749) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_e6d044ccb4", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_be8d7a4399", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -141,8 +133,6 @@ ActiveRecord::Schema.define(version: 20150204113749) do
   add_index "users", ["profile_id"], name: "index_users_on_profile_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "pair_skills", "pairs"
-  add_foreign_key "pair_skills", "skills"
   add_foreign_key "profile_skills", "profiles"
   add_foreign_key "profile_skills", "profiles"
   add_foreign_key "profile_skills", "skills"

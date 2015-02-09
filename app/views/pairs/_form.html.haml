@@ -1,19 +1,39 @@
-= simple_form_for(@pair, remote: true) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :pair_date, as: :string, class:"form-control"
-    = f.input :pair_time, as: :string, input_html: {"data-mask" => "99:99"}
-    = f.input :navigator_id,  as: :hidden
-    = f.input :address
-    = f.input :address_details, label: "Location details"
+#pair_form
+  = simple_form_for(@pair, remote: true, validate: true, html: { multipart: true }) do |f|
+    = f.error_notification
+    .form-inputs
+      = f.input :pair_date, as: :string, class:"form-control", placeholder: 'Pair date time', label: false
+      = f.input :pair_time, as: :string, input_html: {"data-mask" => "99:99"}, label: false, placeholder: 'Pair time'
+      = f.input :navigator_id, as: :hidden
+      = f.input :address, label: false, placeholder: 'Pair location'
+      = f.input :address_details, label: "Location details", label: false, placeholder: 'Location details'
+      = f.input :details, label: false, placeholder: 'Reason of pairing', required: true, validate: { presence: true }
+      = f.input :type, label: "Online"
+      = f.input :hangout_url, placeholder: 'google hangout url, skayp id', label: false
+    .modal-footer
+      .form-actions
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        = f.button :submit, 'Send pair request', class: "btn btn-primary"
 
-    / = f.simple_fields_for :skill, validate: true, required: true do |s|
-    /   = s.input :email, collection: current_user.profile.skills & Profile.find(pair.navigator_id).skills, as: :check_boxes
+:javascript
+  $("#pair_address").geocomplete({
+    details: "form",
+    markerOptions: {
+      draggable: true
+    }
+  });
 
-    = f.input :details, label: "Reason of pairing"
-    = f.input :type, label: "Online/Offline"
-    = f.input :hangout_url, label: "URL", placeholder: 'google hangout url, skayp id'
-  .modal-footer
-    .form-actions
-      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-      = f.button :submit, 'Send pair request', class: "btn btn-primary"
+  $(function () {
+    $('#pair_pair_date').datetimepicker();
+  });
+
+  $(document).ready(function() {
+    $('#pair_hangout_url').prop('disabled', true);
+    $('#pair_type').change(function() {
+      if($(this).is(":checked")) {
+        $('#pair_hangout_url').prop('disabled', false);
+      } else {
+        $('#pair_hangout_url').prop('disabled', true);
+      }
+    });
+  });

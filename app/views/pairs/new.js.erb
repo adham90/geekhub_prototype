@@ -1,3 +1,2 @@
-$(".search-items").append("<%= escape_javascript(render :partial => 'form') %>");
-$('#exampleModal').modal('show');
-console.log("<%= escape_javascript(@common_skills.first) %>");
+$(document).find('#pair_form').remove();
+$(".modal-body").append("<%= escape_javascript(render :partial => 'form') %>");

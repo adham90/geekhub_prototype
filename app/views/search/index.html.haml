@@ -11,24 +11,21 @@
     #search-map
 
 
+#pairModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#exampleModalLabel.modal-title New message
+      .modal-body
+
+
 :javascript
 
-  $(function () {
-    $('#pair_pair_date').datetimepicker();
-  });
 
-  $(document).ready(function() {
-    $('#pair_hangout_url').prop('disabled', true);
-    $('#pair_type').change(function() {
-      if($(this).is(":checked")) {
-        $('#pair_hangout_url').prop('disabled', false);
-      } else {
-        $('#pair_hangout_url').prop('disabled', true);
-      }
-    });
-  });
 
-  $('#exampleModal').on('show.bs.modal', function (event) {
+  $('#pairModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var navigator_id = button.data('navigator_id');
     var navigator_name = button.data('navigator-name');
@@ -39,11 +36,6 @@
     modal.find('.modal-title').text('New pair with ' + navigator_name);
     modal.find('#pair_navigator_id').val(navigator_id);
   });
-
-
-
-
-
 
 
 

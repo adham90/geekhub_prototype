@@ -13,9 +13,11 @@ class PairsController < ApplicationController
   end
 
   def new
-    @pair = Pair.new(navigator_id: params[:navigator_id])
-    @common_skills = Profile.find(params[:navigator_id]).skills
-    respond_with(@pair)
+    @pair = Pair.new()
+    @pair.driver_id = current_user.profile.id
+    respond_to do |format|
+      format.js { render "new.js.erb" }
+    end
   end
 
   def edit
@@ -24,8 +26,14 @@ class PairsController < ApplicationController
   def create
     @pair = Pair.new(pair_params)
     @pair.driver_id = current_user.profile.id
-    @pair.save
-    redirect_to :root_path
+    respond_to do |format|
+      if @pair.save
+        format.js { render "create.js.erb", notice: 'Pair request sended successfully.' } 
+      else
+        flash[:error] = @pair.errors.full_messages.to_sentence
+        format.js { render "error.js.erb" }
+      end
+    end
   end
 
   def update
