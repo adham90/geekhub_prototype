@@ -38,4 +38,11 @@
   .form-actions
     = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
 
-=# render 'autocomplete'
+//= render 'autocomplete'
+:javascript
+  $("#profile_address").geocomplete({
+    details: "form",
+    markerOptions: {
+      draggable: true
+    }
+  });
