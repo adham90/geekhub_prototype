@@ -5,9 +5,10 @@
     = f.input :username, required: true
     = f.input :first_name, required: true
     = f.input :last_name
-    = f.input :title, placeholder: 'Select or type your title...'
+    = f.input :title
     = f.input :phone, required: true
-    = f.input :age, required: true, as: :string
+    = f.input :age, required: true, as: :string, class:"form-control"
+    = f.select :domain_id, @domains
 
     .fileinput.fileinput-new{"data-provides" => "fileinput"}
       .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
@@ -37,6 +38,7 @@
       draggable: true
     }
   });
+
   $(function () {
     $('#profile_age').datetimepicker({
       viewMode: 'years',
@@ -45,3 +47,4 @@
     });
   });
   
+  $('#profile_domain_id').selectize();

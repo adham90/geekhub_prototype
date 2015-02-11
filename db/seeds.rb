@@ -8,14 +8,23 @@
 
 User.destroy_all
 Skill.destroy_all
+Domain.destroy_all
 
-2.times do |n|
+5.times do |n|
   Skill.create(
-    name: "skill#{n}",
+    name: "skill#{n}"
   )
 end
 
+5.times do |d|
+  Domain.create(name: Faker::Internet.user_name)
+  20.times do |s|
+    Domain.create(name: Faker::Internet.user_name, ancestry: Domain.last.id)
+  end
+end
+
 35.times do |n|
+
   User.create(
     email: Faker::Internet.safe_email,
     password: "password",
@@ -35,4 +44,5 @@ end
     university: Faker::Lorem.word,
     title: Faker::Name.title
   )
+
 end

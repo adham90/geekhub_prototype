@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211001817) do
+ActiveRecord::Schema.define(version: 20150211173019) do
+
+  create_table "domains", force: :cascade do |t|
+    t.string "name",        limit: 255, null: false
+    t.string "description", limit: 255
+    t.string "ancestry",    limit: 255
+  end
+
+  add_index "domains", ["ancestry"], name: "index_domains_on_ancestry", using: :btree
+  add_index "domains", ["name"], name: "index_domains_on_name", using: :btree
 
   create_table "identities", force: :cascade do |t|
     t.string  "uid",      limit: 255
@@ -71,7 +80,7 @@ ActiveRecord::Schema.define(version: 20150211001817) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_5c52f00312", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_19d4974007", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -87,6 +96,7 @@ ActiveRecord::Schema.define(version: 20150211001817) do
     t.float    "longitude",           limit: 24
     t.string   "address",             limit: 255
     t.string   "university",          limit: 255
+    t.integer  "domain_id",           limit: 4
     t.integer  "user_id",             limit: 4
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
@@ -96,6 +106,7 @@ ActiveRecord::Schema.define(version: 20150211001817) do
     t.datetime "avatar_updated_at"
   end
 
+  add_index "profiles", ["domain_id"], name: "index_profiles_on_domain_id", using: :btree
   add_index "profiles", ["latitude"], name: "index_profiles_on_latitude", using: :btree
   add_index "profiles", ["longitude"], name: "index_profiles_on_longitude", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree

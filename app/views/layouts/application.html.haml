@@ -14,5 +14,7 @@
     %main{:role => "main"}
       = render 'layouts/messages' unless current_page?(root_path)
       = yield
+      - unless current_page?(root_path)
+        .push
     = render 'layouts/footer' unless current_page?(root_path)
 

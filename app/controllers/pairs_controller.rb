@@ -1,4 +1,5 @@
 class PairsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :new, :create, :destroy, :set_status]
   before_action :set_pair, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :js

@@ -30,9 +30,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def all
-    Rails.logger.debug "=============================================="
-    Rails.logger.debug request.env["omniauth.auth"]
-    Rails.logger.debug "=============================================="
+    # Rails.logger.debug "=============================================="
+    # Rails.logger.debug request.env["omniauth.auth"]
+    # Rails.logger.debug "=============================================="
 
     identity = Identity.where("provider" => auth[:identity][:provider]).where("uid" => auth[:identity][:uid]).first
     if identity

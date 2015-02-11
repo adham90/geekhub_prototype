@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-
+  before_action :set_domains
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete  :university, :name
@@ -68,6 +68,15 @@ class ProfilesController < ApplicationController
 
 
   private
+
+
+    def set_domains
+      @domains = Domain.all.each { |c| c.ancestry = c.ancestry.to_s + (c.ancestry != nil ? "/" : '') + c.id.to_s 
+              }.sort {|x,y| x.ancestry <=> y.ancestry 
+              }.map{ |c| ["--" * (c.depth - 1) + c.name,c.id] 
+              }.unshift(["-- none --", nil])
+    end
+
     def clear_flash
       flash.delete(:notice)
       flash.delete(:error)
@@ -84,6 +93,8 @@ class ProfilesController < ApplicationController
     end
 
     def profile_params
-      params.require(:profile).permit(:username, :first_name, :last_name, :title, :bio, :phone, :gender, :address, :university, :age, :avatar, user_attributes: [:email, :password, :password_confirmation])
+      params.require(:profile).permit(:username, :first_name, :last_name,
+       :title, :bio, :phone, :gender, :address, :university, :age,
+       :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation])
     end
 end
