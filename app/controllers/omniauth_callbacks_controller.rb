@@ -17,35 +17,31 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         provider: auth.provider
       },
       profile: {
+        username:   "fb#{auth.uid}",
         first_name: auth.extra.raw_info.first_name,
-        last_name: auth.extra.raw_info.last_name,
-        bio:      auth.extra.raw_info.bio,
-        age:      auth.extra.raw_info.birthday,
-        gender:   true,
-        username: auth.uid,
-        phone: "0010010010",
-        address: "cairo, egypt",
-        avatar:   process_uri(largeimage),
-
+        last_name:  auth.extra.raw_info.last_name,
+        bio:        auth.extra.raw_info.bio,
+        age:        auth.extra.raw_info.birthday,
+        gender:     auth.extra.raw_info.gender == "male"? true : false,
+        address:    "" || auth.extra.raw_info.location.name,
+        avatar:     process_uri(largeimage)
       }
     }
   end
 
   def all
-    Rails.logger.debug("=============================================")
-    Rails.logger.debug(auth)
-    Rails.logger.debug("=============================================")
+    Rails.logger.debug "=============================================="
+    Rails.logger.debug request.env["omniauth.auth"]
+    Rails.logger.debug "=============================================="
 
     identity = Identity.where("provider" => auth[:identity][:provider]).where("uid" => auth[:identity][:uid]).first
     if identity
-      # current_user = identity.profile.user
       flash.notice = "Signed in!"
-      sign_in_and_redirect identity.profile.user
-      # redirect_to root_path
+      sign_in_and_redirect identity.user
     else
       profile = Profile.new(auth[:profile])
-      profile.build_user(email: auth[:email], password: "password", password_confirmation: "password")
-      profile.identities.push(Identity.new(auth[:identity]))
+      profile.build_user(email: auth[:email])
+      profile.user.identities.push(Identity.new(auth[:identity]))
       if profile.save
         flash[:notice] = "Signed in!"
         sign_in_and_redirect profile.user

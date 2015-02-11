@@ -7,7 +7,7 @@
     = f.input :last_name
     = f.input :title, placeholder: 'Select or type your title...'
     = f.input :phone, required: true
-    = f.input :age, required: true, label: "Year of birth"
+    = f.input :age, required: true, as: :string
 
     .fileinput.fileinput-new{"data-provides" => "fileinput"}
       .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
@@ -37,3 +37,11 @@
       draggable: true
     }
   });
+  $(function () {
+    $('#profile_age').datetimepicker({
+      viewMode: 'years',
+      defaultDate: "01/01/1990",
+      format: 'DD/MM/YYYY'
+    });
+  });
+  

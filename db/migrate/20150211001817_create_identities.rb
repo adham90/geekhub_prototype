@@ -3,7 +3,7 @@ class CreateIdentities < ActiveRecord::Migration
     create_table :identities do |t|
       t.string :uid
       t.string :provider
-      t.belongs_to :profile, index: true
+      t.belongs_to :user, index: true
     end
   end
 end

@@ -81,9 +81,6 @@ ul.ui-autocomplete {
 .selectize-input.not-full > input {
   width: 100% !important;
 }
-input[id^='profile_age'] {
-  width: 100px;
-}
 
 .nav-user{
   border-right: solid 1px #ECF0F1;
@@ -133,3 +130,5 @@ input[id^='profile_age'] {
 .nav-line{
   border-right: solid 1px #ECF0F1;
 }
+.datepicker {z-index: 1151 !important;}
+

@@ -14,12 +14,12 @@
 ActiveRecord::Schema.define(version: 20150211001817) do
 
   create_table "identities", force: :cascade do |t|
-    t.string  "uid",        limit: 255
-    t.string  "provider",   limit: 255
-    t.integer "profile_id", limit: 4
+    t.string  "uid",      limit: 255
+    t.string  "provider", limit: 255
+    t.integer "user_id",  limit: 4
   end
 
-  add_index "identities", ["profile_id"], name: "index_identities_on_profile_id", using: :btree
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "pairs", force: :cascade do |t|
     t.integer  "driver_id",                limit: 4,                     null: false
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150211001817) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_7121de52ab", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_5c52f00312", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false

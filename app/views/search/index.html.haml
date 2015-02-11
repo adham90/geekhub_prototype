@@ -5,8 +5,7 @@
       %lu.list-unstyled#search-ul
         = render partial: "profile_search", collection: @search, as: :profile
     .text-center= paginate @search, :outer_window => 0
-    .text-center.about
-      %p MADE BY GEEK WITH <3 FOR GEEKS
+    = render 'layouts/footer'
   .side-map
     #search-map
 
