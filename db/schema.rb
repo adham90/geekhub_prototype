@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204094307) do
+ActiveRecord::Schema.define(version: 20150211001817) do
 
   create_table "identities", force: :cascade do |t|
     t.string  "uid",        limit: 255
@@ -71,17 +71,17 @@ ActiveRecord::Schema.define(version: 20150204094307) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_be8d7a4399", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_7121de52ab", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
-    t.string   "first_name",          limit: 255,   null: false
+    t.string   "first_name",          limit: 255
     t.string   "last_name",           limit: 255
     t.text     "bio",                 limit: 65535
-    t.string   "phone",               limit: 255,   null: false
+    t.string   "phone",               limit: 255
     t.integer  "rank",                limit: 4
-    t.integer  "age",                 limit: 4,     null: false
-    t.boolean  "gender",              limit: 1,     null: false
+    t.date     "age"
+    t.boolean  "gender",              limit: 1
     t.string   "title",               limit: 255
     t.float    "latitude",            limit: 24
     t.float    "longitude",           limit: 24
@@ -98,7 +98,6 @@ ActiveRecord::Schema.define(version: 20150204094307) do
 
   add_index "profiles", ["latitude"], name: "index_profiles_on_latitude", using: :btree
   add_index "profiles", ["longitude"], name: "index_profiles_on_longitude", using: :btree
-  add_index "profiles", ["phone"], name: "index_profiles_on_phone", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
   add_index "profiles", ["username"], name: "index_profiles_on_username", using: :btree
 

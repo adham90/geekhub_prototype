@@ -23,21 +23,12 @@
 
 :javascript
 
-
-
   $('#pairModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
-    var navigator_id = button.data('navigator_id');
     var navigator_name = button.data('navigator-name');
-    var gon = {};
-    gon.navigator_id = navigator_id;
-    console.log(gon.navigator_id)
     var modal = $(this);
     modal.find('.modal-title').text('New pair with ' + navigator_name);
-    modal.find('#pair_navigator_id').val(navigator_id);
   });
-
-
 
   //the map
   var profiles = #{@search.to_json};

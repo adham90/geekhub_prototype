@@ -6,11 +6,9 @@
       %button.search-btn.btn.btn-gray{:type => "submit"}
         %i.ion-search
         SEARCH
-      / = submit_tag "SEARCH", class: ""
-
-
 
 :javascript
+
   $("#location_address").geocomplete({
     details: "form",
     markerOptions: {

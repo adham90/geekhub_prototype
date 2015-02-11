@@ -3,28 +3,28 @@
   .profile-head
     %h2.profile-name= @profile.name.capitalize
     .bar
-      %ul.nav
-        %li#about
-          %a{:href => "#"}
-            %span ABOUT
-            %br/
-            %p ......
-        %li#pair
-          %a{:href => "#"}
-            %span PAIRED WITH
-            %br/
-            %p 13
-        %li
-          %a{:href => "#"}
-            %span PAIRED WITH
-            %br/
-            %p 104
+      / %ul.nav
+      /   %li#about
+      /     %a{:href => "#"}
+      /       %span ABOUT
+      /       %br/
+      /       %p ......
+      /   %li#pair
+      /     %a{:href => "#"}
+      /       %span PAIRED WITH
+      /       %br/
+      /       %p 13
+      /   %li
+      /     %a{:href => "#"}
+      /       %span PAIRED WITH
+      /       %br/
+      /       %p 104
     .profile-image-box
       .image_wrapper
         = image_tag @profile.avatar.url(:medium), class: "profile_img"
 #profile-main
-  .col-md-2.box
-  .col-md-9.box#profile-content
+  / .col-md-2.box
+  .col-md-10.col-md-offset-1.box#profile-content
     = render 'about'
 
 :javascript

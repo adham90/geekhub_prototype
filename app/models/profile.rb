@@ -1,12 +1,12 @@
 class Profile < ActiveRecord::Base
 
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 
   has_many :profile_skills
   has_many :skills, through: :profile_skills
   has_many :navigats, class_name: "Pair", foreign_key: :navigator_id
   has_many :drives,   class_name: "Pair", foreign_key: :driver_id
-
+  has_many :identities, dependent: :delete_all
 
   accepts_nested_attributes_for :user
 
@@ -22,17 +22,17 @@ class Profile < ActiveRecord::Base
                        length: {maximum: 50},
                        format: /\A[a-zA-Z\d]*\z/
 
-  validates :first_name, presence: true, length: {maximum: 50}
+  validates :first_name, length: {maximum: 50}
 
-  validates :phone, presence: true,
-                    uniqueness: { case_sensitive: false },
-                    length: {maximum: 50}
+  # validates :phone, presence: true,
+  #                   uniqueness: { case_sensitive: false },
+  #                   length: {maximum: 50}
 
-  validates :age, presence: true,
-                  length: {maximum: 4},
-                  numericality: {only_integer: true,
-                    greater_than_or_equal_to: Date.today.year - 90 ,
-                    less_than_or_equal_to: Date.today.year + 90}
+  # validates :age, presence: true,
+  #                 length: {maximum: 4},
+  #                 numericality: {only_integer: true,
+  #                   greater_than_or_equal_to: Date.today.year - 90 ,
+  #                   less_than_or_equal_to: Date.today.year + 90}
 
 
   # validates_numericality_of :rank
@@ -55,5 +55,15 @@ class Profile < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      user.image = auth.info.image # assuming the user model has an image
+    end
   end
 end

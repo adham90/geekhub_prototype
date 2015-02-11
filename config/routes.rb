@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   resources :profiles, except: [:edit, :destroy] do
     get :autocomplete_university_name, :on => :collection
@@ -28,7 +29,6 @@ Rails.application.routes.draw do
   get '/@:username/about', to: 'profiles#about', as: 'profile_about'
   get '/addskill', to: 'profiles#add_skill'
   get '/signup', to: 'profiles#new', as: 'signup'
-  devise_for :users
   root "search#index"
 
   # search

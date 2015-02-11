@@ -3,14 +3,14 @@
   %head
     %title= "#{content_for?(:title) ? yield(:title) : 'Rails Devise'} - GEEKHUB.IO"
     = include_gon
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     %script{:src => "https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
     = javascript_include_tag 'application'
     = csrf_meta_tags
-
+    
   %body
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      /= render 'layouts/messages'
+      = #render 'layouts/messages'
       = yield

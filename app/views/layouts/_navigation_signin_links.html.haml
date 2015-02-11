@@ -2,18 +2,22 @@
   %a{:href => "#{show_profile_path(current_user.profile.username)}"}
     = current_user.profile.first_name
     = image_tag(current_user.profile.avatar.url(:thumb), class: "navbar-profile-img")
+
+/ pair notifications
 %li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}
     %span.ion-code
   %ul.dropdown-menu{:role => "menu"}
-    =render 'layouts/notification'
+    = render 'layouts/notification'
 
+/ activite notifications
 %li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Notifications"}
   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}
     %span.ion-android-notifications-none
   %ul.dropdown-menu{:role => "menu"}
-    =render 'layouts/notification'
+    = render 'layouts/notification'
 
+/ setting notifications
 %li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Settings"}
   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
     %span.ion-android-settings

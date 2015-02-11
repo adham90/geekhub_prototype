@@ -1,44 +1,44 @@
 = simple_form_for(@profile, validate: true, html: { multipart: true }) do |f|
   = f.error_notification
 
+
   .form-inputs
-    = f.input :username, required: true, uniqueness: true
-    = f.input :first_name, required: true
-    = f.input :last_name
-    = f.input :title, placeholder: 'Select or type your title...'
-    = f.input :phone, hint: 'Private', required: true, uniqueness: true
-    = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
 
+    = f.input :username, required: true, uniqueness: true, label: false, placeholder: "Username", input_html: { class: "input-lg"}
+    / = f.input :first_name, required: true, class: "input-small", placeholder: 'Name'
+    / = f.input :last_name, class: "input-small", placeholder: 'Last name'
+    / = f.input :title, placeholder: 'Select or type your title...'
+    / = f.input :phone, hint: 'Private', required: true, uniqueness: true
+    / = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
     = f.simple_fields_for :user, validate: true, required: true do |o|
-      = o.input :email, required: true, uniqueness: true
-      = o.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
-      = o.input :password_confirmation, required: true
-
-    = f.input :age, required: true, label: "Year of birth", placeholder: "1990", size: "4"
-
-
-    .fileinput.fileinput-new{"data-provides" => "fileinput"}
-      .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
-        %img{"src" => "/images/200.gif"}
-      .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 200px;"}
-      %div
-        %span.btn.btn-default.btn-file
-          %span.fileinput-new Select image
-          %span.fileinput-exists Change
-          = f.file_field :avatar
-        %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
+      = o.input :email, required: true, uniqueness: true, placeholder: "Email address", label: false, input_html: { class: "input-lg"}
+      = o.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable), placeholder: "Password", label: false, input_html: { class: "input-lg"}
+      = o.input :password_confirmation, required: true, placeholder: "Password confirmation", label: false, input_html: { class: "input-lg"}
+    / = f.input :age, required: true, label: "Year of birth", placeholder: "1990", size: "4"
+    / .fileinput.fileinput-new{"data-provides" => "fileinput"}
+    /   .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
+    /     %img{"src" => "/images/200.gif"}
+    /   .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 200px;"}
+    /   %div
+    /     %span.btn.btn-default.btn-file
+    /       %span.fileinput-new Select image
+    /       %span.fileinput-exists Change
+    /       = f.file_field :avatar
+    /     %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
 
 
     -# = f.input :avatar
 
 
 
-    = f.input :university, input_html: { class: "form-control" }
-    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
+    / = f.input :university, input_html: { class: "form-control" }
+    / = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons, :checked => true, required: true
   .form-actions
-    = f.button :submit,"Sign Up", class: "btn btn-success btn-lg btn-block"
+    = f.button :submit,"Sign Up", class: "btn btn-itunes btn-lg btn-block"
+    %a.btn.btn-lg.btn-block.btn-facebook-inversed{:href => "/users/auth/facebook"}
+      %i.ion-social-facebook
+      Sign Up with Facebook
 
-//= render 'autocomplete'
 :javascript
   $("#profile_address").geocomplete({
     details: "form",

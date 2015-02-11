@@ -1,4 +1,4 @@
-class CreateIdentity < ActiveRecord::Migration
+class CreateIdentities < ActiveRecord::Migration
   def change
     create_table :identities do |t|
       t.string :uid

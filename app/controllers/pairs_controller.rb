@@ -13,7 +13,7 @@ class PairsController < ApplicationController
   end
 
   def new
-    @pair = Pair.new()
+    @pair = Pair.new(navigator_id: params[:navigator_id])
     @pair.driver_id = current_user.profile.id
     respond_to do |format|
       format.js { render "new.js.erb" }
@@ -28,9 +28,10 @@ class PairsController < ApplicationController
     @pair.driver_id = current_user.profile.id
     respond_to do |format|
       if @pair.save
-        format.js { render "create.js.erb", notice: 'Pair request sended successfully.' } 
+        flash[:notice] = 'Pair request sended successfully.'
+        format.js { render "create.js.erb" } 
       else
-        flash[:error] = @pair.errors.full_messages.to_sentence
+        flash[:error] = 'Please review the field hints below:'
         format.js { render "error.js.erb" }
       end
     end
@@ -66,7 +67,6 @@ class PairsController < ApplicationController
         :navigator_id,
         :pair_date,
         :pair_time,
-        :confirmation_status,
         :address,
         :address_details,
         :details,

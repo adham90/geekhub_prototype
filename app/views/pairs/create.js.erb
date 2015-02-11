@@ -1,1 +1,4 @@
-alert("ok");
+$('#pairModal').modal('hide');
+$(document).find('#flash-message').remove();
+$('.items-list').prepend('<%= j render "layouts/messages"%>');
+$('*[data-navigator_id="<%= @pair.navigator_id %>"]').attr("disabled","disabled");

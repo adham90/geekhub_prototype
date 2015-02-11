@@ -97,12 +97,12 @@
 #profile-top{
   @extend .row;
   height: 420px;
-  margin-bottom: 0;
+  margin-bottom: 100px;
   padding-bottom: 0;
 }
 
 #profile-content{
-  // margin-top: 130px;
+  margin-top: -60px;
   // margin-left: 20px;
 }
 #about{
@@ -111,7 +111,7 @@
 
 #profile-main{
   @extend .row;
-  margin-left: -30px;
+  margin-left: -20px;
   margin-top: 10;
   padding-top: 0;
 }
