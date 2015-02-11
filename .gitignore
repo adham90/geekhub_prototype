@@ -15,10 +15,10 @@
 # Ignore sublime temporary files
 .fuse*
 
-.secrets.yml
-.secrets
-secrets.yml
-secrets
+#.secrets.yml
+#.secrets
+#secrets.yml
+#secrets
 
 # Ignore CarrierWave uploads
 /public/system
