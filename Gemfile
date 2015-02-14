@@ -15,13 +15,14 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+gem 'intl-tel-input-rails'
 gem 'autoprefixer-rails'
 gem 'simple_form'
 gem 'kaminari-bootstrap'
 gem 'gon'
 gem "omniauth"
 gem 'omniauth-facebook'
-# gem 'searchkick'
+gem 'searchkick'
 gem 'open_uri_redirections'
 gem 'mini_magick'
 gem 'paperclip', '~> 4.2.1'
@@ -64,7 +65,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
-  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :development do

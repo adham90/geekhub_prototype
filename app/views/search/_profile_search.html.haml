@@ -6,11 +6,15 @@
         %span.ion-code-working
         PAIR
 
-
   .info
     .name
       = link_to profile.name, show_profile_path(profile.username)
       .username= "@#{profile.username}"
-    .title= profile.title
+    .title= profile.job_title
     .hidden-xs.bio= profile.bio
     = render partial: "profile_skills_search", collection: profile.skills, as: :skill
+
+:scss
+  .search-item-box{
+    min-height: 121px;
+  }

@@ -36,16 +36,18 @@ class SearchController < ApplicationController
     #   # @search = @search.where.not(id: current_user.profile.id)
     # end
 
-    open_pair = []
-    if user_signed_in?
-      current_user.profile.drives.where(done: false).each do |p|
-        open_pair << p.navigator.id
-      end
-      open_pair << current_user.profile.id
-      @search = Profile.where.not(id: open_pair).page(params[:page]).per(10)
-    else
-      @search = Profile.all.page(params[:page]).per(10)
-    end
+    # open_pair = []
+    # if user_signed_in?
+    #   current_user.profile.drives.where(done: false).each do |p|
+    #     open_pair << p.navigator.id
+    #   end
+    #   open_pair << current_user.profile.id
+    #   @search = Profile.where.not(id: open_pair).page(params[:page]).per(10)
+    # else
+    #   @search = Profile.all.page(params[:page]).per(10)
+    # end
+    
+    @search = Profile.all.page(params[:page]).per(10)
 
 
     respond_with(@search)

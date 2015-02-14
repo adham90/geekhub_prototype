@@ -1,19 +1,20 @@
-%h1 Listing pairs
+.row
+  .search-items.col-md-6
+    %h3 Driver request
+    .items-list
+      %ul.list-unstyled#search-ul
+        = render partial: "drive_list_item", collection: @d_pair, as: :pair
+  .search-items.col-md-6
+    %h3 Navigator request
+    .items-list
+      %ul.list-unstyled#search-ul
+        = render partial: "navigate_list_item", collection: @n_pair, as: :pair
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-      
-  %tbody
-    - @pairs.each do |pair|
-      %tr
-        %td= link_to 'Show', pair
-        %td= link_to 'Edit', edit_pair_path(pair)
-        %td= link_to 'Destroy', pair, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Pair', new_pair_path
+#editPairModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#exampleModalLabel.modal-title Edit request
+      .modal-body

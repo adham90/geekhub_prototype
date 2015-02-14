@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require jquery-ui
+//= require jquery_ujs
 //= require turbolinks
 //= require jquery.turbolinks
 //= require selectize.min
@@ -26,4 +26,5 @@
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require markerclusterer_compiled
+//= require intlTelInput
 //= require_tree .

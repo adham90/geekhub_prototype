@@ -11,20 +11,22 @@ class Pair < ActiveRecord::Base
   validates :pair_time, presence: true
 
 
-  def online
-    if self.type == false
-      if self.address == ""
-        errors.add(:address, "can't be blank")
-      end
-    else
-      if self.hangout_url == ""
-        errors.add(:hangout_url, "can't be blank")
-      end
-      # validates :hangout_url, presence: true
-    end
-  end
 
-  def navigator_not_the_same
-    errors.add(:navigator, "You can't navigate your-self") if driver_id == navigator_id
-  end
+  private
+
+    def online
+      if type == false
+        if address == ""
+          errors.add(:base, "can't be blank")
+        end
+      else
+        if hangout_url == ""
+          errors.add(:base, "can't be blank")
+        end
+      end
+    end
+
+    def navigator_not_the_same
+      errors.add(:navigator, "You can't navigate your-self") if driver_id == navigator_id
+    end
 end

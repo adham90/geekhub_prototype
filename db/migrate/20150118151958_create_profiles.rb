@@ -1,21 +1,31 @@
 class CreateProfiles < ActiveRecord::Migration
   def change
     create_table :profiles do |t|
+
+      ## basic info
       t.string  :username, null: false, index: true, unique: true
       t.string  :first_name
       t.string  :last_name
       t.text    :bio
       t.string  :phone
-      t.integer :rank
       t.date    :age
-      t.boolean :gender
-      t.string  :title
+      t.boolean :gender    # Male => true, Female => false
+      t.string  :university
+
+      ## Job Current Position 
+      t.string  :job_title
+      t.string  :job_company
+      t.text    :job_details
+
+      ## Address
+      t.string  :address
       t.float   :latitude, index: true
       t.float   :longitude, index: true
-      t.string  :address
-      t.string  :university
-      t.integer :domain_id, index: true
+
+      t.integer :rank
+      t.integer :domain_id, index: true # Domain Expert
       t.belongs_to :user, index: true
+
       t.timestamps null: false
     end
     add_attachment :profiles, :avatar

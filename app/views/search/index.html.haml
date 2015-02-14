@@ -1,11 +1,12 @@
 .row
   .search-items
     = render 'layouts/messages'
+    / .search-filter
+
     .items-list
       %lu.list-unstyled#search-ul
         = render partial: "profile_search", collection: @search, as: :profile
     .text-center= paginate @search, :outer_window => 0
-    = render 'layouts/footer'
   .side-map
     #search-map
 
@@ -16,9 +17,8 @@
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-        %h4#exampleModalLabel.modal-title New message
+        %h4#exampleModalLabel.modal-title New request
       .modal-body
-
 
 :javascript
 

@@ -42,7 +42,9 @@ end
     address: Faker::Address.country,
     bio: Faker::Lorem.sentence,
     university: Faker::Lorem.word,
-    title: Faker::Name.title
+    job_title: Faker::Name.title,
+    job_company: Faker::Company.name,
+    job_details: Faker::Lorem.sentence
   )
 
 end

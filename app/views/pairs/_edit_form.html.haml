@@ -4,7 +4,6 @@
     .form-inputs
       = f.input :pair_date, as: :string, class:"form-control", placeholder: 'Pair date time --cant be blank', label: false
       = f.input :pair_time, as: :string, label: false, placeholder: 'minimum time for pairing in minutes --cant be blank'
-      = f.input :navigator_id, as: :hidden
       = f.input :address, label: false, placeholder: 'Pair location ex. madinet nasr, cairo, egypt', hint: ("can't be blank if you want to pair offline.")
       = f.input :address_details, label: false, placeholder: 'Location details ex. cowork space, coffee shop'
       = f.input :details, label: false, placeholder: 'What was the request about? (Markdown supported)', required: true, hint: ("can't be blank or less than 20 characters.")
@@ -13,9 +12,9 @@
     .modal-footer
       .form-actions
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-        = f.button :submit, 'Send pair request', class: "btn btn-primary"
+        = f.button :submit, 'Edit request', class: "btn btn-primary"
 
-:javascript
+:javascript 
   $("#pair_address").geocomplete({
     details: "form",
     markerOptions: {
@@ -26,11 +25,10 @@
   $(function () {
     $('#pair_pair_date').datetimepicker({
       format: "DD MM YY hh:mm A"
-    });
+    }).val(#{@pair.pair_date});
   });
 
   $(document).ready(function() {
-    $('#pair_hangout_url').prop('disabled', true);
     $('#pair_type').change(function() {
       if($(this).is(":checked")) {
         $('#pair_hangout_url').prop('disabled', false);

@@ -1,0 +1,32 @@
+- if pair.confirmation_status == nil
+  - color = "yellow"
+- elsif pair.confirmation_status == true
+  - color = "green"
+- elsif pair.confirmation_status == false
+  - color = "gray"
+
+- if pair.last_update_confirmation == false && pair.last_updated_by == current_user.id
+  - color = "yellow"
+- elsif pair.last_update_confirmation == false && pair.last_updated_by != current_user.id
+  - color = "red"
+- elsif pair.last_update_confirmation == true
+  - color = "green"
+
+- if pair.cancelled == true
+  - color = "gray"
+
+%li.has-hover.search-item-box{id: "#{pair.id}", class: "status-#{color}"}
+  = link_to image_tag(pair.driver.avatar.url(:small), class: "item-img", title: "#{pair.driver.name}")
+  .pait-btn
+    = link_to pair_path(pair), :confirm => 'Are you sure?', :method => :delete, class: "btn btn-youtube" do
+      %span.ion-close
+      Cancel
+    = link_to edit_pair_path(id: pair.id), :class => "btn btn-itunes", :type => "button", "data-target" => "#editPairModal", "data-toggle" => "modal", :remote => true do
+      %span.ion-edit
+      EDIT PAIR
+  .info
+    .name
+      = link_to pair.driver.name, show_profile_path(pair.driver.username)
+    .title= pair.pair_date
+    .hidden-xs.bio= pair.details
+

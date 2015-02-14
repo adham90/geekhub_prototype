@@ -1,3 +1,23 @@
+######################--SCHEMA--###################
+# t.string   "username",            limit: 255,   null: false
+# t.string   "first_name",          limit: 255
+# t.string   "last_name",           limit: 255
+# t.text     "bio",                 limit: 65535
+# t.string   "phone",               limit: 255
+# t.date     "age"
+# t.boolean  "gender",              limit: 1
+# t.string   "university",          limit: 255
+# t.string   "job_title",           limit: 255
+# t.string   "Job_company",             limit: 255
+# t.text     "job_details",         limit: 65535
+# t.string   "address",             limit: 255
+# t.float    "latitude",            limit: 24
+# t.float    "longitude",           limit: 24
+# t.integer  "rank",                limit: 4
+# t.integer  "domain_id",           limit: 4
+# t.integer  "user_id",             limit: 4
+# t.string   "avatar",    limit: 255
+####################################################
 class ProfilesController < ApplicationController
   before_action :set_domains
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
@@ -71,9 +91,9 @@ class ProfilesController < ApplicationController
 
 
     def set_domains
-      @domains = Domain.all.each { |c| c.ancestry = c.ancestry.to_s + (c.ancestry != nil ? "/" : '') + c.id.to_s 
-              }.sort {|x,y| x.ancestry <=> y.ancestry 
-              }.map{ |c| ["--" * (c.depth - 1) + c.name,c.id] 
+      @domains = Domain.all.each { |c| c.ancestry = c.ancestry.to_s + (c.ancestry != nil ? "/" : '') + c.id.to_s
+              }.sort {|x,y| x.ancestry <=> y.ancestry
+              }.map{ |c| ["--" * (c.depth - 1) + c.name,c.id]
               }.unshift(["-- none --", nil])
     end
 
@@ -94,7 +114,7 @@ class ProfilesController < ApplicationController
 
     def profile_params
       params.require(:profile).permit(:username, :first_name, :last_name,
-       :title, :bio, :phone, :gender, :address, :university, :age,
+       :job_title, :Job_company, :job_details, :bio, :phone, :gender, :address, :university, :age,
        :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation])
     end
 end

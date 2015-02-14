@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211173019) do
+ActiveRecord::Schema.define(version: 20150213114943) do
 
   create_table "domains", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -30,11 +30,25 @@ ActiveRecord::Schema.define(version: 20150211173019) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
+  create_table "languages", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+  end
+
+  add_index "languages", ["name"], name: "index_languages_on_name", using: :btree
+
+  create_table "languages_profiles", force: :cascade do |t|
+    t.integer "profile_id",  limit: 4, null: false
+    t.integer "language_id", limit: 4, null: false
+  end
+
+  add_index "languages_profiles", ["language_id"], name: "index_languages_profiles_on_language_id", using: :btree
+  add_index "languages_profiles", ["profile_id"], name: "index_languages_profiles_on_profile_id", using: :btree
+
   create_table "pairs", force: :cascade do |t|
     t.integer  "driver_id",                limit: 4,                     null: false
     t.integer  "navigator_id",             limit: 4,                     null: false
     t.datetime "pair_date",                                              null: false
-    t.time     "pair_time",                                              null: false
+    t.integer  "pair_time",                limit: 4,                     null: false
     t.datetime "confirmed_at"
     t.boolean  "confirmation_status",      limit: 1
     t.float    "latitude",                 limit: 24
@@ -47,7 +61,6 @@ ActiveRecord::Schema.define(version: 20150211173019) do
     t.integer  "last_updated_by",          limit: 4
     t.boolean  "last_update_confirmation", limit: 1
     t.integer  "cancelled",                limit: 4,     default: 0
-    t.datetime "cancelled_at"
     t.boolean  "done",                     limit: 1,     default: false
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
@@ -58,29 +71,27 @@ ActiveRecord::Schema.define(version: 20150211173019) do
   add_index "pairs", ["longitude"], name: "index_pairs_on_longitude", using: :btree
   add_index "pairs", ["navigator_id"], name: "index_pairs_on_navigator_id", using: :btree
 
-  create_table "profile_jobs", force: :cascade do |t|
-    t.string  "company",      limit: 255
-    t.string  "title",        limit: 255
-    t.text    "description",  limit: 65535
-    t.boolean "currently_in", limit: 1,     default: false
-    t.date    "enroll_date"
-    t.date    "quit_date"
-    t.integer "profile_id",   limit: 4
+  create_table "profile_skill_tags", force: :cascade do |t|
+    t.integer  "skill_id",         limit: 4
+    t.integer  "profile_skill_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  add_index "profile_jobs", ["profile_id"], name: "index_profile_jobs_on_profile_id", using: :btree
+  add_index "profile_skill_tags", ["profile_skill_id"], name: "index_profile_skill_tags_on_profile_skill_id", using: :btree
+  add_index "profile_skill_tags", ["skill_id"], name: "index_profile_skill_tags_on_skill_id", using: :btree
 
   create_table "profile_skills", id: false, force: :cascade do |t|
-    t.integer "profile_id",  limit: 4
-    t.integer "skill_id",    limit: 4
-    t.integer "rank",        limit: 4
-    t.boolean "primary",     limit: 1
-    t.date    "started_at"
-    t.string  "description", limit: 255
+    t.integer "profile_id",       limit: 4
+    t.integer "skill_id",         limit: 4
+    t.integer "rank",             limit: 4
+    t.boolean "primary",          limit: 1
+    t.integer "experience_years", limit: 4
+    t.text    "description",      limit: 65535
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_19d4974007", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_411fe35272", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -88,14 +99,16 @@ ActiveRecord::Schema.define(version: 20150211173019) do
     t.string   "last_name",           limit: 255
     t.text     "bio",                 limit: 65535
     t.string   "phone",               limit: 255
-    t.integer  "rank",                limit: 4
     t.date     "age"
     t.boolean  "gender",              limit: 1
-    t.string   "title",               limit: 255
+    t.string   "university",          limit: 255
+    t.string   "job_title",           limit: 255
+    t.string   "job_company",         limit: 255
+    t.text     "job_details",         limit: 65535
+    t.string   "address",             limit: 255
     t.float    "latitude",            limit: 24
     t.float    "longitude",           limit: 24
-    t.string   "address",             limit: 255
-    t.string   "university",          limit: 255
+    t.integer  "rank",                limit: 4
     t.integer  "domain_id",           limit: 4
     t.integer  "user_id",             limit: 4
     t.datetime "created_at",                        null: false
@@ -113,12 +126,7 @@ ActiveRecord::Schema.define(version: 20150211173019) do
   add_index "profiles", ["username"], name: "index_profiles_on_username", using: :btree
 
   create_table "skills", force: :cascade do |t|
-    t.string   "name",                limit: 255, null: false
-    t.date     "created_at"
-    t.string   "avatar_file_name",    limit: 255
-    t.string   "avatar_content_type", limit: 255
-    t.integer  "avatar_file_size",    limit: 4
-    t.datetime "avatar_updated_at"
+    t.string "name", limit: 255, null: false
   end
 
   add_index "skills", ["name"], name: "index_skills_on_name", using: :btree
@@ -144,7 +152,5 @@ ActiveRecord::Schema.define(version: 20150211173019) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "profile_skills", "profiles"
-  add_foreign_key "profile_skills", "profiles"
-  add_foreign_key "profile_skills", "skills"
   add_foreign_key "profile_skills", "skills"
 end

@@ -23,7 +23,7 @@
 @import "brand-buttons";
 @import "brand-buttons-inversed";
 @import 'bootstrap-datetimepicker';
-
+@import "intlTelInput";
 
 .footer {
   height: 50px; /* .push must be the same height as .footer */
@@ -37,6 +37,7 @@ body {
   width:100%;
   height:100%;
 }
+
 footer {
   height: 60px;
 }
@@ -121,11 +122,18 @@ ul.ui-autocomplete {
   .ion-android-notifications-none,
   .ion-ios-person-outline,
   .ion-ios-person,
-  .ion-code{
+  .ion-code,
+  .ion-code-working,
+  .ion-close,
+  .ion-edit{
     margin:auto;
     text-align:center;
     vertical-align:middle;
     font-size: 21px;
+  }
+  .ion-code-working,
+  .ion-android-notifications{
+    color:$red;
   }
   .ion-search{
     font-size: 15px;
@@ -146,3 +154,9 @@ ul.ui-autocomplete {
 }
 .datepicker {z-index: 1151 !important;}
 
+.via{
+  text-align: center;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+}

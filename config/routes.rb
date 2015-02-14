@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :pairs do
     post 'set_status'
+    get 'navigator_edit'
   end
 
 
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
   get '/addskill', to: 'profiles#add_skill'
   get '/signup', to: 'profiles#new', as: 'signup'
   root "search#index"
+  # root "landing_page#index"
 
   # search
   get '/search', to: 'search#index', as: 'search'

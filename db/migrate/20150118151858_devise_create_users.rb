@@ -19,7 +19,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
-      t.integer  :profile_id, index: true
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at
@@ -31,6 +30,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      ## User Profile id
+      t.integer  :profile_id, index: true
 
       t.timestamps
     end

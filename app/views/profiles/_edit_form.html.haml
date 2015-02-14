@@ -5,8 +5,12 @@
     = f.input :username, required: true
     = f.input :first_name, required: true
     = f.input :last_name
-    = f.input :title
-    = f.input :phone, required: true
+    = f.input :job_title
+
+    = f.input :phone, required: true, :input_html => { class:"form-control" }
+    %span.hide{:id => "valid-msg"} ✓ Valid
+    %span.help-block.hide{:id => "error-msg"} Invalid number
+
     = f.input :age, required: true, as: :string, class:"form-control"
     = f.select :domain_id, @domains
 
@@ -30,7 +34,34 @@
   .form-actions
     = f.button :submit, class: "btn btn-default btn-lg btn-block"
 
-//= render 'autocomplete'
+
+:scss
+  #global-container{
+    position:relative;
+  }
+  #container-1{
+    position:relative;
+    z-index:1;
+  }
+  #content-1{
+    position:relative;
+    z-index:50;
+  }
+  #container-2{
+    position:relative;
+    z-index:2;
+  }
+  #content-2{
+    position:relative;
+    z-index:2;
+  }
+
+
+
+
+
+
+
 :javascript
   $("#profile_address").geocomplete({
     details: "form",
@@ -48,3 +79,35 @@
   });
   
   $('#profile_domain_id').selectize();
+
+
+  var telInput = $("#profile_phone"),
+      errorMsg = $("#error-msg"),
+      validMsg = $("#valid-msg");
+
+  // initialise plugin
+  telInput.intlTelInput({
+    nationalMode: true,
+    defaultCountry: "auto",
+    utilsScript: "/javascripts/utils.js"
+  });
+
+  // on blur: validate
+  telInput.blur(function() {
+    if ($.trim(telInput.val())) {
+      if (telInput.intlTelInput("isValidNumber")) {
+        validMsg.removeClass("hide");
+      } else {
+        $(".intl-tel-input").addClass("has-error");
+        errorMsg.removeClass("hide");
+        validMsg.addClass("hide");
+      }
+    }
+  });
+
+  // on keydown: reset
+  telInput.keydown(function() {
+    telInput.removeClass("has-error");
+    errorMsg.addClass("hide");
+    validMsg.addClass("hide");
+  });

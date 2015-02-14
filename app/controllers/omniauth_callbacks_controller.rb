@@ -8,10 +8,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def auth
+  def facebook_auth
     auth = request.env["omniauth.auth"]
     largeimage = "http://graph.facebook.com/#{auth.uid}/picture?type=large"
-    { email: auth.info.email, 
+    { email: auth.info.email,
       identity: {
         uid:      auth.uid,
         provider: auth.provider
@@ -23,7 +23,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         bio:        auth.extra.raw_info.bio,
         age:        auth.extra.raw_info.birthday,
         gender:     auth.extra.raw_info.gender == "male"? true : false,
-        address:    "" || auth.extra.raw_info.location.name,
+        address:    auth.extra.raw_info.location.name,
         avatar:     process_uri(largeimage)
       }
     }
@@ -34,14 +34,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # Rails.logger.debug request.env["omniauth.auth"]
     # Rails.logger.debug "=============================================="
 
-    identity = Identity.where("provider" => auth[:identity][:provider]).where("uid" => auth[:identity][:uid]).first
+    identity = Identity.where("provider" => facebook_auth[:identity][:provider]).where("uid" => facebook_auth[:identity][:uid]).first
     if identity
       flash.notice = "Signed in!"
       sign_in_and_redirect identity.user
     else
-      profile = Profile.new(auth[:profile])
-      profile.build_user(email: auth[:email])
-      profile.user.identities.push(Identity.new(auth[:identity]))
+      profile = Profile.new(facebook_auth[:profile])
+      profile.build_user(email: facebook_auth[:email])
+      profile.user.identities.push(Identity.new(facebook_auth[:identity]))
       if profile.save
         flash[:notice] = "Signed in!"
         sign_in_and_redirect profile.user

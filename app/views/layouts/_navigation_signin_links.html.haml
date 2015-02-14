@@ -4,18 +4,23 @@
     = image_tag(current_user.profile.avatar.url(:thumb), class: "navbar-profile-img")
 
 / pair notifications
-%li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
-  %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}
-    %span.ion-code
-  %ul.dropdown-menu{:role => "menu"}
-    = render 'layouts/notification'
+- if current_user.profile.navigats.where(done: false) || current_user.profile.drives.where(done: false)
+  %li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
+    %a{:href => "#{pairs_path}"}
+      %span.ion-code-working
+- else
+  %li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
+    %a{:href => "#{pairs_path}"}
+      %span.ion-code
 
 / activite notifications
-%li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Notifications"}
-  %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#"}
+%li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Notifications"}
+  %a{:href => "#"}
     %span.ion-android-notifications-none
-  %ul.dropdown-menu{:role => "menu"}
-    = render 'layouts/notification'
+
+/ %li.nav-line{:role => "presentation", "data-toggle" => "tooltip", :title => "Notifications"}
+/   %a{:href => "#"}
+/     %span.ion-android-notifications
 
 / setting notifications
 %li.dropdown.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Settings"}
