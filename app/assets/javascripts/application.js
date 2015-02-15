@@ -27,4 +27,5 @@
 //= require rails.validations.simple_form
 //= require markerclusterer_compiled
 //= require intlTelInput
+//= require geolocator.min
 //= require_tree .

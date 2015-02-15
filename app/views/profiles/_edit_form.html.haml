@@ -6,6 +6,8 @@
     = f.input :first_name, required: true
     = f.input :last_name
     = f.input :job_title
+    = f.input :latitude
+    = f.input :longitude
 
     = f.input :phone, required: true, :input_html => { class:"form-control" }
     %span.hide{:id => "valid-msg"} ✓ Valid
@@ -35,6 +37,10 @@
     = f.button :submit, class: "btn btn-default btn-lg btn-block"
 
 
+#status
+
+#edit-map
+
 :scss
   #global-container{
     position:relative;
@@ -56,12 +62,6 @@
     z-index:2;
   }
 
-
-
-
-
-
-
 :javascript
   $("#profile_address").geocomplete({
     details: "form",
@@ -77,9 +77,8 @@
       format: 'DD/MM/YYYY'
     });
   });
-  
-  $('#profile_domain_id').selectize();
 
+  $('#profile_domain_id').selectize();
 
   var telInput = $("#profile_phone"),
       errorMsg = $("#error-msg"),
@@ -111,3 +110,29 @@
     errorMsg.addClass("hide");
     validMsg.addClass("hide");
   });
+
+
+  function onGeoSuccess(location) {
+    (function(window, google, mapster) {
+      var options = mapster.profile_map;
+      element = document.getElementById("edit-map");
+      map = new google.maps.Map(element, options);
+      map.setCenter(new google.maps.LatLng(location.coords.latitude, location.coords.longitude));
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
+        map: map,
+        icon: '/images/red_marker.png',
+        title: "0000"
+      });
+    }(window, google, window.Mapster || (window.Mapster = {})));
+  }
+  //The callback function executed when the location could not be fetched.
+  function onGeoError(error) {
+    console.log(error);
+  }
+
+  window.onload = function () {
+    //geolocator.locateByIP(onGeoSuccess, onGeoError, 2, 'map-canvas');
+    var html5Options = { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 };
+    geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
+  };
