@@ -44,33 +44,6 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   add_index "languages_profiles", ["language_id"], name: "index_languages_profiles_on_language_id", using: :btree
   add_index "languages_profiles", ["profile_id"], name: "index_languages_profiles_on_profile_id", using: :btree
 
-  create_table "pairs", force: :cascade do |t|
-    t.integer  "driver_id",                limit: 4,                     null: false
-    t.integer  "navigator_id",             limit: 4,                     null: false
-    t.datetime "pair_date",                                              null: false
-    t.integer  "pair_time",                limit: 4,                     null: false
-    t.datetime "confirmed_at"
-    t.boolean  "confirmation_status",      limit: 1
-    t.float    "latitude",                 limit: 24
-    t.float    "longitude",                limit: 24
-    t.string   "address",                  limit: 255
-    t.string   "address_details",          limit: 255
-    t.text     "details",                  limit: 65535
-    t.boolean  "type",                     limit: 1,     default: false
-    t.string   "hangout_url",              limit: 255
-    t.integer  "last_updated_by",          limit: 4
-    t.boolean  "last_update_confirmation", limit: 1
-    t.integer  "cancelled",                limit: 4,     default: 0
-    t.boolean  "done",                     limit: 1,     default: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
-  end
-
-  add_index "pairs", ["driver_id"], name: "index_pairs_on_driver_id", using: :btree
-  add_index "pairs", ["latitude"], name: "index_pairs_on_latitude", using: :btree
-  add_index "pairs", ["longitude"], name: "index_pairs_on_longitude", using: :btree
-  add_index "pairs", ["navigator_id"], name: "index_pairs_on_navigator_id", using: :btree
-
   create_table "profile_skill_tags", force: :cascade do |t|
     t.integer  "skill_id",         limit: 4
     t.integer  "profile_skill_id", limit: 4
@@ -91,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_a7ffa81289", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_2396a4b4f9", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
