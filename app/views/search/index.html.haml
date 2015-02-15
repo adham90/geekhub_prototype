@@ -8,7 +8,7 @@
         = render partial: "profile_search", collection: @search, as: :profile
     .text-center= paginate @search, :outer_window => 0
   .side-map
-    #search-map
+    .hidden-sm.hidden-sx#search-map
 
 
 #pairModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}

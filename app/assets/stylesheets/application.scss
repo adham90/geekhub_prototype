@@ -135,11 +135,13 @@ ul.ui-autocomplete {
   .ion-android-notifications{
     color:$red;
   }
+
   .ion-search{
     font-size: 15px;
   }
   .search-btn{
     max-height: 34px;
+    margin-bottom: 5px;
   }
   #skill_search{
     max-width: 150px;
@@ -159,4 +161,33 @@ ul.ui-autocomplete {
   position: relative;
   height: 50px;
   line-height: 50px;
+}
+
+.selectize-control{
+  min-width: 200px;
+
+  display: inline-block;
+  .selectize-input, .item, input{
+    display: inline-block;
+  }
+  .selectize-input {
+    height: 20px;
+    max-width: 300px;
+    overflow: hidden;
+  }
+  .selectize-input input {
+      height: 20px;
+      max-width: 300px;
+      overflow: hidden;
+    }
+}
+
+#location_address{
+  margin-bottom: 5px;
+}
+
+.ion-social-github,
+.ion-social-twitter,
+.ion-social-googleplus{
+  font-size: 19px;
 }

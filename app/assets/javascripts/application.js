@@ -15,7 +15,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.turbolinks
-//= require selectize.min
+//= require selectize
 //= require autocomplete-rails
 //= require jquery-geocomplete
 //= reuqire gmaps

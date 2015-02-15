@@ -3,20 +3,20 @@
     = current_user.profile.first_name
     = image_tag(current_user.profile.avatar.url(:thumb), class: "navbar-profile-img")
 
-/ pair notifications
-- if current_user.profile.navigats.where(done: false) || current_user.profile.drives.where(done: false)
-  %li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
-    %a{:href => "#{pairs_path}"}
-      %span.ion-code-working
-- else
-  %li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
-    %a{:href => "#{pairs_path}"}
-      %span.ion-code
-
-/ activite notifications
-%li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Notifications"}
-  %a{:href => "#"}
-    %span.ion-android-notifications-none
+-# / pair notifications
+-# - if current_user.profile.navigats.where(done: false) || current_user.profile.drives.where(done: false)
+-#   %li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
+-#     %a{:href => "#{pairs_path}"}
+-#       %span.ion-code-working
+-# - else
+-#   %li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Pair Requests"}
+-#     %a{:href => "#{pairs_path}"}
+-#       %span.ion-code
+-#
+-# / activite notifications
+-# %li.nav-line{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Notifications"}
+-#   %a{:href => "#"}
+-#     %span.ion-android-notifications-none
 
 / %li.nav-line{:role => "presentation", "data-toggle" => "tooltip", :title => "Notifications"}
 /   %a{:href => "#"}

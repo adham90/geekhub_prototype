@@ -12,7 +12,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.boolean :gender    # Male => true, Female => false
       t.string  :university
 
-      ## Job Current Position 
+      ## Job Current Position
       t.string  :job_title
       t.string  :job_company
       t.text    :job_details
@@ -26,6 +26,11 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer :domain_id, index: true # Domain Expert
       t.belongs_to :user, index: true
 
+      ## Linked accounts
+      t.string  :twitter
+      t.string  :github
+      t.string  :googleplus
+      
       t.timestamps null: false
     end
     add_attachment :profiles, :avatar

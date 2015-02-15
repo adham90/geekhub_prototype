@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: "users/registrations" } 
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: "users/registrations" }
 
   resources :profiles, except: [:edit, :destroy] do
     get :autocomplete_university_name, :on => :collection
@@ -9,12 +9,11 @@ Rails.application.routes.draw do
     end
   end
 
-  # pair
-
-  resources :pairs do
-    post 'set_status'
-    get 'navigator_edit'
-  end
+  ## pair
+  # resources :pairs do
+  #   get 'set_status'
+  #   get 'navigator_edit'
+  # end
 
 
   resources :jobs do

@@ -11,7 +11,7 @@
   - color = "red"
 - elsif pair.last_update_confirmation == true
   - color = "green"
-  
+
 - if pair.cancelled == true
   - color = "gray"
 
@@ -24,6 +24,9 @@
     = link_to pair_navigator_edit_path(pair_id: pair.id), :class => "btn btn-itunes", :type => "button", "data-target" => "#editPairModal", "data-toggle" => "modal", :remote => true do
       %span.ion-edit
       EDIT PAIR
+    = link_to pair_set_status_path(pair_id: pair.id, confirmation_status: true), :class => "btn btn-itunes", :type => "button", "data-target" => "#editPairModal", "data-toggle" => "modal", :remote => true do
+      %span.ion-information
+      DETAILS
   .info
     .name
       = link_to pair.driver.name, show_profile_path(pair.driver.username)

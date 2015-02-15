@@ -16,7 +16,7 @@
   - color = "gray"
 
 %li.has-hover.search-item-box{id: "#{pair.id}", class: "status-#{color}"}
-  = link_to image_tag(pair.driver.avatar.url(:small), class: "item-img", title: "#{pair.driver.name}")
+  = link_to image_tag(pair.navigator.avatar.url(:small), class: "item-img", title: "#{pair.navigator.name}")
   .pait-btn
     = link_to pair_path(pair), :confirm => 'Are you sure?', :method => :delete, class: "btn btn-youtube" do
       %span.ion-close
@@ -26,7 +26,6 @@
       EDIT PAIR
   .info
     .name
-      = link_to pair.driver.name, show_profile_path(pair.driver.username)
+      = link_to pair.navigator.name, show_profile_path(pair.navigator.username)
     .title= pair.pair_date
     .hidden-xs.bio= pair.details
-

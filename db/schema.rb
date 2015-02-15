@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_411fe35272", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_a7ffa81289", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -111,6 +111,9 @@ ActiveRecord::Schema.define(version: 20150213114943) do
     t.integer  "rank",                limit: 4
     t.integer  "domain_id",           limit: 4
     t.integer  "user_id",             limit: 4
+    t.string   "twitter",             limit: 255
+    t.string   "github",              limit: 255
+    t.string   "googleplus",          limit: 255
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.string   "avatar_file_name",    limit: 255

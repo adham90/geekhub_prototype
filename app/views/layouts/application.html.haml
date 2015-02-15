@@ -7,7 +7,7 @@
     %script{:src => "https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"}
     = javascript_include_tag 'application'
     = csrf_meta_tags
-    
+
   %body
     %header
       = render 'layouts/navigation' unless current_page?(signup_path)
@@ -15,6 +15,5 @@
       = render 'layouts/messages' unless current_page?(root_path)
       = yield
       - unless current_page?(root_path)
-        .push
+        -# .push
     / = render 'layouts/footer' unless current_page?(root_path) || current_page?(signup_path)
-
