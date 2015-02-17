@@ -46,10 +46,8 @@ class SearchController < ApplicationController
     # else
     #   @search = Profile.all.page(params[:page]).per(10)
     # end
-    
-    @search = Profile.all.page(params[:page]).per(10)
 
-
+    @search = Profile.all.page(params[:page]).per(20)
     respond_with(@search)
   end
 

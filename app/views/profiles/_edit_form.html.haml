@@ -1,21 +1,8 @@
-= simple_form_for(@profile, html: { multipart: true }) do |f|
+= simple_form_for(@profile) do |f|
+
   = f.error_notification
-
   .form-inputs
-    = f.input :username, required: true
-    = f.input :first_name, required: true
-    = f.input :last_name
-    = f.input :job_title
-    = f.input :latitude
-    = f.input :longitude
-
-    = f.input :phone, required: true, :input_html => { class:"form-control" }
-    %span.hide{:id => "valid-msg"} ✓ Valid
-    %span.help-block.hide{:id => "error-msg"} Invalid number
-
-    = f.input :age, required: true, as: :string, class:"form-control"
-    = f.select :domain_id, @domains
-
+    %p Profile picture
     .fileinput.fileinput-new{"data-provides" => "fileinput"}
       .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
         - if @profile.avatar?
@@ -29,38 +16,28 @@
           %span.fileinput-exists Change
           = f.file_field :avatar
         %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
-    = f.input :address, placeholder: 'New Cairo City, Cairo, Egypt'
+
+    = f.input :username, required: true
+    = f.input :first_name, required: true
+    = f.input :last_name
+    = f.input :job_title
+    = f.input :phone, required: true, :input_html => { class:"form-control" }
+    = f.input :age, required: true, as: :string, class:"form-control"
+    = f.input :domain_id, collection: @domains, class:"form-control"
+
+
     = f.input :university, input_html: { class: "form-control" }
-    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
     = f.input :bio
-  .form-actions
-    = f.button :submit, class: "btn btn-default btn-lg btn-block"
+    = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
+
+    .form-actions
+      = f.button :submit, class: "btn btn-itunes-inversed btn-lg btn-block"
 
 
 #status
 
-#edit-map
 
-:scss
-  #global-container{
-    position:relative;
-  }
-  #container-1{
-    position:relative;
-    z-index:1;
-  }
-  #content-1{
-    position:relative;
-    z-index:50;
-  }
-  #container-2{
-    position:relative;
-    z-index:2;
-  }
-  #content-2{
-    position:relative;
-    z-index:2;
-  }
+
 
 :javascript
   $("#profile_address").geocomplete({
@@ -80,36 +57,7 @@
 
   $('#profile_domain_id').selectize();
 
-  var telInput = $("#profile_phone"),
-      errorMsg = $("#error-msg"),
-      validMsg = $("#valid-msg");
 
-  // initialise plugin
-  telInput.intlTelInput({
-    nationalMode: true,
-    defaultCountry: "auto",
-    utilsScript: "/javascripts/utils.js"
-  });
-
-  // on blur: validate
-  telInput.blur(function() {
-    if ($.trim(telInput.val())) {
-      if (telInput.intlTelInput("isValidNumber")) {
-        validMsg.removeClass("hide");
-      } else {
-        $(".intl-tel-input").addClass("has-error");
-        errorMsg.removeClass("hide");
-        validMsg.addClass("hide");
-      }
-    }
-  });
-
-  // on keydown: reset
-  telInput.keydown(function() {
-    telInput.removeClass("has-error");
-    errorMsg.addClass("hide");
-    validMsg.addClass("hide");
-  });
 
 
   function onGeoSuccess(location) {

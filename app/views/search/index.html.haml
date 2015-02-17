@@ -1,33 +1,23 @@
 .row
-  .search-items
-    = render 'layouts/messages'
-    / .search-filter
+  .col-md-4{ id: "side" }
+    = render 'search/form'
+    #search-map.visible-md.hidden-xs.hidden-sm
+  .col-md-offset-4.col-md-8
+    .search-items
+      = render 'layouts/messages'
+      .items-list
+        %lu.list-unstyled#search-ul
+          = render partial: "profile_search", collection: @search, as: :profile
+      .text-center= paginate @search, :outer_window => 0
 
-    .items-list
-      %lu.list-unstyled#search-ul
-        = render partial: "profile_search", collection: @search, as: :profile
-    .text-center= paginate @search, :outer_window => 0
-  .side-map
-    .hidden-sm.hidden-sx#search-map
-
-
-#pairModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-        %h4#exampleModalLabel.modal-title New request
-      .modal-body
 
 :javascript
 
-  $('#pairModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var navigator_name = button.data('navigator-name');
-    var modal = $(this);
-    modal.find('.modal-title').text('New pair with ' + navigator_name);
+  $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
   });
+  $("#wrapper").toggleClass("toggled");
 
   //the map
   var profiles = #{@search.to_json};
@@ -113,3 +103,18 @@
     map.fitBounds(bounds);
     var mc = new MarkerClusterer(map, markers);
   }(window, google, window.Mapster || (window.Mapster = {})));
+
+
+  function onGeoSuccess(location) {
+
+  }
+  //The callback function executed when the location could not be fetched.
+  function onGeoError(error) {
+    console.log(error);
+  }
+
+  window.onload = function () {
+    //geolocator.locateByIP(onGeoSuccess, onGeoError, 2, 'map-canvas');
+    var html5Options = { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 };
+    geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
+  };

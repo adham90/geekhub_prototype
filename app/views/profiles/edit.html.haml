@@ -1,4 +1,13 @@
-= render 'layouts/messages'
-.authform
-  %h2 Editing profile
-  = render 'edit_form'
+.row
+  .col-md-3
+    = render 'layouts/setting_nav'
+
+
+  .col-md-9
+    .panel.panel-default
+      .panel-heading Public profile
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        = render 'edit_form'
+
+:scss

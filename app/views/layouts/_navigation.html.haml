@@ -1,23 +1,15 @@
 -# navigation styled for Bootstrap 3.0
 %nav.navbar.navbar-default.navbar-fixed-top
   .container-fluid
-    .navbar-header
-      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      = link_to 'GEEKHUB', root_path, class: 'navbar-brand', id: "brand"
-    .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        %li= render 'layouts/navigation_search'
-      %ul.nav.navbar-nav.navbar-right
-        - if user_signed_in?
-          = render 'layouts/navigation_signin_links'
-        - else
-          %li.nav-line= link_to 'Sign in', new_user_session_path
-          %li.nav-line= link_to 'Sign up', signup_path
 
+    = link_to 'GEEKHUB', root_path, class: 'navbar-brand', id: "brand"
+
+    %ul.nav.navbar-nav.navbar-right
+      - if user_signed_in?
+        = render 'layouts/navigation_signin_links'
+      - else
+        %li.nav-line= link_to 'Sign in', new_user_session_path
+        %li.nav-line= link_to 'Sign up', signup_path
 
 :javascript
   $(function () {

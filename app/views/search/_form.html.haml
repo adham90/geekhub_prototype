@@ -1,0 +1,63 @@
+#search-controls
+  = form_tag(search_path, method: 'get') do
+    .input-group
+      = text_field_tag :qlocation,params[:qlocation] , class: "form-control input-lg"
+      %a.input-group-addon.ion-navigate{:href => "#"}
+    = text_field_tag :qskill, params[:qskill], id: "qskill", class: "form-control", placeholder: 'ruby, go, python'
+    = text_field_tag :qdomain,params[:qdomain] , class: "form-control"
+    = text_field_tag :qedu,params[:qedu] , class: "form-control"
+
+    %button.search-btn.btn.btn-gray.btn-lg.btn-block{:type => "submit"}
+      %i.ion-search
+      SEARCH
+.map-cont.hidden-xs
+  #search-map
+:javascript
+
+  $("#qlocation").geocomplete({
+    details: "form",
+    markerOptions: {
+      draggable: true
+    }
+  });
+
+  $('#qskill').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    maxItems: 3,
+    persist: false,
+    valueField: 'name',
+    labelField: 'name',
+    searchField: 'name',
+    options: [],
+    create: true,
+    render: {
+      option: function(item, escape) {
+        var actors = [];
+        for (var i = 0, n = item.length; i < n; i++) {
+          actors.push('<span>' + escape(item.autocompletes[i].name) + '</span>');
+        }
+
+        return '<div>' +
+                  '<span class="name">' + escape(item.name) + '</span>' +
+               '</div>';
+      }
+    },
+    load: function(query, callback) {
+      if (!query.length) return callback();
+      $.ajax({
+        url: '/autocompletes/skill.json',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          q: query,
+        },
+        error: function() {
+          callback();
+        },
+        success: function(res) {
+          callback(res.autocompletes);
+        }
+      });
+    }
+  });
