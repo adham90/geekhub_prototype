@@ -20,7 +20,7 @@
 ####################################################
 class ProfilesController < ApplicationController
   before_action :set_domains
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :add_skill]
+  before_action :set_profile, only: [:edit_address ,:show, :edit, :update, :destroy, :add_skill]
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete  :university, :name
   respond_to    :html, :js
@@ -58,8 +58,16 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile.update(profile_params)
-    render :edit
+    if profile_params[:languages].present?
+      langs = (profile_params[:languages].split(",").map(&:to_i) + @profile.languages.map(&:id)) - (profile_params[:languages].split(",").map(&:to_i) & @profile.languages.map(&:id))
+      
+      langs.each do |l|
+        lang = Language.find(l)
+        @profile.languages << lang
+      end
+    end
+    @profile.update(profile_params.except!(:languages))
+    redirect_to :back
   end
 
   def destroy
@@ -79,6 +87,10 @@ class ProfilesController < ApplicationController
         format.js
       end
     end
+  end
+
+  def edit_address
+    render :address, :locals => {profile: @profile}
   end
 
   def locations
@@ -105,16 +117,20 @@ class ProfilesController < ApplicationController
     def set_profile
       if params[:username]
         @profile = Profile.find_by_username(params[:username])
-      elsif params[:id]
-        @profile = Profile.find(params[:id])
+      # elsif params[:id]
+      #   @profile = Profile.find(params[:id])
       elsif user_signed_in?
         @profile = current_user.profile
       end
     end
 
+    # def address_params
+    #   params.require(:profile).permit(:latitude, :longitude, :address)
+    # end
+
     def profile_params
-      params.require(:profile).permit(:username, :first_name, :last_name,
-       :job_title, :Job_company, :job_details, :bio, :phone, :gender, :address, :university, :age,
+      params.require(:profile).permit(:languages, :github, :twitter, :linkedin,:facebook, :username, :first_name, :last_name,
+       :job_title, :Job_company, :job_details, :bio, :phone, :gender, :address, :latitude, :longitude, :university, :age,
        :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation])
     end
 end

@@ -1,7 +1,8 @@
+- title "Edir Account"
+
 .row
   .col-md-3
     = render 'layouts/setting_nav'
-
 
   .col-md-9
     .panel.panel-default
@@ -20,7 +21,7 @@
             = f.input :password_confirmation, required: false
             = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
           .form-actions
-            = f.button :submit, "Update", class: "btn btn-default btn-lg btn-block"
+            = f.button :submit, "Update Account", class: "btn btn-itunes-inversed btn-lg btn-block"
         %h3 Cancel my account
         %p
           Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}

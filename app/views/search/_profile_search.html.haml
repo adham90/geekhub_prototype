@@ -1,14 +1,9 @@
 %li.has-hover.search-item-box{id: "#{profile.id}"}
   = link_to image_tag(profile.avatar.url(:small), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
-  -# .pait-btn
-  -#   - if user_signed_in?
-  -#     = link_to new_pair_path(navigator_id: profile.id), :class => "btn btn-itunes", :type => "button", "data-target" => "#pairModal", "data-toggle" => "modal", "data-navigator-name" => "#{profile.first_name}", "data-navigator_id" => "#{profile.id}", :remote => true do
-  -#       %span.ion-code-working
-  -#       PAIR
 
   .pait-btn
-    - if profile.user.identities.any?
-      = link_to "https://www.facebook.com/#{profile.user.identities.first.uid}", :class => "btn btn-facebook", target: "_blank" do
+    - if profile.facebook.present?
+      = link_to "#{profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
         %span.ion-social-facebook
 
     - if profile.github.present?
@@ -19,17 +14,16 @@
       = link_to "#{profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
         %span.ion-social-twitter
 
-    - if profile.googleplus.present?
-      = link_to "#{profile.googleplus}", :class => "btn btn-googleplus", target: "_blank" do
-        %span.ion-social-googleplus
+    - if profile.linkedin.present?
+      = link_to "#{profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
+        %span.ion-social-linkedin
 
   .info
     .name
       = link_to profile.name, show_profile_path(profile.username)
-      .username= "@#{profile.username}"
     .title= profile.job_title
     .hidden-xs.bio= profile.bio
-    = render partial: "profile_skills_search", collection: profile.skills, as: :skill
+    = render partial: "profile_skills_search", collection: profile.skills.limit(4), as: :skill
 
 :scss
   .search-item-box{

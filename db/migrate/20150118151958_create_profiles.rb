@@ -27,10 +27,11 @@ class CreateProfiles < ActiveRecord::Migration
       t.belongs_to :user, index: true
 
       ## Linked accounts
+      t.string  :facebook
       t.string  :twitter
       t.string  :github
-      t.string  :googleplus
-      
+      t.string  :linkedin
+
       t.timestamps null: false
     end
     add_attachment :profiles, :avatar

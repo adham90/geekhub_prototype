@@ -24,15 +24,16 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         age:        auth.extra.raw_info.birthday,
         gender:     auth.extra.raw_info.gender == "male"? true : false,
         address:    auth.extra.raw_info.location.name,
-        avatar:     process_uri(largeimage)
+        avatar:     process_uri(largeimage),
+        facebook:   "https://www.fb.com/#{auth.uid}"
       }
     }
   end
 
   def all
-    # Rails.logger.debug "=============================================="
-    # Rails.logger.debug request.env["omniauth.auth"]
-    # Rails.logger.debug "=============================================="
+    Rails.logger.debug "=============================================="
+    Rails.logger.debug request.env["omniauth.auth"]
+    Rails.logger.debug "=============================================="
 
     identity = Identity.where("provider" => facebook_auth[:identity][:provider]).where("uid" => facebook_auth[:identity][:uid]).first
     if identity

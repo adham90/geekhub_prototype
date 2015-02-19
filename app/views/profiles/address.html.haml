@@ -1,0 +1,124 @@
+- title "Edir Address"
+
+.row
+  .col-md-3
+    = render 'layouts/setting_nav'
+
+  .col-md-9
+    .panel.panel-default
+      .panel-heading Address
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        #address-map
+
+        = simple_form_for(@profile) do |f|
+          = f.error_notification
+          .form-inputs
+            %label Address
+            .input-group.input-group-lg
+              %span.input-group-addon.ion-search{id: "btn-search"}
+              = f.input :address, :input_html => {class: "input-lg"}, label: false
+              %span.input-group-addon.ion-navigate{id: "gps"}
+            = f.input :latitude, :disabled => true
+            = f.input :longitude, :disabled => true
+          .form-actions
+            = f.button :submit, "Update Address", class: "btn btn-itunes-inversed btn-lg btn-block"
+
+:scss
+  #address-map{
+    height: 400px;
+    width: 100%;
+  }
+
+:javascript
+  var profile = #{profile.to_json};
+
+  $("#profile_address").geocomplete();
+
+  (function(window, google, mapster) {
+
+    var options = mapster.address_map;
+    element = document.getElementById("address-map");
+    map = new google.maps.Map(element, options);
+    map.setCenter(new google.maps.LatLng(profile.latitude,profile.longitude));
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(profile.latitude,profile.longitude),
+      map: map,
+      draggable:true,
+      icon: '/images/red_marker.png',
+      title: profile.first_name + " " + profile.last_name
+    });
+
+
+    function onGeoSuccess(location) {
+      map.setCenter(new google.maps.LatLng(location.coords.latitude, location.coords.longitude));
+      marker.setPosition(new google.maps.LatLng(location.coords.latitude, location.coords.longitude));
+      $('#profile_address').val(location.formattedAddress);
+      $('#profile_latitude').val(marker.getPosition()["D"]);
+      $('#profile_longitude').val(marker.getPosition()["k"]);
+    }
+
+    function onGeoError(error) {}
+
+    $("#gps").click(function() {
+      var html5Options = { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 };
+      geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
+    });
+
+
+    $("#btn-search").click(function() {
+      var geocoder = new google.maps.Geocoder();
+      var address = $('#profile_address').val();
+      geocoder.geocode( { 'address': address }, function(results, status) {
+        map.setCenter(results[0].geometry.location);
+        marker.setPosition(results[0].geometry.location);
+      });
+      $('#profile_latitude').val(marker.getPosition()["D"]);
+      $('#profile_longitude').val(marker.getPosition()["k"]);
+    });
+
+    google.maps.event.addListener(marker, 'dragend', function(event)
+    {
+      $('#profile_latitude').val(marker.getPosition()["D"]);
+      $('#profile_longitude').val(marker.getPosition()["k"]);
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+        "latLng":event.latLng
+      }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var lat = results[0].geometry.location.lat(),
+              lng = results[0].geometry.location.lng(),
+              placeName = results[0].formatted_address,
+              latlng = new google.maps.LatLng(lat, lng);
+          $('#profile_address').val(placeName);
+        }
+      });
+      $('#profile_latitude').val(marker.getPosition()["D"]);
+      $('#profile_longitude').val(marker.getPosition()["k"]);
+    });
+
+
+    google.maps.event.addListener(map, 'click', function (event) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+        "latLng":event.latLng
+      }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var lat = results[0].geometry.location.lat(),
+              lng = results[0].geometry.location.lng(),
+              placeName = results[0].formatted_address,
+              latlng = new google.maps.LatLng(lat, lng);
+          $('#profile_latitude').val(lat);
+          $('#profile_longitude').val(lng);
+          $('#profile_address').val(placeName);
+          marker.setPosition(latlng);
+          $("#searchTextField").val(results[0].formatted_address);
+        }
+
+      });
+    });
+
+
+
+
+  }(window, google, window.Mapster || (window.Mapster = {})));

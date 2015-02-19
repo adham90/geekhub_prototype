@@ -1,3 +1,6 @@
+- if params[:qlocation].present?
+  - title "#{params[:qskill]} geeks near: #{params[:qlocation]}"
+
 .row
   .col-md-4{ id: "side" }
     = render 'search/form'
@@ -10,13 +13,13 @@
           = render partial: "profile_search", collection: @search, as: :profile
       .text-center= paginate @search, :outer_window => 0
 
-
 :javascript
 
   $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
   });
+
   $("#wrapper").toggleClass("toggled");
 
   //the map
@@ -102,19 +105,18 @@
     map.setCenter(bounds.getCenter());
     map.fitBounds(bounds);
     var mc = new MarkerClusterer(map, markers);
+
+
+    function onGeoSuccess(location) {
+      $('#qlocation').val(location.formattedAddress);
+    }
+
+    function onGeoError(error) {}
+
+    $("#gps").click(function() {
+      var html5Options = { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 };
+      geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
+    });
+
+
   }(window, google, window.Mapster || (window.Mapster = {})));
-
-
-  function onGeoSuccess(location) {
-
-  }
-  //The callback function executed when the location could not be fetched.
-  function onGeoError(error) {
-    console.log(error);
-  }
-
-  window.onload = function () {
-    //geolocator.locateByIP(onGeoSuccess, onGeoError, 2, 'map-canvas');
-    var html5Options = { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 };
-    geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
-  };

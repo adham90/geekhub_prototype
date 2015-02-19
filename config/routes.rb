@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     collection do
       get '/locations/:id', to: 'profiles#locations'
       get '/edit', to: 'profiles#edit'
+      get 'address', to: 'profiles#edit_address'
     end
   end
 

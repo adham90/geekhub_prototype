@@ -1,3 +1,8 @@
+- title @profile.name
+- description @profile.bio
+- keywords @profile.skills.pluck(:name)
+= display_meta_tags :og => {title: @profile.name, type: 'profile', image: @profile.avatar.url, url: request.original_url}
+
 #profile-top
   #profile-map
   .profile-head

@@ -10,7 +10,7 @@ User.destroy_all
 Skill.destroy_all
 Domain.destroy_all
 
-1000.times do |n|
+10.times do |n|
   Skill.create(
     name: "skill#{n}"
   )
@@ -23,7 +23,7 @@ end
   end
 end
 
-10000.times do |n|
+30.times do |n|
 
   User.create(
     email: Faker::Internet.safe_email,
@@ -44,7 +44,11 @@ end
     university: Faker::Lorem.word,
     job_title: Faker::Name.title,
     job_company: Faker::Company.name,
-    job_details: Faker::Lorem.sentence
+    job_details: Faker::Lorem.sentence,
+    facebook: "fb",
+    linkedin: "lk",
+    github: "gh",
+    twitter: "tw"
   )
 
 end

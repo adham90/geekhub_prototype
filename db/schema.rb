@@ -31,10 +31,14 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
-    t.string "name", limit: 255, null: false
+    t.string "name",        limit: 255, null: false
+    t.string "native_name", limit: 255, null: false
+    t.string "code",        limit: 255, null: false
   end
 
+  add_index "languages", ["code"], name: "index_languages_on_code", using: :btree
   add_index "languages", ["name"], name: "index_languages_on_name", using: :btree
+  add_index "languages", ["native_name"], name: "index_languages_on_native_name", using: :btree
 
   create_table "languages_profiles", force: :cascade do |t|
     t.integer "profile_id",  limit: 4, null: false
@@ -64,7 +68,7 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_2396a4b4f9", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_98f0c9588b", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -84,9 +88,10 @@ ActiveRecord::Schema.define(version: 20150213114943) do
     t.integer  "rank",                limit: 4
     t.integer  "domain_id",           limit: 4
     t.integer  "user_id",             limit: 4
+    t.string   "facebook",            limit: 255
     t.string   "twitter",             limit: 255
     t.string   "github",              limit: 255
-    t.string   "googleplus",          limit: 255
+    t.string   "linkedin",            limit: 255
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.string   "avatar_file_name",    limit: 255

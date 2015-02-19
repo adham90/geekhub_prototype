@@ -1,6 +1,5 @@
 class Profile < ActiveRecord::Base
-
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
 
   has_many :profile_skills
   has_many :skills, through: :profile_skills
@@ -11,8 +10,8 @@ class Profile < ActiveRecord::Base
   accepts_nested_attributes_for :user
 
   geocoded_by :address
-  reverse_geocoded_by :latitude, :longitude
-  after_validation :geocode, if: :address_changed?
+  # reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode, :if => :address_changed?
 
 
   validates_presence_of :user

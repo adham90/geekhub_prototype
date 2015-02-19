@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   autocomplete :skill, :name
-
+  before_action :set_domains
   respond_to :html, :json
   def index
     # lat    = params[:lan]    || current_user.profile.latitude
@@ -46,8 +46,12 @@ class SearchController < ApplicationController
     # else
     #   @search = Profile.all.page(params[:page]).per(10)
     # end
-
     @search = Profile.all.page(params[:page]).per(20)
+
+    unless params[:qlocation].present?
+      @search = @search.near(current_user.profile.address) if user_signed_in?
+    end
+
     respond_with(@search)
   end
 
@@ -62,6 +66,13 @@ class SearchController < ApplicationController
 
     #   return {skill: skill, lat: lat, log: log, within: within}
     # end
+
+    def set_domains
+      @domains = Domain.all.each { |c| c.ancestry = c.ancestry.to_s + (c.ancestry != nil ? "/" : '') + c.id.to_s
+              }.sort {|x,y| x.ancestry <=> y.ancestry
+              }.map{ |c| ["--" * (c.depth - 1) + c.name,c.id]
+              }.unshift(["-- Domain --", nil])
+    end
 
     def search(skill=nil, lat, log, within)
       if skill == nil

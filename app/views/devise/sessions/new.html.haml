@@ -1,3 +1,4 @@
+- title "Log in"
 .authform
   %h2 Log in
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
@@ -6,11 +7,10 @@
       = f.input :password, required: false, placeholder: "Password", label: false, input_html: { class: "input-lg"}
       = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
     .form-actions
-      = f.button :submit, "Log In", class: "btn btn-itunes btn-block btn-lg"
+      = f.button :submit, "Log In", class: "btn btn-itunes-inversed btn-block btn-lg"
       %a.btn.btn-lg.btn-block.btn-facebook-inversed{:href => "/users/auth/facebook"}
         %i.ion-social-facebook
         Connect with Facebook
         %i.ion-chevron-right
 
   = render "devise/shared/links"
-

@@ -32,7 +32,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## User Profile id
       t.integer  :profile_id, index: true
-
       t.timestamps
     end
 

@@ -23,8 +23,10 @@
     = f.input :job_title
     = f.input :phone, required: true, :input_html => { class:"form-control" }
     = f.input :age, required: true, as: :string, class:"form-control"
-    = f.input :domain_id, collection: @domains, class:"form-control"
 
+    = f.input :domain_id, collection: @domains, class:"form-control", label: "Area of expertise"
+
+    = f.input :languages, class:"form-control", label: "lang"
 
     = f.input :university, input_html: { class: "form-control" }
     = f.input :bio
@@ -34,17 +36,27 @@
       = f.button :submit, class: "btn btn-itunes-inversed btn-lg btn-block"
 
 
-#status
-
-
-
-
 :javascript
+
+  var data = #{ Language.all.map{|l| [l.native_name, l.id]}.to_json };
+  var profile = #{ @profie.to_json }
+  var langs = data.map(function(x) { return { id: x[1], name: x[0] }; });
+  console.log(langs);
+
   $("#profile_address").geocomplete({
     details: "form",
     markerOptions: {
       draggable: true
     }
+  });
+
+  var select = $('#profile_languages').selectize({
+    delimiter: ',',
+    maxItems: 10,
+    create: false,
+    options: langs,
+    labelField: "name",
+    valueField: "id"
   });
 
   $(function () {
@@ -56,31 +68,3 @@
   });
 
   $('#profile_domain_id').selectize();
-
-
-
-
-  function onGeoSuccess(location) {
-    (function(window, google, mapster) {
-      var options = mapster.profile_map;
-      element = document.getElementById("edit-map");
-      map = new google.maps.Map(element, options);
-      map.setCenter(new google.maps.LatLng(location.coords.latitude, location.coords.longitude));
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
-        map: map,
-        icon: '/images/red_marker.png',
-        title: "0000"
-      });
-    }(window, google, window.Mapster || (window.Mapster = {})));
-  }
-  //The callback function executed when the location could not be fetched.
-  function onGeoError(error) {
-    console.log(error);
-  }
-
-  window.onload = function () {
-    //geolocator.locateByIP(onGeoSuccess, onGeoError, 2, 'map-canvas');
-    var html5Options = { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 };
-    geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
-  };

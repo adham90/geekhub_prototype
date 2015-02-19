@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
 
   has_one :profile, dependent: :destroy
-  has_many :identities, dependent: :delete_all
+  has_many :identities, dependent: :destroy
 
   def password_required?
     super && identities.blank?

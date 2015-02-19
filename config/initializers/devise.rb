@@ -13,7 +13,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = '"geekhub.io" <admin@geekhub.io>'
-  
+
   config.omniauth :facebook, FACEBOOK_CONFIG['facebook_key'], FACEBOOK_CONFIG['facebook_secre'],
                              scope: 'user_location,user_hometown,email,user_birthday,read_stream,user_about_me,user_friends,public_profile'
 
