@@ -3,7 +3,6 @@ class Profile < ActiveRecord::Base
 
   has_many :profile_skills
   has_many :skills, through: :profile_skills
-  has_and_belongs_to_many :languages
 
   accepts_nested_attributes_for :skills
   accepts_nested_attributes_for :profile_skills, :reject_if => :all_blank, :allow_destroy => true

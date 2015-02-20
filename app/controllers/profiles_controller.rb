@@ -34,6 +34,11 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    if @profile == nil
+      @profile = Profile.find_by_id(params[:id])
+    else
+      redirect_to :status => 404
+    end
     respond_with(@profile)
   end
 
@@ -58,16 +63,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    # if profile_params[:languages].present?
-    #   langs = (profile_params[:languages].split(",").map(&:to_i) + @profile.languages.map(&:id)) - (profile_params[:languages].split(",").map(&:to_i) & @profile.languages.map(&:id))
-    #
-    #   langs.each do |l|
-    #     lang = Language.find(l)
-    #     @profile.languages << lang
-    #   end
-    # end
-
-    @profile.update(profile_params.except!(:languages))
+    @profile.update(profile_params)
     redirect_to :back
   end
 
@@ -75,7 +71,6 @@ class ProfilesController < ApplicationController
     @profile.destroy
     respond_with(@profile)
   end
-
 
 
   def edit_address
@@ -89,23 +84,6 @@ class ProfilesController < ApplicationController
   def linked_accounts
     render :linked_accounts, :locals => {profile: @profile}
   end
-
-  # def add_skill
-  #   skill = Skill.find_or_create_by!(name: skill_params[:skill].strip)
-  #
-  #   unless @profile.skills.include?(skill)
-  #     @profile.profile_skills.build(skill: skill,
-  #                                   description: skill_params[:description],
-  #                                   experience_years: skill_params[:experience_years],
-  #                                   primary: skill_params[:primary])
-  #     @profile.save
-  #     flash[:notice] = "Skill Added successfully"
-  #   else
-  #     flash[:error] = "Skill can't be added"
-  #   end
-  #
-  #   redirect_to :back
-  # end
 
   def skills
     render :skills, :locals => {profile: @profile}
@@ -130,7 +108,7 @@ class ProfilesController < ApplicationController
 
 
     def profile_params
-      params.require(:profile).permit(:languages, :github, :twitter, :linkedin,:facebook,
+      params.require(:profile).permit(:github, :twitter, :linkedin,:facebook,
        :username, :first_name, :last_name,
        :job_title, :Job_company, :job_details, :bio, :phone,
        :gender, :address, :latitude, :longitude, :university, :age,

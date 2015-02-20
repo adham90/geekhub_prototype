@@ -26,8 +26,6 @@
 
     = f.input :domain_id, collection: @domains, class:"form-control", label: "Area of expertise"
 
-    = f.input :languages, class:"form-control", label: "Language"
-
     = f.input :university, input_html: { class: "form-control" }
     = f.input :bio
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
@@ -37,11 +35,6 @@
 
 
 :javascript
-
-  var data = #{ Language.all.map{|l| [l.native_name, l.id]}.to_json };
-  var profile = #{ @profie.to_json }
-  var langs = data.map(function(x) { return { id: x[1], name: x[0] }; });
-
   $("#profile_address").geocomplete({
     details: "form",
     markerOptions: {
@@ -49,14 +42,6 @@
     }
   });
 
-  var select = $('#profile_languages').selectize({
-    delimiter: ',',
-    maxItems: 10,
-    create: false,
-    options: langs,
-    labelField: "name",
-    valueField: "id"
-  });
 
   $(function () {
     $('#profile_age').datetimepicker({

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213114943) do
+ActiveRecord::Schema.define(version: 20150212212655) do
 
   create_table "domains", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -29,24 +29,6 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
-
-  create_table "languages", force: :cascade do |t|
-    t.string "name",        limit: 255, null: false
-    t.string "native_name", limit: 255, null: false
-    t.string "code",        limit: 255, null: false
-  end
-
-  add_index "languages", ["code"], name: "index_languages_on_code", using: :btree
-  add_index "languages", ["name"], name: "index_languages_on_name", using: :btree
-  add_index "languages", ["native_name"], name: "index_languages_on_native_name", using: :btree
-
-  create_table "languages_profiles", force: :cascade do |t|
-    t.integer "profile_id",  limit: 4, null: false
-    t.integer "language_id", limit: 4, null: false
-  end
-
-  add_index "languages_profiles", ["language_id"], name: "index_languages_profiles_on_language_id", using: :btree
-  add_index "languages_profiles", ["profile_id"], name: "index_languages_profiles_on_profile_id", using: :btree
 
   create_table "profile_skill_tags", force: :cascade do |t|
     t.integer  "skill_id",         limit: 4
@@ -68,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_ba78f152f5", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_e2cfaf5664", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false

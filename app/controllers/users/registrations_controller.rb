@@ -44,6 +44,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
       resource.update_with_password(params)
     end
+
+    def after_inactive_sign_up_path_for(resource)
+      edit_profiles_path
+    end
+
+    def after_sign_up_path_for(resource)
+      edit_profiles_path
+    end
   # You can put the params you want to permit in the empty array.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.for(:sign_up) << :attribute
