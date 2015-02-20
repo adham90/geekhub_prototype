@@ -20,7 +20,7 @@
 ####################################################
 class ProfilesController < ApplicationController
   before_action :set_domains
-  before_action :set_profile, only: [:edit_address ,:show, :edit, :update, :destroy, :add_skill]
+  before_action :set_profile, only: [:skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill]
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete  :university, :name
   respond_to    :html, :js
@@ -58,14 +58,15 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if profile_params[:languages].present?
-      langs = (profile_params[:languages].split(",").map(&:to_i) + @profile.languages.map(&:id)) - (profile_params[:languages].split(",").map(&:to_i) & @profile.languages.map(&:id))
-      
-      langs.each do |l|
-        lang = Language.find(l)
-        @profile.languages << lang
-      end
-    end
+    # if profile_params[:languages].present?
+    #   langs = (profile_params[:languages].split(",").map(&:to_i) + @profile.languages.map(&:id)) - (profile_params[:languages].split(",").map(&:to_i) & @profile.languages.map(&:id))
+    #
+    #   langs.each do |l|
+    #     lang = Language.find(l)
+    #     @profile.languages << lang
+    #   end
+    # end
+
     @profile.update(profile_params.except!(:languages))
     redirect_to :back
   end
@@ -75,19 +76,7 @@ class ProfilesController < ApplicationController
     respond_with(@profile)
   end
 
-  def add_skill
-    unless params[:skill] == "" or params[:skill] == nil
-      clear_flash
-      if @profile.add_skill?(params[:skill])
-        flash[:notice] = "Skill Added successfully"
-      else
-        flash[:error] = "Skill can't be added"
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
-  end
+
 
   def edit_address
     render :address, :locals => {profile: @profile}
@@ -97,10 +86,32 @@ class ProfilesController < ApplicationController
     render json: Profile.find(params[:id]).profile_locations
   end
 
+  def linked_accounts
+    render :linked_accounts, :locals => {profile: @profile}
+  end
 
+  # def add_skill
+  #   skill = Skill.find_or_create_by!(name: skill_params[:skill].strip)
+  #
+  #   unless @profile.skills.include?(skill)
+  #     @profile.profile_skills.build(skill: skill,
+  #                                   description: skill_params[:description],
+  #                                   experience_years: skill_params[:experience_years],
+  #                                   primary: skill_params[:primary])
+  #     @profile.save
+  #     flash[:notice] = "Skill Added successfully"
+  #   else
+  #     flash[:error] = "Skill can't be added"
+  #   end
+  #
+  #   redirect_to :back
+  # end
+
+  def skills
+    render :skills, :locals => {profile: @profile}
+  end
 
   private
-
 
     def set_domains
       @domains = Domain.all.each { |c| c.ancestry = c.ancestry.to_s + (c.ancestry != nil ? "/" : '') + c.id.to_s
@@ -109,28 +120,21 @@ class ProfilesController < ApplicationController
               }.unshift(["-- none --", nil])
     end
 
-    def clear_flash
-      flash.delete(:notice)
-      flash.delete(:error)
-    end
-
     def set_profile
       if params[:username]
         @profile = Profile.find_by_username(params[:username])
-      # elsif params[:id]
-      #   @profile = Profile.find(params[:id])
       elsif user_signed_in?
         @profile = current_user.profile
       end
     end
 
-    # def address_params
-    #   params.require(:profile).permit(:latitude, :longitude, :address)
-    # end
 
     def profile_params
-      params.require(:profile).permit(:languages, :github, :twitter, :linkedin,:facebook, :username, :first_name, :last_name,
-       :job_title, :Job_company, :job_details, :bio, :phone, :gender, :address, :latitude, :longitude, :university, :age,
-       :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation])
+      params.require(:profile).permit(:languages, :github, :twitter, :linkedin,:facebook,
+       :username, :first_name, :last_name,
+       :job_title, :Job_company, :job_details, :bio, :phone,
+       :gender, :address, :latitude, :longitude, :university, :age,
+       :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation],
+       profile_skills_attributes: [:id, :skill_name, :experience_years, :description, :tags, :primary, :_destroy])
     end
 end

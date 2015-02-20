@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   add_index "profile_skill_tags", ["profile_skill_id"], name: "index_profile_skill_tags_on_profile_skill_id", using: :btree
   add_index "profile_skill_tags", ["skill_id"], name: "index_profile_skill_tags_on_skill_id", using: :btree
 
-  create_table "profile_skills", id: false, force: :cascade do |t|
+  create_table "profile_skills", force: :cascade do |t|
     t.integer "profile_id",       limit: 4
     t.integer "skill_id",         limit: 4
     t.integer "rank",             limit: 4
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20150213114943) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_98f0c9588b", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_ba78f152f5", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false

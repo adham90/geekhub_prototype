@@ -28,4 +28,5 @@
 //= require markerclusterer_compiled
 //= require intlTelInput
 //= require geolocator.min
+//= require cocoon
 //= require_tree .

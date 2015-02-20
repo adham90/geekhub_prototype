@@ -81,6 +81,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
+    cocoon (1.2.6)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -310,6 +311,7 @@ DEPENDENCIES
   byebug
   client_side_validations!
   client_side_validations-simple_form!
+  cocoon
   devise
   faker
   geocoder

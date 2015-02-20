@@ -15,13 +15,6 @@
 
 :javascript
 
-  $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-  });
-
-  $("#wrapper").toggleClass("toggled");
-
   //the map
   var profiles = #{@search.to_json};
 

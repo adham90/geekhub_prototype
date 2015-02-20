@@ -38,7 +38,7 @@ gem "geocoder"
 # gem 'leaflet-rails'
 gem 'meta-tags'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+gem "cocoon"
 gem 'ancestry'
 
 # Use ActiveModel has_secure_password

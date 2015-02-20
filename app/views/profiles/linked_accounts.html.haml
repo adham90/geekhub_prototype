@@ -1,0 +1,20 @@
+- title "Edit Linked Accounts"
+
+.row
+  .col-md-3
+    = render 'layouts/setting_nav'
+
+  .col-md-9
+    .panel.panel-default
+      .panel-heading Linked Accounts
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        = simple_form_for(@profile) do |f|
+          = f.error_notification
+          .form-inputs
+            = f.input :facebook, as: :url, placeholder: "https://www.fb.com/Adham.Abdelkhalek.ELdeeb"
+            = f.input :twitter, as: :url, placeholder: "https://twitter.com/adham_deeb"
+            = f.input :github, as: :url, placeholder: "https://github.com/adham90"
+            = f.input :linkedin, as: :url, placeholder: "https://www.linkedin.com/profile/view?id=236838511"
+          .form-actions
+            = f.button :submit, "Update", class: "btn btn-itunes-inversed btn-lg btn-block"

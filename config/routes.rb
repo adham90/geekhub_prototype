@@ -7,6 +7,14 @@ Rails.application.routes.draw do
       get '/locations/:id', to: 'profiles#locations'
       get '/edit', to: 'profiles#edit'
       get 'address', to: 'profiles#edit_address'
+      get 'linked_accounts', to: 'profiles#linked_accounts'
+
+      get 'skills', to: 'profiles#skills'
+      # post 'skills', to: 'profiles#add_skill'
+      #
+      # post 'add_skills', to: 'profiles#add_skill'
+      # post 'edit_skills', to: 'profiles#edit_skills'
+
     end
   end
 

@@ -1,0 +1,106 @@
+- title "Edit Linked Accounts"
+
+.row
+  .col-md-3
+    = render 'layouts/setting_nav'
+
+  .col-md-9
+    .panel.panel-default
+      .panel-heading Skills
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        = simple_form_for(@profile) do |f|
+          = f.error_notification
+          .form-inputs
+            #tags
+              .form-actions
+                = f.button :submit, "Update", class: "btn btn-itunes-inversed btn-lg btn-block"
+                %br
+              = link_to_add_association 'Add New Skill', f, :profile_skills, class: "btn btn-block btn-itunes-inversed"
+              %br
+
+              = f.simple_fields_for :profile_skills do |skill|
+                = render 'profile_skill_fields', f: skill
+                %hr
+
+
+:javascript
+
+  $('[id$=skill_name]').selectize({
+    maxItems: 1,
+    valueField: 'name',
+    labelField: 'name',
+    searchField: 'name',
+    create: true,
+    render: {
+      option: function(item, escape) {
+        var actors = [];
+        for (var i = 0, n = item.length; i < n; i++) {
+          actors.push('<span>' + escape(item.autocompletes[i].name) + '</span>');
+        }
+
+        return '<div>' +
+                  '<span class="name">' + escape(item.name) + '</span>' +
+               '</div>';
+      }
+    },
+    load: function(query, callback) {
+      if (!query.length) return callback();
+      $.ajax({
+        url: '/autocompletes/skill.json',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          q: query,
+        },
+        error: function() {
+          callback();
+        },
+        success: function(res) {
+          callback(res.autocompletes);
+        }
+      });
+    }
+  });
+
+  //
+  // $('#_profiles_add_skills_tags').selectize({
+  //   plugins: ['remove_button'],
+  //   delimiter: ',',
+  //   maxItems: 10,
+  //   persist: false,
+  //   valueField: 'name',
+  //   labelField: 'name',
+  //   searchField: 'name',
+  //   options: [],
+  //   create: true,
+  //   render: {
+  //     option: function(item, escape) {
+  //       var actors = [];
+  //       for (var i = 0, n = item.length; i < n; i++) {
+  //         actors.push('<span>' + escape(item.autocompletes[i].name) + '</span>');
+  //       }
+  //
+  //       return '<div>' +
+  //                 '<span class="name">' + escape(item.name) + '</span>' +
+  //              '</div>';
+  //     }
+  //   },
+  //   load: function(query, callback) {
+  //     if (!query.length) return callback();
+  //     $.ajax({
+  //       url: '/autocompletes/skill.json',
+  //       type: 'GET',
+  //       dataType: 'json',
+  //       data: {
+  //         q: query,
+  //       },
+  //       error: function() {
+  //         callback();
+  //       },
+  //       success: function(res) {
+  //         callback(res.autocompletes);
+  //       }
+  //     });
+  //   }
+  // });

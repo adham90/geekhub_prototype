@@ -1,6 +1,6 @@
 class CreateProfileSkills < ActiveRecord::Migration
   def change
-    create_table :profile_skills, id: false do |t|
+    create_table :profile_skills do |t|
       t.belongs_to :profile
       t.belongs_to :skill
       t.integer    :rank
