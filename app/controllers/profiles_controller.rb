@@ -34,12 +34,16 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    if @profile == nil
+    if @profile
+      respond_with(@profile)
+    elsif params[:id]
       @profile = Profile.find_by_id(params[:id])
-    else
-      redirect_to :status => 404
+      if @profile
+        respond_with(@profile)
+      else
+        redirect_to :status => 404
+      end
     end
-    respond_with(@profile)
   end
 
   def new
