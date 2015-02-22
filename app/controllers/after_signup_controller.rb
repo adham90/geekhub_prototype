@@ -1,4 +1,6 @@
 class AfterSignupController < ApplicationController
+  before_filter :hide_navbar
+
   before_action :authenticate_user!
   include Wicked::Wizard
 

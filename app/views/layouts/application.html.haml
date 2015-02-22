@@ -12,6 +12,5 @@
 
   %body
     %main{:role => "main"}
-      -unless current_page?(signup_path) || current_page?(new_user_session_path)
-        = render 'layouts/navigation'
+      = render 'layouts/navigation' unless @hide_navbar
       = yield

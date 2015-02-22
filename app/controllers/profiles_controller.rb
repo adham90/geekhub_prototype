@@ -19,6 +19,8 @@
 # t.string   "avatar",    limit: 255
 ####################################################
 class ProfilesController < ApplicationController
+  before_filter :hide_navbar, only: [ :new ]
+
   before_action :set_domains
   before_action :set_profile, only: [:skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill]
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]

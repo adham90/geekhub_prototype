@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def hide_navbar
+    @hide_navbar = true
+  end
+
   def set_drives_notification
     if user_signed_in?
       unless current_user.profile.valid?
