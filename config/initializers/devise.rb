@@ -14,7 +14,7 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = '"geekhub.io" <admin@geekhub.io>'
 
-  config.omniauth :facebook, FACEBOOK_CONFIG['facebook_key'], FACEBOOK_CONFIG['facebook_secre'],
+  config.omniauth :facebook, ENV["FACEBOOK_KEY"], ENV["FACEBOOK_SECRET"],
                              scope: 'user_location,user_hometown,email,user_birthday,read_stream,user_about_me,user_friends,public_profile'
 
   # Configure the class responsible to send e-mails.

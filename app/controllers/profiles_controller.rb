@@ -19,6 +19,7 @@
 # t.string   "avatar",    limit: 255
 ####################################################
 class ProfilesController < ApplicationController
+  before_filter :valid_notice, except: [ :edit, :update ]
   before_filter :hide_navbar, only: [ :new ]
 
   before_action :set_domains

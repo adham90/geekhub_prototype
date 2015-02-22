@@ -1,4 +1,5 @@
 class Profile < ActiveRecord::Base
+  attr_accessor :valid
   belongs_to :user
 
   has_many :profile_skills
@@ -41,15 +42,20 @@ class Profile < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  scope :valid_user, -> { joins(:skills).where.not(first_name: nil, address: nil).having("count(skills.id) > ?",0)  }
 
-  def self.valid?
-    if self.first_name.present? && self.address.present? && self.skills.count > 0
+  # Profile.joins(:skills).select('profiles.*, count(skills.id) as n_skills').group('profiles.id').having('n_skills <= 0').where.not(first_name: nil, address: nil)
+
+  scope :valid_users, -> { joins(:skills).select('profiles.*, count(skills.id) as n_skills').group('profiles.id').having('n_skills').where.not(first_name: nil, address: nil)  }
+
+
+  def self.valid?(profile)
+    if profile.skills.count > 0
       true
-    else
+    elsif profile.skills.count <= 0
       false
     end
   end
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -59,4 +65,5 @@ class Profile < ActiveRecord::Base
       user.image = auth.info.image # assuming the user model has an image
     end
   end
+
 end

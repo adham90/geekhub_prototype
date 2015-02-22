@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  before_filter :valid_notice
   autocomplete :skill, :name
   before_action :set_domains
   respond_to :html, :json
@@ -48,7 +49,7 @@ class SearchController < ApplicationController
     # end
 
 
-    @search = Profile.all.page(params[:page]).per(20)
+    @search = Profile.valid_users.page(params[:page]).per(20)
 
     unless params[:qlocation].present?
       @search = @search.near(current_user.profile.address) if user_signed_in?
@@ -59,15 +60,6 @@ class SearchController < ApplicationController
 
 
   private
-
-    # def set_params
-    #   lat    = params[:lan]    || current_user.profile.latitude
-    #   log    = params[:log]    || current_user.profile.longitude
-    #   within = params[:within] || 20
-    #   skill  = params[:skill]  || nil
-
-    #   return {skill: skill, lat: lat, log: log, within: within}
-    # end
 
     def set_domains
       @domains = Domain.all.each { |c| c.ancestry = c.ancestry.to_s + (c.ancestry != nil ? "/" : '') + c.id.to_s
