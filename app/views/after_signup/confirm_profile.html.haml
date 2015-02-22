@@ -1,0 +1,51 @@
+- title "Edit Profile"
+.row
+  .col-md-6.col-md-offset-3
+    .panel.panel-default
+      .panel-heading Public profile
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        = simple_form_for(@profile, url: wizard_path, method: :put) do |f|
+
+          = f.error_notification
+          .form-inputs
+            %p Profile picture
+            .fileinput.fileinput-new{"data-provides" => "fileinput"}
+              .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
+                - if @profile.avatar?
+                  = image_tag(@profile.avatar.url, id: "edit-profile-avatar")
+                -else
+                  %img{"src" => "/images/200.gif"}
+              .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 200px;"}
+              %div
+                %span.btn.btn-default.btn-file
+                  %span.fileinput-new Select image
+                  %span.fileinput-exists Change
+                  = f.file_field :avatar
+                %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
+
+            = f.input :first_name, required: true
+            = f.input :last_name
+            = f.input :job_title
+            = f.input :phone, :input_html => { class:"form-control" }
+            = f.input :age, required: true, class:"form-control"
+
+            = f.input :domain_id, collection: @domains, class:"form-control", label: "Area of expertise"
+
+            = f.input :university, input_html: { class: "form-control" }
+            = f.input :bio
+            = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
+
+            .form-actions
+              = f.button :submit, "Next", class: "btn btn-itunes-inversed btn-lg btn-block"
+
+
+:javascript
+  $("#profile_address").geocomplete({
+    details: "form",
+    markerOptions: {
+      draggable: true
+    }
+  });
+
+  $('#profile_domain_id').selectize();

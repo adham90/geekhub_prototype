@@ -1,26 +1,11 @@
-- title "Edit Linked Accounts"
-
-.row
-  .col-md-3
-    = render 'layouts/setting_nav'
-
-  .col-md-9
-    .panel.panel-default
-      .panel-heading Skills
-      = render 'layouts/messages'
-      .panel-body#panel-body
-        = simple_form_for(@profile) do |f|
-          = f.error_notification
-          .form-inputs
-            #tags
-              .form-actions
-                = f.button :submit, "Update", class: "btn btn-itunes-inversed btn-lg btn-block"
-                %br
-              = link_to_add_association 'Add New Skill', f, :profile_skills, class: "btn btn-block btn-itunes-inversed"
-              %br
-
-              = f.simple_fields_for :profile_skills do |skill|
-                = render 'profile_skill_fields', f: skill
+.nested-fields.project-tag-fields
+  #tag_from_list
+    = f.input :skill_name
+    = f.input :experience_years, as: :integer
+    = f.input :description, as: :text
+    = f.input :primary, as: :boolean
+    = link_to_remove_association "Remove Skill", f, class: "btn btn-itunes-inversed"
+    %hr
 
 
 :javascript

@@ -5,7 +5,8 @@
   = form_tag(search_path, method: 'get') do
     .input-group
       = text_field_tag :qlocation, params[:qlocation], class: "form-control input-lg"
-      %span.input-group-addon.ion-navigate{id: "gps"}
+      %span.input-group-btn
+        %button.btn.btn-default.btn-lg.ion-navigate{id: "gps", :type => "button"}
     = text_field_tag :qskill, params[:qskill], id: "qskill", class: "form-control", placeholder: 'ruby, go, python'
 
     = select_tag :qdomain, options_for_select(@domains, params[:qdomain]), class: "form-control"

@@ -46,6 +46,8 @@ class SearchController < ApplicationController
     # else
     #   @search = Profile.all.page(params[:page]).per(10)
     # end
+
+
     @search = Profile.all.page(params[:page]).per(20)
 
     unless params[:qlocation].present?
@@ -72,6 +74,10 @@ class SearchController < ApplicationController
               }.sort {|x,y| x.ancestry <=> y.ancestry
               }.map{ |c| ["--" * (c.depth - 1) + c.name,c.id]
               }.unshift(["-- Domain --", nil])
+    end
+
+    def active_user users
+      user.where
     end
 
     def search(skill=nil, lat, log, within)

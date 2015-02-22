@@ -56,15 +56,16 @@
     margin-right: 5px;
     margin-top: 13px;
     float: right;
-    max-width: 85px;
+    max-width: 89px;
+    .btn-facebook, .btn-twitter{
+      margin-right: 3px;
+    }
     .btn{
       min-width: 40px;
       min-height: 40px;
       max-width: 40px;
       max-height: 40px;
       margin-bottom: 4px;
-      margin-bottom: 4px;
-
       padding: 0;
       span{
         display:table;

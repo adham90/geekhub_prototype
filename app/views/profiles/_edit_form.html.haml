@@ -22,7 +22,7 @@
     = f.input :last_name
     = f.input :job_title
     = f.input :phone, :input_html => { class:"form-control" }
-    = f.input :age, required: true, as: :string, class:"form-control"
+    = f.input :age, required: true, class:"form-control"
 
     = f.input :domain_id, collection: @domains, class:"form-control", label: "Area of expertise"
 
@@ -40,15 +40,6 @@
     markerOptions: {
       draggable: true
     }
-  });
-
-
-  $(function () {
-    $('#profile_age').datetimepicker({
-      viewMode: 'years',
-      defaultDate: "01/01/1990",
-      format: 'DD/MM/YYYY'
-    });
   });
 
   $('#profile_domain_id').selectize();

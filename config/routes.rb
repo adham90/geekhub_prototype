@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: "users/registrations" }
 
+  resources :after_signup
+
   resources :profiles, except: [:edit, :destroy] do
     get :autocomplete_university_name, :on => :collection
     collection do

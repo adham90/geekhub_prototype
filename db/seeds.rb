@@ -37,7 +37,7 @@ end
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     phone: "#{n}" + Faker::PhoneNumber.phone_number,
-    age: "Sat, 12 May 1990",
+    age: 1990,
     gender: true,
     address: Faker::Address.country,
     bio: Faker::Lorem.sentence,

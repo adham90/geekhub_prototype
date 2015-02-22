@@ -8,7 +8,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string  :last_name
       t.text    :bio
       t.string  :phone
-      t.date    :age
+      t.string  :age
       t.boolean :gender    # Male => true, Female => false
       t.string  :university
 

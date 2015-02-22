@@ -8,7 +8,7 @@
 # t.boolean  "gender",              limit: 1
 # t.string   "university",          limit: 255
 # t.string   "job_title",           limit: 255
-# t.string   "Job_company",             limit: 255
+# t.string   "Job_company",         limit: 255
 # t.text     "job_details",         limit: 65535
 # t.string   "address",             limit: 255
 # t.float    "latitude",            limit: 24
@@ -49,6 +49,7 @@ class ProfilesController < ApplicationController
   def new
     if user_signed_in?
       flash[:error] = "You cannot perform this action."
+  def edit
       redirect_to root_path
     else
       @profile = Profile.new
@@ -57,13 +58,16 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def edit
   end
 
   def create
     @profile = Profile.new(profile_params)
-    @profile.save
-    respond_with(@profile)
+    if @profile.save
+      sign_in @profile.user
+      redirect_to after_signup_path(:confirm_profile)
+    else
+      render :new
+    end
   end
 
   def update

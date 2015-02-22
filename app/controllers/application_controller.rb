@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
 
   def set_drives_notification
     if user_signed_in?
-      profile = current_user.profile
-      if profile.name == "" or profile.skills.count <= 0 or profile.address == ""
+      unless current_user.profile.valid?
         flash[:error] = nil
         flash[:error] = "You need to complete your info in order to be visible to other geeks."
       end

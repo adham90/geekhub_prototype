@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150212212655) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_e2cfaf5664", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_6fd9d3ba06", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20150212212655) do
     t.string   "last_name",           limit: 255
     t.text     "bio",                 limit: 65535
     t.string   "phone",               limit: 255
-    t.date     "age"
+    t.string   "age",                 limit: 255
     t.boolean  "gender",              limit: 1
     t.string   "university",          limit: 255
     t.string   "job_title",           limit: 255
