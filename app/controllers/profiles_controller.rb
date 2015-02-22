@@ -49,7 +49,6 @@ class ProfilesController < ApplicationController
   def new
     if user_signed_in?
       flash[:error] = "You cannot perform this action."
-  def edit
       redirect_to root_path
     else
       @profile = Profile.new
@@ -58,6 +57,7 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def edit
   end
 
   def create
