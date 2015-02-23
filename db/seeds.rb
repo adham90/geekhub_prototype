@@ -18,9 +18,6 @@ end
 
 5.times do |d|
   Domain.create(name: Faker::Internet.user_name)
-  20.times do |s|
-    Domain.create(name: Faker::Internet.user_name, ancestry: Domain.last.id)
-  end
 end
 
 30.times do |n|

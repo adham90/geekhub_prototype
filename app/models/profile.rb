@@ -42,10 +42,10 @@ class Profile < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-
+  # joins(:profile_skills).group("profile_skills.profile_id").having("count(profile_skills.id) > 0")
   # Profile.joins(:skills).select('profiles.*, count(skills.id) as n_skills').group('profiles.id').having('n_skills <= 0').where.not(first_name: nil, address: nil)
 
-  scope :valid_users, -> { joins(:skills).select('profiles.*, count(skills.id) as n_skills').group('profiles.id').having('n_skills').where.not(first_name: nil, address: nil)  }
+  scope :valid_users, -> { joins(:skills).group('profiles.id').having("count(skills.id) > 0").where.not(first_name: nil, address: nil)  }
 
 
   def self.valid?(profile)

@@ -16,10 +16,8 @@ ActiveRecord::Schema.define(version: 20150212212655) do
   create_table "domains", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
     t.string "description", limit: 255
-    t.string "ancestry",    limit: 255
   end
 
-  add_index "domains", ["ancestry"], name: "index_domains_on_ancestry", using: :btree
   add_index "domains", ["name"], name: "index_domains_on_name", using: :btree
 
   create_table "identities", force: :cascade do |t|
@@ -50,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150212212655) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_6fd9d3ba06", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_adea3f0e94", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
