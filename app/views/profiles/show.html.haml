@@ -1,6 +1,6 @@
 - title @profile.name
 - description @profile.bio
-- keywords @profile.skills.pluck(:name)
+- keywords @profile.skills.map(&:name)
 = display_meta_tags :og => {title: @profile.name, type: 'profile', image: @profile.avatar.url, url: request.original_url}
 
 #profile-top
@@ -32,7 +32,7 @@
       %blockquote{class: "quote-#{s.primary.to_s}"}
         .skill-name
           %p.name= link_to s.skill.name, search_path(qskills: s.skill.name)
-          %p.experience_years= " - #{s.experience_years.to_s} years experience"
+          %p.experience_years= " - #{s.experience_years.to_s} years experience" if s.experience_years.to_i > 0
         %p= s.description
 
 :javascript

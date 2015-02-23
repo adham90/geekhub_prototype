@@ -1,11 +1,10 @@
 class SearchController < ApplicationController
-  before_filter :valid_notice 
+  before_filter :valid_notice
   autocomplete :skill, :name
   before_action :set_domains
   respond_to :html, :json
   def index
     @search = Profile.valid_users
-
     @search = @search.near(params[:qlocation]) if params[:qlocation].to_s.length > 0
     @search = @search.joins(:skills).where(["skills.name IN (?)", params[:qskills].split(',')]) if params[:qskills].to_s.length > 0
     @search = @search.where(domain_id: params[:qdomain]) if params[:qdomain].to_s.length > 0
