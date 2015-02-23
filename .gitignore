@@ -15,6 +15,7 @@
 # Ignore sublime temporary files
 .fuse*
 
+.env
 #.secrets.yml
 #.secrets
 #secrets.yml
