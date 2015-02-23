@@ -11,7 +11,7 @@ class Profile < ActiveRecord::Base
   accepts_nested_attributes_for :user
 
   geocoded_by :address
-  reverse_geocoded_by :latitude, :longitude
+  # reverse_geocoded_by :latitude, :longitude
   after_validation :geocode, :if => :address_changed?
 
 
