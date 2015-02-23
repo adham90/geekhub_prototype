@@ -121,3 +121,30 @@
   padding: 5px;
   padding-top: 20px;
 }
+
+.skill-name{
+  p {
+    display:inline-block;
+  }
+  .name{
+    font-style: bold;
+    a {
+      color: #000;
+    }
+  }
+  .experience_years{
+    font-size: 13px;
+    color: #5a5a5a;
+  }
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+}
+
+.quote-true{
+  background: #e2f1e0;
+}

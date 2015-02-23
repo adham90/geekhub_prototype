@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_filter :valid_notice
+  before_filter :valid_notice 
   autocomplete :skill, :name
   before_action :set_domains
   respond_to :html, :json

@@ -249,6 +249,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    redcarpet (3.2.2)
     request_store (1.1.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
@@ -344,6 +345,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails4-autocomplete
   rails_12factor
+  redcarpet
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   searchkick

@@ -8,44 +8,35 @@
   .profile-head
     %h2.profile-name= @profile.name.capitalize
     .bar
-      / %ul.nav
-      /   %li#about
-      /     %a{:href => "#"}
-      /       %span ABOUT
-      /       %br/
-      /       %p ......
-      /   %li#pair
-      /     %a{:href => "#"}
-      /       %span PAIRED WITH
-      /       %br/
-      /       %p 13
-      /   %li
-      /     %a{:href => "#"}
-      /       %span PAIRED WITH
-      /       %br/
-      /       %p 104
     .profile-image-box
       .image_wrapper
         = image_tag @profile.avatar.url(:original), class: "profile_img"
-#profile-main
-  / .col-md-2.box
-  .col-md-10.col-md-offset-1.box#profile-content
-    = render 'about'
+.row
+  .col-md-10.col-md-offset-1.box
+    %h3 About
+    %hr
+    %b Email:
+    %p= @profile.user.email
+    %br
+    %b Bio:
+    %p= markdown(@profile.bio)
+    %br
+    %b Address:
+    %address= @profile.address
+    %br
+.row
+  .col-md-10.col-md-offset-1.box
+    %h3 Skills
+    %hr
+    - @profile.profile_skills.order(primary: :desc).each do |s|
+      %blockquote{class: "quote-#{s.primary.to_s}"}
+        .skill-name
+          %p.name= link_to s.skill.name, search_path(qskills: s.skill.name)
+          %p.experience_years= " - #{s.experience_years.to_s} years experience"
+        %p= s.description
 
 :javascript
   var profile = #{@profile.to_json};
-
-  $( "#about" ).click(function() {
-    $(document).find('#in').remove();
-    $('#profile-content').prepend('#{j render "about", :object => @profile}');
-    $("html, body").animate({ scrollTop: 160 }, 1);
-  });
-
-  $( "#pair" ).click(function() {
-    $(document).find('#in').remove();
-    $('#profile-content').prepend('#{j render "pair", :object => @profile}');
-    $("html, body").animate({ scrollTop: 160 }, 1);
-  });
 
   (function(window, google, mapster) {
     var options = mapster.profile_map;

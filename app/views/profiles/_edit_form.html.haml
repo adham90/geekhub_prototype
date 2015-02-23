@@ -27,7 +27,7 @@
     = f.input :domain_id, collection: @domains, class:"form-control", label: "Area of expertise"
 
     = f.input :university, input_html: { class: "form-control" }
-    = f.input :bio
+    = f.input :bio, hint:"Markdown supported"
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
 
     .form-actions
