@@ -88,4 +88,7 @@ Rails.application.configure do
     }
   }
 
+  ## Google analytics
+  GA.tracker = "UA-60076849-1"
+
 end

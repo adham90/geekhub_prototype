@@ -118,7 +118,7 @@ class ProfilesController < ApplicationController
     def profile_params
       params.require(:profile).permit(:github, :twitter, :linkedin,:facebook,
        :username, :first_name, :last_name,
-       :job_title, :Job_company, :job_details, :bio, :phone,
+       :job_title, :job_company, :job_details, :bio, :phone,
        :gender, :address, :latitude, :longitude, :university, :age,
        :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation],
        profile_skills_attributes: [:id, :skill_name, :experience_years, :description, :tags, :primary, :_destroy])

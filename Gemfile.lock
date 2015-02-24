@@ -125,6 +125,7 @@ GEM
       json
       multi_json
       request_store (>= 1.0.5)
+    google-analytics-rails (0.0.6)
     haml (4.0.6)
       tilt
     haml-rails (0.8.2)
@@ -322,6 +323,7 @@ DEPENDENCIES
   faker
   geocoder
   gon
+  google-analytics-rails
   haml
   haml-rails
   intl-tel-input-rails

@@ -10,12 +10,6 @@ class SearchController < ApplicationController
     @search = @search.where(domain_id: params[:qdomain]) if params[:qdomain].to_s.length > 0
     @search = @search.where(university: params[:qedu]) if params[:qedu].to_s.length > 0
 
-    # @search = Profile.valid_users.near(params[:qlocation]).page(params[:page]).per(20)
-
-    # if params[:qlocation] == ""
-    #   @search = @search.near(current_user.profile.address) if user_signed_in?
-    # end
-
     @search = @search.page(params[:page]).per(20)
     respond_with(@search)
   end
@@ -25,17 +19,5 @@ class SearchController < ApplicationController
 
     def set_domains
       @domains = Domain.all
-    end
-
-    def active_user users
-      user.where
-    end
-
-    def search(skill=nil, lat, log, within)
-      if skill == nil
-        search_list = Profile.near([lat, log], within, units: :km)
-      else
-        search_list = Profile.near([lat, log], within, units: :km).skills.where(name: skill)
-      end
     end
 end

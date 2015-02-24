@@ -1,7 +1,7 @@
 %li.has-hover.search-item-box{id: "#{profile.id}"}
   = link_to image_tag(profile.avatar.url(:small), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
 
-  .pait-btn
+  .linked_accounts-btn
     - if profile.facebook.present?
       = link_to "#{profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
         %span.ion-social-facebook
