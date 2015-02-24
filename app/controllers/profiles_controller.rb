@@ -44,8 +44,10 @@ class ProfilesController < ApplicationController
       if @profile
         respond_with(@profile)
       else
-        redirect_to :status => 404
+        redirect_to '/404'
       end
+    elsif @profile == nil
+      redirect_to '/404'
     end
   end
 
