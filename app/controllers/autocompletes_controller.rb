@@ -2,7 +2,7 @@ class AutocompletesController < ApplicationController
   respond_to :json
 
   def skill
-    @skills = Skill.where("name LIKE ?", "%#{params[:q].downcase}%").limit(5).map do |copy|
+    @skills = Skill.where("lower(name) LIKE ?", "%#{params[:q].downcase}%").limit(5).map do |copy|
       { id: copy.id,
         name: copy.name
       }
@@ -11,7 +11,7 @@ class AutocompletesController < ApplicationController
   end
 
   def university
-    @university = Profile.where("university LIKE ?", "%#{params[:q]}%").limit(5).map do |copy|
+    @university = Profile.where("lower(university) LIKE ?", "%#{params[:q].downcase}%").limit(5).map do |copy|
       {
         name: copy.university
       }
