@@ -21,7 +21,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         first_name: auth.extra.raw_info.first_name,
         last_name:  auth.extra.raw_info.last_name,
         bio:        auth.extra.raw_info.bio,
-        age:        Date.strptime(auth.extra.raw_info.birthday,'%m/%d/%Y').year,
+        # age:        Date.strptime(auth.extra.raw_info.birthday,'%Y'),
         gender:     auth.extra.raw_info.gender == "male"? true : false,
         address:    auth.extra.raw_info.location.name,
         avatar:     process_uri(largeimage),

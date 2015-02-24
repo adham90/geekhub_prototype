@@ -28,9 +28,9 @@
             = f.input :last_name
             = f.input :job_title
             = f.input :phone, :input_html => { class:"form-control" }
-            = f.input :age, required: true, class:"form-control"
+            = f.input :age, required: true, class:"form-control", label: "Year of birth"
 
-            = f.input :domain_id, collection: @domains, class:"form-control", label: "Area of expertise"
+            = f.input :domain_id, collection: @domains, class:"form-control", label: "Domain (Area of expertise)"
 
             = f.input :university, input_html: { class: "form-control" }
             = f.input :bio
@@ -56,7 +56,7 @@
   });
 
   $('#profile_domain_id').selectize();
-  
+
   $('#profile_university').selectize({
     maxItems: 1,
     persist: false,
