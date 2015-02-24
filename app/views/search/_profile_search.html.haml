@@ -22,7 +22,7 @@
     .name
       = link_to profile.name, show_profile_path(profile.username)
     .title= profile.job_title
-    .hidden-xs.bio= profile.bio
+    .bio= profile.bio
     = render partial: "profile_skills_search", collection: profile.skills.limit(4), as: :skill
 
 :scss

@@ -11,7 +11,11 @@ class AutocompletesController < ApplicationController
   end
 
   def university
-    @university = Profile.where("university LIKE ?", "%#{params[:term]}%").limit(5).map(&:university)
+    @university = Profile.where("university LIKE ?", "%#{params[:q]}%").limit(5).map do |copy|
+      {
+        name: copy.university
+      }
+    end
     respond_with(@university)
   end
 end

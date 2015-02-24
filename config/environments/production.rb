@@ -78,7 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-
+  ## AWS S3
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
@@ -90,5 +90,8 @@ Rails.application.configure do
 
   ## Google analytics
   GA.tracker = "UA-60076849-1"
+
+
+  config.action_mailer.default_url_options = { host: 'geekhub.io' }
 
 end

@@ -46,3 +46,43 @@
   });
 
   $('#profile_domain_id').selectize();
+
+
+  $('#profile_university').selectize({
+    maxItems: 1,
+    persist: false,
+    valueField: 'name',
+    labelField: 'name',
+    searchField: 'name',
+    options: [],
+    create: true,
+    render: {
+      option: function(item, escape) {
+        var actors = [];
+        for (var i = 0, n = item.length; i < n; i++) {
+          actors.push('<span>' + escape(item.autocompletes[i].name) + '</span>');
+        }
+
+        return '<div>' +
+                  '<span class="name">' + escape(item.name) + '</span>' +
+               '</div>';
+      }
+    },
+    load: function(query, callback) {
+      if (!query.length) return callback();
+      $.ajax({
+        url: '/autocompletes/university.json',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          q: query,
+        },
+        error: function() {
+          callback();
+        },
+        success: function(res) {
+          callback(res.autocompletes);
+        }
+      });
+    }
+  });

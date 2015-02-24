@@ -10,7 +10,7 @@
     = text_field_tag :qskills, params[:qskills], id: "qskill", class: "form-control", placeholder: 'ruby, go, python'
 
     = select_tag :qdomain, options_from_collection_for_select(@domains, 'id', 'name', params[:qdomain]), class: "form-control", include_blank: true, placeholder: 'domain'
-    = text_field_tag :qedu,params[:qedu] , class: "form-control", placeholder: "University"
+    = text_field_tag :qedu,params[:qedu] , class: "form-control", placeholder: "University", id: "qedu"
 
     %button.search-btn.btn.btn-gray.btn-lg.btn-block{:type => "submit"}
       %i.ion-search
@@ -55,6 +55,45 @@
       if (!query.length) return callback();
       $.ajax({
         url: '/autocompletes/skill.json',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          q: query,
+        },
+        error: function() {
+          callback();
+        },
+        success: function(res) {
+          callback(res.autocompletes);
+        }
+      });
+    }
+  });
+
+  $('#qedu').selectize({
+    maxItems: 1,
+    persist: false,
+    valueField: 'name',
+    labelField: 'name',
+    searchField: 'name',
+    options: [],
+    create: true,
+    render: {
+      option: function(item, escape) {
+        var actors = [];
+        for (var i = 0, n = item.length; i < n; i++) {
+          actors.push('<span>' + escape(item.autocompletes[i].name) + '</span>');
+        }
+
+        return '<div>' +
+                  '<span class="name">' + escape(item.name) + '</span>' +
+               '</div>';
+      }
+    },
+    load: function(query, callback) {
+      if (!query.length) return callback();
+      $.ajax({
+        url: '/autocompletes/university.json',
         type: 'GET',
         dataType: 'json',
         data: {
