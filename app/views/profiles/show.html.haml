@@ -15,64 +15,100 @@
   .col-md-10.col-md-offset-1.box
     %h3 About
     %hr
-    %b Age:
-    %p= "#{Date.today.strftime("%Y").to_i - @profile.age.to_i} years old."
-    %b Gender:
-    %p= @profile.gender ? "Male" : "Female"
-    %b Bio:
-    %p= @profile.bio
+    - if @profile.bio.present?
+      %b Age:
+      %p= "#{Date.today.strftime("%Y").to_i - @profile.age.to_i} years old."
+      %br
+      %br
+    - if @profile.bio.present?
+      %b Gender:
+      %p= @profile.gender ? "Male" : "Female"
+      %br
+      %br
+    - if @profile.bio.present?
+      %b Bio:
+      %p= @profile.bio
 .row
   .col-md-10.col-md-offset-1.box
     %h3 Work and Education
     %hr
-    %b University:
-    %p= @profile.university
-    %b Job Title:
-    %p= @profile.job_title
-    %b Company:
-    %p= @profile.job_company
-    %b Job Details:
-    %p= @profile.job_details
+    - if @profile.university.present?
+      %b University:
+      %p= @profile.university
+      %br
+      %br
+    - if @profile.job_title.present?
+      %b Job Title:
+      %p= @profile.job_title
+      %br
+      %br
+    - if @profile.job_company.present?
+      %b Company:
+      %p= @profile.job_company
+      %br
+      %br
+    - if @profile.job_details.present?
+      %b Job Details:
+      %p= @profile.job_details
 .row
   .col-md-10.col-md-offset-1.box
     %h3 Contact information
     %hr
     %b Email:
     %p= @profile.user.email
-    %b Phone:
-    %p= @profile.phone
-    %b Address:
-    %address= @profile.address
-    %b Linked Accounts:
-    .linked_accounts
-      - if @profile.facebook.present?
-        = link_to "#{@profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
-          %span.ion-social-facebook
+    %br
+    %br
+    - if @profile.phone.present?
+      %b Phone:
+      %p= @profile.phone
+      %br
+      %br
+    - if @profile.address.present?
+      %b Address:
+      %address= @profile.address
+      %br
+      %br
+    - if @profile.facebook.present? || @profile.github.present? || @profile.twitter.present? || @profile.linkedin.present?
+      %b Linked Accounts:
+      .linked_accounts
+        - if @profile.facebook.present?
+          = link_to "#{@profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
+            %span.ion-social-facebook
 
-      - if @profile.github.present?
-        = link_to "#{@profile.github}", :class => "btn btn-github", target: "_blank" do
-          %span.ion-social-github
+        - if @profile.github.present?
+          = link_to "#{@profile.github}", :class => "btn btn-github", target: "_blank" do
+            %span.ion-social-github
 
-      - if @profile.twitter.present?
-        = link_to "#{@profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
-          %span.ion-social-twitter
+        - if @profile.twitter.present?
+          = link_to "#{@profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
+            %span.ion-social-twitter
 
-      - if @profile.linkedin.present?
-        = link_to "#{@profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
-          %span.ion-social-linkedin
+        - if @profile.linkedin.present?
+          = link_to "#{@profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
+            %span.ion-social-linkedin
 
 .row
   .col-md-10.col-md-offset-1.box
     %h3 Skills & Expertises
     %hr
-    %b Domain (Area of expertise):
-    %p= @profile.domain.name if @profile.domain.present?
+    - if @profile.domain.present?
+      %b Domain (Area of expertise):
+      %p= @profile.domain.name
     - @profile.profile_skills.order(primary: :desc).each do |s|
       %blockquote{class: "quote-#{s.primary.to_s}"}
         .skill-name
           %p.name= link_to s.skill.name, search_path(qskills: s.skill.name)
           %p.experience_years= " - #{s.experience_years.to_s} years experience" if s.experience_years.to_i > 0
         %p= s.description
+
+
+:scss
+  p, d, address{
+    display: inline;
+  }
+  .btn{
+    margin-right: 5px;
+  }
 
 :javascript
   var profile = #{@profile.to_json};
