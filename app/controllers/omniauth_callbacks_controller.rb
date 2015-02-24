@@ -21,7 +21,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         first_name: auth.extra.raw_info.first_name,
         last_name:  auth.extra.raw_info.last_name,
         gender:     (auth.extra.raw_info.gender == "male" ? true : false if auth.extra.raw_info.gender.present?),
-        address:    (auth.extra.raw_info.location.name if auth.extra.raw_info.location.name.present?),
         avatar:     process_uri(largeimage),
         facebook:   "https://www.fb.com/#{auth.uid}"
       }
