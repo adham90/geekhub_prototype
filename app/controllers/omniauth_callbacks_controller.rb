@@ -44,8 +44,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       profile.build_user(email: facebook_auth[:email])
       profile.user.identities.push(Identity.new(facebook_auth[:identity]))
       if profile.save
-        flash[:notice] = "Signed in!"
         sign_in_and_redirect profile.user
+        redirect_to after_signup_path(:confirm_profile)
       else
         flash[:error] = "Sign in fall!"
         redirect_to signup_path
