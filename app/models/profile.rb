@@ -2,7 +2,7 @@ class Profile < ActiveRecord::Base
   attr_accessor :valid
   belongs_to :user
 
-  has_many :profile_skills
+  has_many :profile_skills, dependent: :destroy
   has_many :skills, through: :profile_skills
   belongs_to :domain
 
