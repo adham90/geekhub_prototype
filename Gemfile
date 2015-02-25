@@ -44,7 +44,7 @@ gem 'wicked'
 gem 'redcarpet'
 gem 'sitemap_generator'
 gem "squeel"
-
+gem "fog"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'google-analytics-rails'
