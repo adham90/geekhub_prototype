@@ -18,6 +18,6 @@ class ProfileSkill < ActiveRecord::Base
   end
 
   def find_or_create_skill
-    self.skill_id = Skill.find_or_create_by!(name: @skill.strip).id
+    self.skill_id = Skill.find_or_create_by!(name: @skill.strip.downcase).id
   end
 end

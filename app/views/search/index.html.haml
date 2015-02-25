@@ -1,7 +1,14 @@
-- title "Find geeks near you"
+- title "Find geeks by skills to pair program with"
 - if params[:qlocation].present?
-  - title "#{params[:qskill]} geeks near: #{params[:qlocation]}"
+  - title "#{params[:qskills]} geeks near: #{params[:qlocation]}"
+  - description "#{params[:qskills]} geeks near #{params[:qlocation]} you can pair program with them or work on side project, start up or fix your code bugs."
 
+- elsif params[:qskills].present?
+  - title "#{params[:qskills]} geeks you can pair program with"
+  - description "#{params[:qskills]} geeks you can pair program with them or work on side project, start up or fix your code bugs."
+
+- if params[:qskills].present?
+  - keywords params[:qskills].split(',') + %w[geek pair programming pair-program code fix skills location]
 .row
   .col-md-4{ id: "side" }
     = render 'search/form'
