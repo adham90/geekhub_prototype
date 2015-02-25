@@ -4,7 +4,7 @@ class AfterSignupController < ApplicationController
   before_action :authenticate_user!
   include Wicked::Wizard
 
-  steps :confirm_profile, :confirm_address, :confirm_skills#, :find_friends
+  steps :confirm_profile, :confirm_address, :confirm_skills, :linked_accounts#, :find_friends
 
   def show
     @user = current_user
@@ -15,14 +15,16 @@ class AfterSignupController < ApplicationController
       @profile = current_user.profile
     when :confirm_skills
       @profile = current_user.profile
-    # when :find_friends
-    #   @profile = current_user.profile
+    when :linked_accounts
+      @profile = current_user.profile
     end
     render_wizard
   end
 
   def update
-    current_user.profile.update(profile_params)
+    if profile_params.present?
+      current_user.profile.update(profile_params)
+    end
     render_wizard current_user.profile
   end
 

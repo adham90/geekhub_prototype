@@ -6,7 +6,7 @@ class Profile < ActiveRecord::Base
   has_many :skills, through: :profile_skills
   belongs_to :domain
 
-  accepts_nested_attributes_for :skills
+  accepts_nested_attributes_for :skills, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :profile_skills, :reject_if => :all_blank, :allow_destroy => true
 
   accepts_nested_attributes_for :user

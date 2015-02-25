@@ -7,7 +7,7 @@ class ProfileSkill < ActiveRecord::Base
   # validates_uniqueness_of :skill_id, :scope => :profile_id
   # validates_presence_of :skill, :experience_years, :profile
 
-  accepts_nested_attributes_for :skill
+  accepts_nested_attributes_for :skill, :reject_if => :all_blank
 
   def skill_name
     self.skill.name if skill.present?
@@ -18,6 +18,8 @@ class ProfileSkill < ActiveRecord::Base
   end
 
   def find_or_create_skill
-    self.skill_id = Skill.find_or_create_by!(name: @skill.strip.downcase).id
+    if @skill.present?
+      self.skill_id = Skill.find_or_create_by!(name: @skill.strip.downcase).id
+    end
   end
 end
