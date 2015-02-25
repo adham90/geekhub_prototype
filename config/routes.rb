@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   # search
   get '/search', to: 'search#index', as: 'search'
-
+  get "/sitemap" => redirect("http://geekhub-io.s3.amazonaws.com/sitemaps/sitemap.xml.gz")
   # autocompletes
   get '/autocompletes/skill', to: 'autocompletes#skill', as: 'autocompletes_skill'
   get '/autocompletes/university', to: 'autocompletes#university', as: 'autocompletes_university'
