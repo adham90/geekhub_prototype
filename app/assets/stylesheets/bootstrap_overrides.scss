@@ -85,6 +85,25 @@ section {
   @extend .btn-xs;
 }
 
+
+.btn-skills {
+    @extend .btn;
+    @extend .btn-xs;
+    background-color: #dfdfdf;
+    min-height: 20px;
+    max-height: 20px;
+    padding: 0px 4px 2px 4px;
+    color: #414141;
+  }
+.btn-skills:hover,
+.btn-skills:focus,
+.btn-skills:active,
+.btn-skills.active {
+  background-color: transparent;
+  color: #0099e1;
+}
+
+
 .alert {
   padding: 15px;
   margin-bottom: 20px;

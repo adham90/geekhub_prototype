@@ -1,11 +1,11 @@
 class ProfileSkill < ActiveRecord::Base
-  before_save :find_or_create_skill
+  before_validation :find_or_create_skill
 
   belongs_to :profile
   belongs_to :skill
 
-  # validates_uniqueness_of :skill_id, :scope => :profile_id
-  # validates_presence_of :skill, :experience_years, :profile
+  validates_uniqueness_of :skill_id, :scope => :profile_id
+  validates_presence_of :skill_id, :experience_years, :profile
 
   accepts_nested_attributes_for :skill, :reject_if => :all_blank
 
@@ -18,7 +18,7 @@ class ProfileSkill < ActiveRecord::Base
   end
 
   def find_or_create_skill
-    if @skill.present?
+    if self.skill_name.present? || self.skill_name != ""
       self.skill_id = Skill.find_or_create_by!(name: @skill.strip.downcase).id
     end
   end

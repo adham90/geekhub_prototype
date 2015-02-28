@@ -1,67 +1,93 @@
 .search-item-box{
-  padding-top: 5px;
-  padding-bottom: 5px;
   border-bottom: 1px solid #ECF0F1;
   .item-img{
-    width: 100px;
-    height: 100px;
+    float: left;
+    width: 50px;
+    height: 50px;
     background-color: #F8F8F8;
     margin: 5px;
-    float: left;
   }
+  #box-skills{
+    padding: 5px;
+    margin-bottom: 0px;
+  }
+
+  .bio {
+    padding-left: 5px;
+    margin-top: -7px;
+    padding-right: 5px;
+    color: #747474;
+    height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;     /* fallback */
+    max-height: 65px;      /* fallback */
+    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+
   .info{
-    // display: inline-block;
-    .bio {
-      height: 32px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      line-height: 16px;     /* fallback */
-      max-height: 32px;      /* fallback */
-      -webkit-line-clamp: 2; /* number of lines to show */
-      -webkit-box-orient: vertical;
-    }
-    padding-bottom: 5px;
+    height: 60px;
+    vertical-align: top;
+    padding: 0;
+    display: table-cell;
+    padding-bottom: 0px;
     .name{
       font-size: 1.5em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .username{
       font-size: 0.6em;
       color: #9D9D9D;
       display:inline;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .title{
       height: 18px;
       font-size: 0.9em;
       padding: 0;
       margin: 0;
-      margin-top: -5px;
-      color: #9D9D9D;
+      margin-top: -6px;
+      color: #5d5d5d;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .address{
+    .domain{
+      height: 18px;
       font-size: 0.9em;
       padding: 0;
       margin: 0;
-      margin-top: -5px;
-      color: #9D9D9D;
-    }
-    .skills{
-      font-size: 1em;
-      margin-top: 5px;
-      // margin-top: 50px;
+      margin-top: -3px;
+      color: #5d5d5d;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
+  .box-top{
+    height: 60px;
+    width:100%;
+    display: inline-table;
+  }
+
   .linked_accounts-btn{
-    // position: absolute;
-    margin-right: 5px;
-    margin-top: 13px;
-    float: right;
-    max-width: 89px;
-    .btn-facebook, .btn-twitter{
-      margin-right: 3px;
-    }
+    display: table-cell;
+    vertical-align: top;
+    max-width: 180px;
+    height: 60px;
+    padding: 5px;
+    padding-top: 7px;
+    padding-right: 0;
     .btn{
+      float: right;
+      margin-right: 5px;
       min-width: 40px;
       min-height: 40px;
       max-width: 40px;

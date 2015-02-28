@@ -12,9 +12,12 @@
         = simple_form_for(@profile) do |f|
           = f.error_notification
           .form-inputs
-            = f.input :facebook, as: :url, placeholder: "https://www.fb.com/Adham.Abdelkhalek.ELdeeb"
-            = f.input :twitter, as: :url, placeholder: "https://twitter.com/adham_deeb"
-            = f.input :github, as: :url, placeholder: "https://github.com/adham90"
-            = f.input :linkedin, as: :url, placeholder: "https://www.linkedin.com/profile/view?id=236838511"
+            = f.input :facebook, as: :url, hint: "i.e. https://fb.com/YOUR_ID"
+            = f.input :twitter, as: :url, hint: "i.e. https://twitter.com/YOUR_ID"
+            = f.input :github, as: :url, hint: "i.e. https://github.com/YOUR_ID"
+            = f.input :linkedin, as: :url, hint: "i.e. http://www.linkedin.com/profile/view?id=YOUR_ID"
+            %br
+
           .form-actions
             = f.button :submit, "Update", class: "btn btn-itunes-inversed btn-lg btn-block"
+            %br

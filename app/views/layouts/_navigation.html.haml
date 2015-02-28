@@ -8,8 +8,8 @@
       - if user_signed_in?
         = render 'layouts/navigation_signin_links'
       - else
-        %li.nav-line= link_to 'Sign in', new_user_session_path
-        %li.nav-line= link_to 'Sign up', signup_path
+        %li.nav-line.signup= link_to "Sign up", signup_path
+        %li.nav-line= link_to "Sign in", new_user_session_path
 
 :javascript
   $(function () {

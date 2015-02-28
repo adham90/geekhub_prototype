@@ -1,10 +1,66 @@
-.footer{
-  background-color: #fff;
-  margin-bottom: 0;
-  .text-center{
-    margin-bottom: 0;
-    p{
-      margin-bottom: 0;
+// .footer{
+//   background-color: #fff;
+//   margin-bottom: 0;
+//   .text-center{
+//     margin-bottom: 0;
+//     p{
+//       margin-bottom: 0;
+//     }
+//   }
+// }
+
+.footer {
+  .container-fluid{
+    padding: 0px;
+  }
+  position: absolute;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: auto;
+  background-color: #F8F8F8;
+  .copyright{
+    float: left;
+  }
+  .follow{
+    p {
+      font-weight: bold;
+      font-size: 23px;
+    }
+    float: right;
+    a {
+      width: 64px;
+      height: 64px;
+    }
+    .btn-facebook-inversed,
+    .btn-twitter-inversed{
+      margin: 0px;
+      span{
+        display:table;
+        margin:0 auto;
+        margin-top: 8px;
+        font-size: 30px;
+      }
+    }
+  }
+  .admin{
+    .admin-img{
+      float: left;
+    }
+    .admin-info{
+      float: right;
+      p, .email, .name {
+        display: block;
+        margin: 0 0 0 5px;
+      }
+      .name{
+        margin-top: 2px;
+      }
+      .who{
+        font-weight: bold;
+        margin-top: 1px;
+      }
     }
   }
 }

@@ -23,9 +23,10 @@
                 %button.btn.btn-default.ion-navigate{id: "gps", :type => "button"}
             = f.input :latitude, :disabled => true
             = f.input :longitude, :disabled => true
+            %br
           .form-actions
             = f.button :submit, "Update Address", class: "btn btn-itunes-inversed btn-lg btn-block"
-
+            %br
 :scss
   #address-map{
     height: 400px;

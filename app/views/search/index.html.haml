@@ -9,10 +9,12 @@
 
 - if params[:qskills].present?
   - keywords params[:qskills].split(',') + %w[geek pair programming pair-program code fix skills location]
+
 .row
   .col-md-4{ id: "side" }
     = render 'search/form'
     #search-map.visible-md.hidden-xs.hidden-sm
+    %p.text-center MADE BY GEEK WITH <3 FOR GEEKS
   .col-md-offset-4.col-md-8
     .search-items
       = render 'layouts/messages'

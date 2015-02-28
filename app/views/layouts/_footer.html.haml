@@ -1,3 +1,16 @@
-%footer.footer
-  .container
-    %p MADE BY GEEK WITH <3 FOR GEEKS
+- @admin = Profile.find_by_username("adham")
+.container-fluid
+  .copyright
+    .admin
+      %a.admin-img{:href => "#{show_profile_path(@admin.username)}"}
+        = image_tag(@admin.avatar.url(:thumb))
+      .admin-info
+        %a.name{:href => "#{show_profile_path(@admin.username)}"}= @admin.name
+        %a.email{:href => "mailto:admin@geekhub.io"}admin@geekhub.io
+        %p.who GEEKHUB Admin
+
+  .follow
+    %a.btn.btn-facebook-inversed{:href => "https://www.facebook.com/geekhub.io"}
+      %span.ion-social-facebook
+    %a.btn.btn-twitter-inversed{:href => "https://www.twitter.com/geekhub_io"}
+      %span.ion-social-twitter

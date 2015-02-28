@@ -10,13 +10,8 @@ Rails.application.routes.draw do
       get '/edit', to: 'profiles#edit'
       get 'address', to: 'profiles#edit_address'
       get 'linked_accounts', to: 'profiles#linked_accounts'
-
+      get 'work_and_education', to: 'profiles#work_and_education'
       get 'skills', to: 'profiles#skills'
-      # post 'skills', to: 'profiles#add_skill'
-      #
-      # post 'add_skills', to: 'profiles#add_skill'
-      # post 'edit_skills', to: 'profiles#edit_skills'
-
     end
   end
 
@@ -47,6 +42,8 @@ Rails.application.routes.draw do
   get '/search', to: 'search#index', as: 'search'
   get "/sitemap" => redirect("http://geekhub-io.s3.amazonaws.com/sitemaps/sitemap.xml.gz")
   # autocompletes
+
+  get '/autocompletes/title', to: 'autocompletes#title', as: 'autocompletes_title'
   get '/autocompletes/skill', to: 'autocompletes#skill', as: 'autocompletes_skill'
   get '/autocompletes/university', to: 'autocompletes#university', as: 'autocompletes_university'
 

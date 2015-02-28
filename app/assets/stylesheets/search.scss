@@ -8,11 +8,15 @@
   width: 100%;
   height: 350px;
   margin: 0px;
+  border-style: solid;
+  border-color: #9f9f9f;
+  border-width: 1px;
 }
 .map-cont{
   padding: 5px;
   padding-top: 10px;
-  height: 55%;
+  padding-button: 0px;
+  height: 54%;
 }
 .btn-group{
   width:100%;
@@ -22,8 +26,6 @@
   position: fixed;
   width : 50%;
 }
-
-
 
 #search-controls{
   padding: 5px;
@@ -41,14 +43,12 @@
 
 .search-items{
   background-color: #fff;
-  // @extend .col-md-7;
-  // @extend .col-md-offset-5;
   margin-bottom: 0;
   padding: 0;
   .items-list{
     li{
       background-color: #fff;
-      height: 100%;
+      height: auto;
       width: 100%;
       margin: 0px;
       float: left;
@@ -62,7 +62,6 @@
   }
 }
 
-
 .search-box{
   float: left;
   background-color: #ECF0F1;
@@ -72,6 +71,7 @@
 
 #side {
   background-color: white;
+  height: 100%;
 }
 
 .search-filter{

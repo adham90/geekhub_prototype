@@ -1,20 +1,33 @@
-.nested-fields.project-tag-fields
-  #tag_from_list
-    = f.input :skill_name, label: "Skill Name", hint: "Programming language or framework (e.g. python, ruby on rails)"
-    = f.input :experience_years, as: :integer, label: "Experience (years)"
-    = f.input :description, as: :text, label: "Tell us more about your experiences in this skill"
-    = f.input :primary, as: :boolean
-    = link_to_remove_association "Remove Skill", f, class: "btn btn-itunes-inversed"
-    %hr
+- title "Edit Work and Education"
+.row
+  .col-md-3
+    = render 'layouts/setting_nav'
 
+  .col-md-9
+    .panel.panel-default
+      .panel-heading Work and Education
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        = simple_form_for(@profile) do |f|
+          = f.error_notification
+          = f.input :university, input_html: { class: "form-control" }
+          = f.input :job_title
+          = f.input :job_company
+          = f.input :job_details, as: :text, placeholder: "Please provide more details about your role."
+          %br
+          .form-actions
+            = f.button :submit, class: "btn btn-itunes-inversed btn-lg btn-block"
+          %br
 
 :javascript
 
-  $('[id$=skill_name]').selectize({
+  $('#profile_university').selectize({
     maxItems: 1,
+    persist: false,
     valueField: 'name',
     labelField: 'name',
     searchField: 'name',
+    options: [],
     create: true,
     render: {
       option: function(item, escape) {
@@ -31,7 +44,7 @@
     load: function(query, callback) {
       if (!query.length) return callback();
       $.ajax({
-        url: '/autocompletes/skill.json',
+        url: '/autocompletes/university.json',
         type: 'GET',
         dataType: 'json',
         data: {

@@ -1,10 +1,11 @@
 class AfterSignupController < ApplicationController
   before_filter :hide_navbar
+  before_filter :hide_footer
 
   before_action :authenticate_user!
   include Wicked::Wizard
 
-  steps :confirm_profile, :confirm_address, :confirm_skills, :linked_accounts#, :find_friends
+  steps :confirm_profile, :confirm_address, :confirm_skills, :linked_accounts, :work_and_education#, :find_friends
 
   def show
     @user = current_user
@@ -16,6 +17,8 @@ class AfterSignupController < ApplicationController
     when :confirm_skills
       @profile = current_user.profile
     when :linked_accounts
+      @profile = current_user.profile
+    when :work_and_education
       @profile = current_user.profile
     end
     render_wizard

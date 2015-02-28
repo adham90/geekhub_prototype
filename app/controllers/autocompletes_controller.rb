@@ -18,4 +18,14 @@ class AutocompletesController < ApplicationController
     end
     respond_with(@university)
   end
+
+  def title
+    @title = Profile.where("lower(title) LIKE ?", "%#{params[:q].downcase}%").limit(5).map do |copy|
+      {
+        name: copy.title
+      }
+    end
+    respond_with(@title)
+  end
+
 end

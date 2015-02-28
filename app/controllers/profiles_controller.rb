@@ -21,9 +21,10 @@
 class ProfilesController < ApplicationController
   before_filter :valid_notice, except: [ :edit, :update ]
   before_filter :hide_navbar, only: [ :new ]
+  before_filter :hide_footer, only: [ :new ]
 
   before_action :set_domains
-  before_action :set_profile, only: [:skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill]
+  before_action :set_profile, only: [:skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill, :work_and_education]
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete  :university, :name
   respond_to    :html, :js
@@ -76,8 +77,13 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile.update(profile_params)
-    redirect_to :back
+    if @profile.update(profile_params)
+      flash[:notice] = "Update success."
+      redirect_to :back
+    else
+      flash[:error] = "Update failed: #{ @profile.errors.full_messages.to_sentence }"
+      redirect_to :back
+    end
   end
 
   def destroy
@@ -100,6 +106,10 @@ class ProfilesController < ApplicationController
 
   def skills
     render :skills, :locals => {profile: @profile}
+  end
+
+  def work_and_education
+    render :work_and_education, :locals => {profile: @profile}
   end
 
   private

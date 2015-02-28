@@ -16,25 +16,20 @@
           %span.fileinput-exists Change
           = f.file_field :avatar
         %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
-
+    %hr
+    %h3 Details About you
     = f.input :username, required: true
     = f.input :first_name, required: true
     = f.input :last_name
-    = f.input :job_title
-    = f.input :job_company
-    = f.input :job_details, as: :text
-
-    = f.input :phone, :input_html => { class:"form-control" }
     = f.input :age, required: true, class:"form-control", label: "Year of birth"
-
+    = f.input :phone, :input_html => { class:"form-control" }
     = f.input :domain_id, collection: @domains, class:"form-control", label: "Domain (Area of expertise)"
-
-    = f.input :university, input_html: { class: "form-control" }
     = f.input :bio
     = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
-
+    %br
     .form-actions
       = f.button :submit, class: "btn btn-itunes-inversed btn-lg btn-block"
+    %br
 
 
 :javascript
@@ -72,6 +67,45 @@
       if (!query.length) return callback();
       $.ajax({
         url: '/autocompletes/university.json',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          q: query,
+        },
+        error: function() {
+          callback();
+        },
+        success: function(res) {
+          callback(res.autocompletes);
+        }
+      });
+    }
+  });
+
+  $('#profile_job_title').selectize({
+    maxItems: 1,
+    persist: false,
+    valueField: 'name',
+    labelField: 'name',
+    searchField: 'name',
+    options: [],
+    create: true,
+    render: {
+      option: function(item, escape) {
+        var actors = [];
+        for (var i = 0, n = item.length; i < n; i++) {
+          actors.push('<span>' + escape(item.autocompletes[i].name) + '</span>');
+        }
+
+        return '<div>' +
+                  '<span class="name">' + escape(item.name) + '</span>' +
+               '</div>';
+      }
+    },
+    load: function(query, callback) {
+      if (!query.length) return callback();
+      $.ajax({
+        url: '/autocompletes/title.json',
         type: 'GET',
         dataType: 'json',
         data: {

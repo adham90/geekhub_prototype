@@ -7,9 +7,9 @@
       = text_field_tag :qlocation, params[:qlocation], class: "form-control input-lg"
       %span.input-group-btn
         %button.btn.btn-default.btn-lg.ion-navigate{id: "gps", :type => "button"}
-    = text_field_tag :qskills, params[:qskills], id: "qskill", class: "form-control", placeholder: 'ruby, go, python'
+    = text_field_tag :qskills, params[:qskills], id: "qskill", class: "form-control", placeholder: "Programming lang or framework (e.g. python, ruby on rails)"
 
-    = select_tag :qdomain, options_from_collection_for_select(@domains, 'id', 'name', params[:qdomain]), class: "form-control", include_blank: true, placeholder: 'domain'
+    = select_tag :qdomain, options_from_collection_for_select(@domains, 'id', 'name', params[:qdomain]), class: "form-control", include_blank: true, placeholder: 'Domain (Area of expertise)'
     = text_field_tag :qedu,params[:qedu] , class: "form-control", placeholder: "University", id: "qedu"
 
     %button.search-btn.btn.btn-gray.btn-lg.btn-block{:type => "submit"}
@@ -19,7 +19,6 @@
 .map-cont.hidden-xs
   #search-map
 :javascript
-
   $('#qdomain').selectize();
 
   $("#qlocation").geocomplete({

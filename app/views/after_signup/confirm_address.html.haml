@@ -71,6 +71,10 @@
       geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
     });
 
+    $(function() {
+      var html5Options = { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 };
+      geolocator.locate(onGeoSuccess, onGeoError, true, html5Options);
+    });
 
     $("#btn-search").click(function() {
       var geocoder = new google.maps.Geocoder();
@@ -123,8 +127,5 @@
 
       });
     });
-
-
-
 
   }(window, google, window.Mapster || (window.Mapster = {})));

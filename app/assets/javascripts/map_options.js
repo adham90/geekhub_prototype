@@ -10,7 +10,7 @@
       lng: -122.435883
     },
     styles: style,
-    zoom: 9,
+    zoom: 15,
     mapTypeControl: false,
     ControlPosition: true,
     scrollwheel: false,

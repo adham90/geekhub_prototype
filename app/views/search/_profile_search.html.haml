@@ -1,31 +1,30 @@
 %li.has-hover.search-item-box{id: "#{profile.id}"}
-  = link_to image_tag(profile.avatar.url(:small), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
+  .box-top
+    .info
+      = link_to image_tag(profile.avatar.url(:thumb), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
+      .name
+        = link_to profile.name, show_profile_path(profile.username)
+      .title= "#{profile.job_title}" + (" at #{profile.job_company}") if profile.job_company.present?
+      .domain= "expert at #{profile.domain.name}" if profile.domain.present?
 
-  .linked_accounts-btn
-    - if profile.facebook.present?
-      = link_to "#{profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
-        %span.ion-social-facebook
+    .linked_accounts-btn
+      - if profile.facebook.present?
+        = link_to "#{profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
+          %span.ion-social-facebook
 
-    - if profile.github.present?
-      = link_to "#{profile.github}", :class => "btn btn-github", target: "_blank" do
-        %span.ion-social-github
+      - if profile.github.present?
+        = link_to "#{profile.github}", :class => "btn btn-github", target: "_blank" do
+          %span.ion-social-github
 
-    - if profile.twitter.present?
-      = link_to "#{profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
-        %span.ion-social-twitter
+      - if profile.twitter.present?
+        = link_to "#{profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
+          %span.ion-social-twitter
 
-    - if profile.linkedin.present?
-      = link_to "#{profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
-        %span.ion-social-linkedin
+      - if profile.linkedin.present?
+        = link_to "#{profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
+          %span.ion-social-linkedin
 
-  .info
-    .name
-      = link_to profile.name, show_profile_path(profile.username)
-    .title= profile.job_title
-    .bio= profile.bio
-    = render partial: "profile_skills_search", collection: profile.skills.limit(4), as: :skill
-
-:scss
-  .search-item-box{
-    min-height: 121px;
-  }
+  .bio
+    = profile.bio
+  #box-skills
+    = render partial: "profile_skills_search", collection: profile.profile_skills.order(primary: :desc).limit(12), as: :skill

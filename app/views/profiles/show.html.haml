@@ -55,7 +55,7 @@
     %h3 Contact information
     %hr
     %b Email:
-    %p= @profile.user.email
+    %p= mail_to @profile.user.email
     %br
     %br
     - if @profile.phone.present?

@@ -1,8 +1,8 @@
 .nested-fields.project-tag-fields
   #tag_from_list
-    = f.input :skill_name
-    = f.input :experience_years, as: :integer
-    = f.input :description, as: :text
+    = f.input :skill_name, label: "Skill Name", hint: "Programming language or framework (e.g. python, ruby on rails)"
+    = f.input :experience_years, as: :integer, label: "Experience (years)"
+    = f.input :description, as: :text, label: "Tell us more about your experiences in this skill"
     = f.input :primary, as: :boolean
     = link_to_remove_association "Remove Skill", f, class: "btn btn-itunes-inversed"
     %hr

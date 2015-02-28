@@ -6,12 +6,13 @@
       .panel-heading Linked Accounts
       = render 'layouts/messages'
       .panel-body#panel-body
+        %p Please add one at least
         = simple_form_for(@profile, url: wizard_path, method: :put) do |f|
           = f.error_notification
           .form-inputs
-            = f.input :facebook, as: :url, placeholder: "https://www.fb.com/Adham.Abdelkhalek.ELdeeb"
-            = f.input :twitter, as: :url, placeholder: "https://twitter.com/adham_deeb"
-            = f.input :github, as: :url, placeholder: "https://github.com/adham90"
-            = f.input :linkedin, as: :url, placeholder: "https://www.linkedin.com/profile/view?id=236838511"
+            = f.input :facebook, as: :url, hint: "i.e. https://fb.com/YOUR_ID"
+            = f.input :twitter, as: :url, hint: "i.e. https://twitter.com/YOUR_ID"
+            = f.input :github, as: :url, hint: "i.e. https://github.com/YOUR_ID"
+            = f.input :linkedin, as: :url, hint: "i.e. http://www.linkedin.com/profile/view?id=YOUR_ID"
           .form-actions
-            = f.button :submit, "Finish", class: "btn btn-itunes-inversed btn-lg btn-block"
+            = f.button :submit, "Next", class: "btn btn-itunes-inversed btn-lg btn-block"

@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
   def hide_navbar
     @hide_navbar = true
   end
+  def hide_footer
+    @hide_footer = true
+  end
 
   def valid_notice
     if user_signed_in?
