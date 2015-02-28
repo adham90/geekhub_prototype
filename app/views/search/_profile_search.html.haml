@@ -9,8 +9,8 @@
           = "#{profile.job_title}" + " at #{profile.job_company}"
         - else
           = "#{profile.job_title}"
-          
-      .domain= "expert at #{profile.domain.name}" if profile.domain.present?
+
+      .domain= "#{profile.domain.name} specialist" if profile.domain.present?
 
     .linked_accounts-btn
       - if profile.facebook.present?
