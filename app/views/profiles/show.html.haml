@@ -70,6 +70,8 @@
       %br
     - if @profile.facebook.present? || @profile.github.present? || @profile.twitter.present? || @profile.linkedin.present?
       %b Linked Accounts:
+      %br
+      %br
       .linked_accounts
         - if @profile.facebook.present?
           = link_to "#{@profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
@@ -93,7 +95,9 @@
     %hr
     - if @profile.domain.present?
       %b Domain (Area of expertise):
-      %p= @profile.domain.name
+      %p= link_to @profile.domain.name, search_path(qdomain: @profile.domain)
+      %br
+      %br
     - @profile.profile_skills.order(primary: :desc).each do |s|
       %blockquote{class: "quote-#{s.primary.to_s}"}
         .skill-name
