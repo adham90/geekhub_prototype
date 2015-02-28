@@ -10,7 +10,10 @@
         - else
           = "#{profile.job_title}"
 
-      .domain= "#{profile.domain.name} specialist" if profile.domain.present?
+      .domain
+        -if profile.domain.present?
+          = link_to profile.domain.name, search_path(qdomain: profile.domain)
+          specialist
 
     .linked_accounts-btn
       - if profile.facebook.present?

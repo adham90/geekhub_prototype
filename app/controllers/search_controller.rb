@@ -4,7 +4,7 @@ class SearchController < ApplicationController
   autocomplete :skill, :name
   before_action :set_domains
   respond_to :html, :json
-  
+
   def index
     search = Profile.valid_users
     search = search.near(params[:qlocation]) if params[:qlocation].to_s.length > 0
