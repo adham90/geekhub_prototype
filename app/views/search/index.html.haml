@@ -14,7 +14,10 @@
   .col-md-4{ id: "side" }
     = render 'search/form'
     #search-map.visible-md.hidden-xs.hidden-sm
-    %p.text-center MADE BY GEEK WITH <3 FOR GEEKS
+    %p.text-center
+      MADE BY GEEK WITH
+      %span.ion-android-favorite
+      FOR GEEKS
   .col-md-offset-4.col-md-8
     .search-items
       = render 'layouts/messages'
