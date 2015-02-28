@@ -1,34 +1,42 @@
-// .footer{
-//   background-color: #fff;
-//   margin-bottom: 0;
-//   .text-center{
-//     margin-bottom: 0;
-//     p{
-//       margin-bottom: 0;
-//     }
-//   }
-// }
+@import "variables";
 
 .footer {
-  .container-fluid{
-    padding: 0px;
+  .footer-contant{
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    align: center;
   }
   position: absolute;
+  border-top: 2px solid $red;
   display: block;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: auto;
-  background-color: #F8F8F8;
-  .copyright{
+  background-color: #FFFFFF;
+  .contact{
     float: left;
+    padding: 10px;
+    padding-bottom: 0px;
+  }
+  .copyright{
+    bottom: 0;
+    padding-bottom: 5px;
   }
   .follow{
+    padding: 10px;
+    float: right;
+    padding-bottom: 0px;
+
+  }
+
+  .links{
     p {
       font-weight: bold;
       font-size: 23px;
     }
-    float: right;
     a {
       width: 64px;
       height: 64px;

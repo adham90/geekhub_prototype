@@ -34,12 +34,6 @@
             = f.input :bio
             = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
 
-            -# %hr
-            -# %h3 Work and Education
-            -# = f.input :university, input_html: { class: "form-control" }
-            -# = f.input :job_title
-            -# = f.input :job_company
-            -# = f.input :job_details, as: :text, placeholder: "Please provide more details about your role."
             %br
             .form-actions
               = f.button :submit, "Next", class: "btn btn-itunes-inversed btn-lg btn-block"

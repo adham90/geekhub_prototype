@@ -1,6 +1,7 @@
 - @admin = Profile.find_by_username("adham")
-.container-fluid
-  .copyright
+.footer-contant.row
+  .contact
+    %p Contact me:
     .admin
       %a.admin-img{:href => "#{show_profile_path(@admin.username)}"}
         = image_tag(@admin.avatar.url(:thumb))
@@ -10,7 +11,12 @@
         %p.who GEEKHUB Admin
 
   .follow
-    %a.btn.btn-facebook-inversed{:href => "https://www.facebook.com/geekhub.io"}
-      %span.ion-social-facebook
-    %a.btn.btn-twitter-inversed{:href => "https://www.twitter.com/geekhub_io"}
-      %span.ion-social-twitter
+    %p Follow GEEKHUB:
+    .links
+      %a.btn.btn-facebook-inversed{:href => "https://www.facebook.com/geekhub.io", target: "_blank"}
+        %span.ion-social-facebook
+      %a.btn.btn-twitter-inversed{:href => "https://www.twitter.com/geekhub_io", target: "_blank"}
+        %span.ion-social-twitter
+
+.copyright.text-center
+  %p= "Copyright ©#{Date.today.year}, All Rights Reserved"
