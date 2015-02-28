@@ -4,7 +4,12 @@
       = link_to image_tag(profile.avatar.url(:thumb), class: "item-img", title: "#{profile.name}"), show_profile_path(profile.username)
       .name
         = link_to profile.name, show_profile_path(profile.username)
-      .title= "#{profile.job_title}" + (" at #{profile.job_company}") if profile.job_company.present?
+      .title
+        - if profile.job_company.present?
+          = "#{profile.job_title}" + " at #{profile.job_company}"
+        - else
+          = "#{profile.job_title}"
+          
       .domain= "expert at #{profile.domain.name}" if profile.domain.present?
 
     .linked_accounts-btn

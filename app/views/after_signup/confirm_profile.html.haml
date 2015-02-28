@@ -15,7 +15,7 @@
                 - if @profile.avatar?
                   = image_tag(@profile.avatar.url, id: "edit-profile-avatar")
                 -else
-                  %img{"src" => "/images/200.gif"}
+                  %img{"src" => "https://robohash.org/#{@profile.username}.png"}
               .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 200px;"}
               %div
                 %span.btn.btn-default.btn-file
