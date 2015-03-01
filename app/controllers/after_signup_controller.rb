@@ -1,7 +1,7 @@
 class AfterSignupController < ApplicationController
   before_filter :hide_navbar
   before_filter :hide_footer
-
+  before_action :set_domains
   before_action :authenticate_user!
   include Wicked::Wizard
 
@@ -33,6 +33,11 @@ class AfterSignupController < ApplicationController
 
 
   private
+
+    def set_domains
+      @domains = Domain.all
+    end
+
 
     def finish_wizard_path
       flash[:notice] = "Thanks for signing up."
