@@ -27,7 +27,7 @@ class Profile < ActiveRecord::Base
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: {maximum: 50},
-                       format: /\A[a-zA-Z\d]*\z/
+                       format: { with: URI.regexp }
 
   validates :first_name, length: {maximum: 50}
 
@@ -48,9 +48,6 @@ class Profile < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
-
-  # joins(:profile_skills).group("profile_skills.profile_id").having("count(profile_skills.id) > 0")
-  # Profile.joins(:skills).select('profiles.*, count(skills.id) as n_skills').group('profiles.id').having('n_skills <= 0').where.not(first_name: nil, address: nil)
 
   scope :valid_users, -> { joins(:skills).group('profiles.id').having("count(skills.id) > 0").where.not(first_name: "", address: "")  }
 

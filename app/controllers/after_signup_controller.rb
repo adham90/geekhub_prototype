@@ -26,9 +26,14 @@ class AfterSignupController < ApplicationController
 
   def update
     if profile_params.present?
-      current_user.profile.update(profile_params)
+      if current_user.profile.update(profile_params)
+        flash[:notice] = "Update success."
+        render_wizard current_user.profile
+      else
+        flash[:error] = "Update failed: #{ current_user.profile.errors.full_messages.to_sentence }"
+        redirect_to :back
+      end
     end
-    render_wizard current_user.profile
   end
 
 
