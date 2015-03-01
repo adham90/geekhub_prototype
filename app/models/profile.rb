@@ -27,7 +27,7 @@ class Profile < ActiveRecord::Base
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: {maximum: 50},
-                       format: { with: URI.regexp }
+                       format: /\A[a-zA-Z\d]*\z/
 
   validates :first_name, length: {maximum: 50}
 
