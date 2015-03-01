@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301152550) do
+ActiveRecord::Schema.define(version: 20150301212930) do
 
   create_table "domains", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 20150301152550) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_6eec774c48", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_0c67e3d1ff", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "username",            limit: 255,   null: false
+    t.string   "username",            limit: 255,                null: false
     t.string   "first_name",          limit: 255
     t.string   "last_name",           limit: 255
     t.text     "bio",                 limit: 65535
@@ -76,12 +76,13 @@ ActiveRecord::Schema.define(version: 20150301152550) do
     t.string   "twitter",             limit: 255
     t.string   "github",              limit: 255
     t.string   "linkedin",            limit: 255
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+    t.string   "status",              limit: 255,   default: ""
   end
 
   add_index "profiles", ["domain_id"], name: "index_profiles_on_domain_id", using: :btree

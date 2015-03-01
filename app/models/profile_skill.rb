@@ -18,7 +18,7 @@ class ProfileSkill < ActiveRecord::Base
   end
 
   def find_or_create_skill
-    if self.skill_name.present? || self.skill_name != ""
+    if @skill.strip.downcase.present? || @skill.strip.downcase != ""
       self.skill_id = Skill.find_or_create_by!(name: @skill.strip.downcase).id
     end
   end

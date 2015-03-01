@@ -5,7 +5,7 @@ class AfterSignupController < ApplicationController
   before_action :authenticate_user!
   include Wicked::Wizard
 
-  steps :confirm_profile, :confirm_address, :confirm_skills, :linked_accounts, :work_and_education#, :find_friends
+  steps :confirm_profile, :confirm_address, :confirm_skills, :linked_accounts, :work_and_education
 
   def show
     @user = current_user
@@ -15,6 +15,7 @@ class AfterSignupController < ApplicationController
     when :confirm_address
       @profile = current_user.profile
     when :confirm_skills
+      current_user.profile.profile_skills.build
       @profile = current_user.profile
     when :linked_accounts
       @profile = current_user.profile
@@ -26,6 +27,8 @@ class AfterSignupController < ApplicationController
 
   def update
     if profile_params.present?
+      current_user.profile.status = step
+      current_user.profile.status = 'active' if step == steps.last
       if current_user.profile.update(profile_params)
         flash[:notice] = "Update success."
         render_wizard current_user.profile
@@ -55,6 +58,6 @@ class AfterSignupController < ApplicationController
       :job_title, :Job_company, :job_details, :bio, :phone,
       :gender, :address, :latitude, :longitude, :university, :age,
       :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation],
-      profile_skills_attributes: [:id, :skill_name, :experience_years, :description, :tags, :primary, :_destroy])
+      profile_skills_attributes: [:id, :skill_name, :experience_years, :description, :primary, :_destroy])
     end
 end

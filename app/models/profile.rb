@@ -35,6 +35,28 @@ class Profile < ActiveRecord::Base
   validates_presence_of :gender, on: [ :update ]
   validates_presence_of :age, on: [ :update ]
 
+  # validates :skills,      :presence => true, :if => :active_or_skills?
+  validates :address,     :presence => true, :if => :active_or_address?
+
+  validate :has_skills, :if => :active_or_skills?
+
+  def has_skills
+    errors.add(:base, 'must add at least one skill') if self.profile_skills.blank?
+  end
+
+
+  def active?
+    status == 'active'
+  end
+
+  def active_or_skills?
+    status.include?('skills') || active?
+  end
+
+  def active_or_address?
+    status.include?('address') || active?
+  end
+
   # validates_numericality_of :rank
   has_attached_file :avatar, styles: {
     original: "200x200>",
@@ -53,10 +75,10 @@ class Profile < ActiveRecord::Base
 
 
   def self.valid?(profile)
-    if profile.skills.count > 0
-      true
-    elsif profile.skills.count <= 0
+    if profile.skills.count <= 0 or profile.address == "" or profile.first_name == ""
       false
+    else
+      true
     end
   end
 
