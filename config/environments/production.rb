@@ -94,4 +94,15 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'geekhub.io' }
 
+  ActionMailer::Base.smtp_settings = {
+    :address        => "mail.privateemail.com",
+    :port           => 587,
+    :authentication => :plain,
+    :user_name      => ENV['EMAIL_USERNAME'],
+    :password       => ENV['EMAIL_PASSWORD'],
+    :domain         => ENV['EMAIL_DOMAIN'],
+    :enable_starttls_auto => true
+
+  }
+
 end
