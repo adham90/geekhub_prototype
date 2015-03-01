@@ -15,12 +15,12 @@
   .col-md-10.col-md-offset-1.box
     %h3 About
     %hr
-    - if @profile.bio.present?
+    - if @profile.age.present?
       %b Age:
       %p= "#{Date.today.strftime("%Y").to_i - @profile.age.to_i} years old."
       %br
       %br
-    - if @profile.bio.present?
+    - if @profile.gender.present?
       %b Gender:
       %p= @profile.gender ? "Male" : "Female"
       %br
