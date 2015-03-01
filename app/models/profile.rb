@@ -32,7 +32,7 @@ class Profile < ActiveRecord::Base
   validates :first_name, length: {maximum: 50}
 
   validates_presence_of :first_name, on: [ :update ]
-  validates_presence_of :gender, on: [ :update ]
+  validates_inclusion_of :gender, :in => [true, false], on: [ :update ]
   validates_presence_of :age, on: [ :update ]
 
   # validates :skills,      :presence => true, :if => :active_or_skills?
