@@ -1,0 +1,6 @@
+.nested-fields.project-tag-fields
+  #tag_from_list
+    = f.input :privacies_id
+    = f.input :status, as: :boolean
+    = link_to_remove_association "Remove Skill", f, class: "btn btn-itunes-inversed"
+    %hr

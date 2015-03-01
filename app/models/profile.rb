@@ -6,10 +6,16 @@ class Profile < ActiveRecord::Base
   has_many :skills, through: :profile_skills
   belongs_to :domain
 
+  # has_many :privacies, through: :user_privacies
+  # has_many :user_privacies, dependent: :destroy
+
   accepts_nested_attributes_for :skills, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :profile_skills, :reject_if => :all_blank, :allow_destroy => true
 
   accepts_nested_attributes_for :user
+
+  # accepts_nested_attributes_for :user_privacies, :reject_if => :all_blank, :allow_destroy => true
+  # accepts_nested_attributes_for :privacies, :reject_if => :all_blank, :allow_destroy => true
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
@@ -46,7 +52,7 @@ class Profile < ActiveRecord::Base
   # joins(:profile_skills).group("profile_skills.profile_id").having("count(profile_skills.id) > 0")
   # Profile.joins(:skills).select('profiles.*, count(skills.id) as n_skills').group('profiles.id').having('n_skills <= 0').where.not(first_name: nil, address: nil)
 
-  scope :valid_users, -> { joins(:skills).group('profiles.id').having("count(skills.id) > 0").where.not(first_name: nil, address: nil)  }
+  scope :valid_users, -> { joins(:skills).group('profiles.id').having("count(skills.id) > 0").where.not(first_name: "", address: "")  }
 
 
   def self.valid?(profile)

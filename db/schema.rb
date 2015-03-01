@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212212655) do
+ActiveRecord::Schema.define(version: 20150301152550) do
 
   create_table "domains", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -27,6 +27,10 @@ ActiveRecord::Schema.define(version: 20150212212655) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "privacies", force: :cascade do |t|
+    t.string "rule", limit: 255, null: false
+  end
 
   create_table "profile_skill_tags", force: :cascade do |t|
     t.integer  "skill_id",         limit: 4
@@ -48,7 +52,7 @@ ActiveRecord::Schema.define(version: 20150212212655) do
   end
 
   add_index "profile_skills", ["profile_id", "skill_id"], name: "index_profile_skills_on_profile_id_and_skill_id", using: :btree
-  add_index "profile_skills", ["skill_id"], name: "fk_rails_adea3f0e94", using: :btree
+  add_index "profile_skills", ["skill_id"], name: "fk_rails_6eec774c48", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255,   null: false
@@ -91,6 +95,14 @@ ActiveRecord::Schema.define(version: 20150212212655) do
   end
 
   add_index "skills", ["name"], name: "index_skills_on_name", using: :btree
+
+  create_table "user_privacies", force: :cascade do |t|
+    t.integer  "profile_id",   limit: 4,                null: false
+    t.integer  "privacies_id", limit: 4,                null: false
+    t.boolean  "status",       limit: 1, default: true, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

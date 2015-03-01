@@ -1,0 +1,23 @@
+- title "Edit Privacy"
+
+.row
+  .col-md-3
+    = render 'layouts/setting_nav'
+
+  .col-md-9
+    .panel.panel-default
+      .panel-heading Privacy
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        = simple_form_for(@profile) do |f|
+          = f.error_notification
+          .form-inputs
+            #tags
+              .form-actions
+                = f.button :submit, "Update", class: "btn btn-itunes-inversed btn-lg btn-block"
+                %br
+              = link_to_add_association 'Add New Skill', f, :user_privacies, class: "btn btn-block btn-itunes-inversed"
+              %br
+
+              = f.simple_fields_for :user_privacies do |p|
+                = render 'user_privacy_fields', f: p

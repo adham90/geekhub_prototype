@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  has_one :profile, dependent: :destroy
+  has_one  :profile, dependent: :destroy
   has_many :identities, dependent: :destroy
 
   def password_required?

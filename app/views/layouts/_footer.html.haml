@@ -4,7 +4,7 @@
     %p Contact me:
     .admin
       %a.admin-img{:href => "#{show_profile_path(@admin.username)}"}
-        = image_tag(@admin.avatar.url(:thumb))
+        = image_tag(@admin.avatar.url(:thumb), size: "64")
       .admin-info
         %a.name{:href => "#{show_profile_path(@admin.username)}"}= @admin.name
         %a.email{:href => "mailto:admin@geekhub.io"}admin@geekhub.io

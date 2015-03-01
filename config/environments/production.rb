@@ -102,7 +102,6 @@ Rails.application.configure do
     :password       => ENV['EMAIL_PASSWORD'],
     :domain         => ENV['EMAIL_DOMAIN'],
     :enable_starttls_auto => true
-
   }
 
 end

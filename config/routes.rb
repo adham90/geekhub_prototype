@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'linked_accounts', to: 'profiles#linked_accounts'
       get 'work_and_education', to: 'profiles#work_and_education'
       get 'skills', to: 'profiles#skills'
+      # get 'privacy', to: 'profiles#privacy'
     end
   end
 

@@ -24,7 +24,8 @@ class ProfilesController < ApplicationController
   before_filter :hide_footer, only: [ :new ]
 
   before_action :set_domains
-  before_action :set_profile, only: [:skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill, :work_and_education]
+  before_action :set_profile, only: [:privacy, :skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill, :work_and_education]
+
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete  :university, :name
   respond_to    :html, :js
@@ -111,6 +112,11 @@ class ProfilesController < ApplicationController
   def work_and_education
     render :work_and_education, :locals => {profile: @profile}
   end
+
+  def privacy
+    render :privacy, :locals => {profile: @profile}
+  end
+
 
   private
 
