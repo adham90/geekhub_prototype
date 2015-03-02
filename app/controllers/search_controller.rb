@@ -16,7 +16,7 @@ class SearchController < ApplicationController
     search = search.where(domain_id: params[:qdomain]) if params[:qdomain].to_s.length > 0
     search = search.where("lower(university) LIKE ?", "%#{params[:qedu].downcase}%") if params[:qedu].to_s.length > 0
 
-    @search = search.page(params[:page]).per(20)
+    @search = search.page(params[:page]).per(50)
     respond_with(@search)
   end
 
