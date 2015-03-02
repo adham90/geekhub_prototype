@@ -58,6 +58,9 @@ class Profile < ActiveRecord::Base
   scope :valid_users, -> { joins(:skills).group('profiles.id').having("count(skills.id) > 0").where.not(first_name: "", address: "")  }
 
 
+  # scope :valid_users, -> { joins(:skills).group('profiles.id').having("count(skills.id) > 0").where.not(first_name: "", address: "")  }
+
+
   def self.valid?(profile)
     if profile.skills.count <= 0 or profile.address == "" or profile.first_name == ""
       false

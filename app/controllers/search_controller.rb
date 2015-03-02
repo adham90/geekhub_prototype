@@ -6,7 +6,7 @@ class SearchController < ApplicationController
   respond_to :html, :json
 
   def index
-    search = Profile.valid_users
+    search = Profile.valid_users.order(:first_name)
     search = search.near(params[:qlocation]) if params[:qlocation].to_s.length > 0
 
     search = search.joins{skills}.where{skills.name.like_any my{params[:qskills].split(',').map { |s| "%#{s}%" }
