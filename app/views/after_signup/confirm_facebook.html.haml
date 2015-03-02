@@ -1,49 +1,60 @@
 - title "Sign up"
+.row
+  .col-md-6.col-md-offset-3
+    .panel.panel-default
+      .panel-heading Signup
+      = render 'layouts/messages'
+      .panel-body#panel-body
+        = simple_form_for(@profile, url: wizard_path, validate: true, html: { multipart: true}) do |f|
 
-= simple_form_for(@profile, validate: true, html: { multipart: true}) do |f|
-  %a.btn.btn-lg.btn-block.btn-facebook-inversed{:href => "/users/auth/facebook"}
-    %i.ion-social-facebook
-    Sign Up with Facebook
+          = f.error_notification
+          .form-inputs
+            %p Profile picture
+            .fileinput.fileinput-new{"data-provides" => "fileinput"}
+              .fileinput-new.thumbnail{:style => "width: 200px; height: 200px;"}
+                - if @profile.avatar?
+                  = image_tag(@profile.avatar.url, id: "edit-profile-avatar")
+                -else
+                  %img{"src" => "https://robohash.org/facebook.png"}
+              .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 200px;"}
+              %div
+                %span.btn.btn-default.btn-file
+                  %span.fileinput-new Select image
+                  %span.fileinput-exists Change
+                  = f.file_field :avatar
+                %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Remove
+            %hr
+            
+            = f.input :username, required: true, uniqueness: true, label: false, placeholder: "Username", input_html: { class: "input-lg"}
 
-  .via
-    %p.text-center or via email
-  = f.error_notification
-  .form-inputs
-    = f.input :username, required: true, uniqueness: true, label: false, placeholder: "Username", input_html: { class: "input-lg"}
+            = f.input :first_name, label: false, required: true, placeholder: "First name", input_html: { class: "input-lg"}
+            = f.input :last_name, label: false, placeholder: "Last name", input_html: { class: "input-lg"}
 
-    = f.input :first_name, label: false, required: true, placeholder: "First name", input_html: { class: "input-lg"}
-    = f.input :last_name, label: false, placeholder: "Last name", input_html: { class: "input-lg"}
-
-    %hr
-    //User////////////////////
-    = f.simple_fields_for :user, validate: true, required: true do |u|
-      = u.input :email, required: true, uniqueness: true, placeholder: "Email address", label: false, input_html: { class: "input-lg"}
-      = u.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable), placeholder: "Password", label: false, input_html: { class: "input-lg"}
-      = u.input :password_confirmation, required: true, placeholder: "Password confirmation", label: false, input_html: { class: "input-lg"}
-    /////////////////////////
-    %hr
-    //////Skills///////////////
-    = f.simple_fields_for :profile_skills, validate: true, required: true do |s|
-      = s.input :skill_name, label: "Skill Name", hint: "Programming language or framework (e.g. python, ruby on rails)", required: true, label: false, input_html: { class: "input-lg"}
-      = s.input :experience_years, as: :integer, placeholder: "Experience (years)", required: true, label: false, input_html: { class: "input-lg"}
-    ///////////////////////////
-    %hr
-    // address ///////////////////
-    #address-map
-    %br
-    %label Address
-    .input-group.input-group-lg
-      %span.input-group-btn
-        %button.btn.btn-default.ion-search{id: "btn-search", :type => "button"}
-      = f.input :address, :input_html => {class: "input-lg"}, label: false, required: true
-      %span.input-group-btn
-        %button.btn.btn-default.ion-navigate{id: "gps", :type => "button"}
-    = f.input :latitude, as: :hidden
-    = f.input :longitude, as: :hidden
-    ///////////////////////////
-    %br
-  .form-actions
-    = f.button :submit,"Sign Up", class: "btn btn-itunes-inversed btn-lg btn-block"
+            %hr
+            //////Skills///////////////
+            = f.simple_fields_for :profile_skills, validate: true, required: true do |s|
+              = s.input :skill_name, label: "Skill Name", hint: "Programming language or framework (e.g. python, ruby on rails)", required: true, label: false, input_html: { class: "input-lg"}
+              = s.input :experience_years, as: :integer, placeholder: "Experience (years)", required: true, label: false, input_html: { class: "input-lg"}
+            ///////////////////////////
+            %hr
+            // address ///////////////////
+            #address-map
+            %br
+            %label Address
+            .input-group.input-group-lg
+              %span.input-group-btn
+                %button.btn.btn-default.ion-search{id: "btn-search", :type => "button"}
+              = f.input :address, :input_html => {class: "input-lg"}, label: false, required: true
+              %span.input-group-btn
+                %button.btn.btn-default.ion-navigate{id: "gps", :type => "button"}
+            = f.input :latitude, as: :hidden
+            = f.input :longitude, as: :hidden
+            ///////////////////////////
+            %br
+            = f.input :age, required: true, class:"form-control", label: "Year of birth"
+            = f.input :gender, label: 'What is your gender?', collection: [ ['Male', true ], ['Female', false] ], as: :radio_buttons
+          .form-actions
+            = f.button :submit,"Sign Up", class: "btn btn-itunes-inversed btn-lg btn-block"
 
 :scss
   #address-map{

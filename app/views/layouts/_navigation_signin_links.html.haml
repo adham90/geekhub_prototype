@@ -1,11 +1,13 @@
 %li.nav-user{:role => "presentation"}
-  %a{:href => "#{show_profile_path(current_user.profile.username)}"}
-    = current_user.profile.first_name
-    = image_tag(current_user.profile.avatar.url(:thumb), class: "navbar-profile-img")
+  - if current_user.profile.first_name.present?
+    %a{:href => "#{show_profile_path(current_user.profile.username)}"}
+      = current_user.profile.first_name
+      = image_tag(current_user.profile.avatar.url(:thumb), class: "navbar-profile-img")
 
-%li.nav-line{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Settings"}
-  %a{:href => "#{edit_profiles_path}"}
-    %span.ion-android-settings
+- if current_user.profile.first_name.present?
+  %li.nav-line{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Settings"}
+    %a{:href => "#{edit_profiles_path}"}
+      %span.ion-android-settings
 
 %li.nav-line{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "SignOut"}
   %a{:href => "#{destroy_user_session_path}"}

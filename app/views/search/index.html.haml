@@ -26,6 +26,11 @@
           = render partial: "profile_search", collection: @search, as: :profile
       .text-center= paginate @search, :outer_window => 0
 
+:scss
+  body {
+    margin-bottom: 0px;
+  }
+
 :javascript
 
   //the map

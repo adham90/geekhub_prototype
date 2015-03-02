@@ -54,40 +54,46 @@
   .col-md-10.col-md-offset-1.box
     %h3 Contact information
     %hr
-    %b Email:
-    %p= mail_to @profile.user.email
-    %br
-    %br
-    - if @profile.phone.present?
-      %b Phone:
-      %p= @profile.phone
+    -if user_signed_in?
+      %b Email:
+      %p= mail_to @profile.user.email
       %br
       %br
-    - if @profile.address.present?
-      %b Address:
-      %address= @profile.address
-      %br
-      %br
-    - if @profile.facebook.present? || @profile.github.present? || @profile.twitter.present? || @profile.linkedin.present?
-      %b Linked Accounts:
-      %br
-      %br
-      .linked_accounts
-        - if @profile.facebook.present?
-          = link_to "#{@profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
-            %span.ion-social-facebook
+      - if @profile.phone.present?
+        %b Phone:
+        %p= @profile.phone
+        %br
+        %br
+      - if @profile.address.present?
+        %b Address:
+        %address= @profile.address
+        %br
+        %br
+      - if @profile.facebook.present? || @profile.github.present? || @profile.twitter.present? || @profile.linkedin.present?
+        %b Linked Accounts:
+        %br
+        %br
+        .linked_accounts
+          - if @profile.facebook.present?
+            = link_to "#{@profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
+              %span.ion-social-facebook
 
-        - if @profile.github.present?
-          = link_to "#{@profile.github}", :class => "btn btn-github", target: "_blank" do
-            %span.ion-social-github
+          - if @profile.github.present?
+            = link_to "#{@profile.github}", :class => "btn btn-github", target: "_blank" do
+              %span.ion-social-github
 
-        - if @profile.twitter.present?
-          = link_to "#{@profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
-            %span.ion-social-twitter
+          - if @profile.twitter.present?
+            = link_to "#{@profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
+              %span.ion-social-twitter
 
-        - if @profile.linkedin.present?
-          = link_to "#{@profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
-            %span.ion-social-linkedin
+          - if @profile.linkedin.present?
+            = link_to "#{@profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
+              %span.ion-social-linkedin
+    -else
+      %p
+        You need to
+        = link_to "sign up", signup_path
+        in order to see contact info.
 
 .row
   .col-md-10.col-md-offset-1.box

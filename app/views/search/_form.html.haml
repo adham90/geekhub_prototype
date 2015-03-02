@@ -1,6 +1,6 @@
 #search-controls
-  - if params[:qlocation] == nil && user_signed_in?
-    - params[:qlocation] = current_user.profile.address
+  -# - if params[:qlocation] == nil && user_signed_in?
+  -#   - params[:qlocation] = current_user.profile.address
 
   = form_tag(search_path, method: 'get') do
     .input-group

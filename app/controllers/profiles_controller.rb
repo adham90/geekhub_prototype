@@ -19,9 +19,9 @@
 # t.string   "avatar",    limit: 255
 ####################################################
 class ProfilesController < ApplicationController
-  before_filter :valid_notice, except: [ :edit, :update ]
-  before_filter :hide_navbar, only: [ :new ]
-  before_filter :hide_footer, only: [ :new ]
+  # before_filter :hide_navbar, only: [ :new ]
+  # before_filter :hide_footer, only: [ :new ]
+  before_filter :valid_notice
 
   before_action :set_domains
   before_action :set_profile, only: [:privacy, :skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill, :work_and_education]
@@ -60,6 +60,7 @@ class ProfilesController < ApplicationController
     else
       @profile = Profile.new
       @profile.build_user
+      @profile.profile_skills.build
       respond_with(@profile)
     end
   end
@@ -139,6 +140,6 @@ class ProfilesController < ApplicationController
        :job_title, :job_company, :job_details, :bio, :phone,
        :gender, :address, :latitude, :longitude, :university, :age,
        :avatar, :domain_id, user_attributes: [:email, :password, :password_confirmation],
-       profile_skills_attributes: [:id, :skill_name, :experience_years, :description, :tags, :primary, :_destroy])
+       profile_skills_attributes: [:id, :skill_name, :experience_years, :description, :primary, :_destroy])
     end
 end

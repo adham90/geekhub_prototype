@@ -48,4 +48,5 @@ Rails.application.routes.draw do
   get '/autocompletes/skill', to: 'autocompletes#skill', as: 'autocompletes_skill'
   get '/autocompletes/university', to: 'autocompletes#university', as: 'autocompletes_university'
 
+  post "/after_signup/confirm_facebook", to: "after_signup#update"
 end

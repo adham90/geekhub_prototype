@@ -16,22 +16,38 @@
           specialist
 
     .linked_accounts-btn
-      - if profile.facebook.present?
-        = link_to "#{profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
-          %span.ion-social-facebook
+      -if user_signed_in?
+        - if profile.facebook.present?
+          = link_to "#{profile.facebook}", :class => "btn btn-facebook", target: "_blank" do
+            %span.ion-social-facebook
 
-      - if profile.github.present?
-        = link_to "#{profile.github}", :class => "btn btn-github", target: "_blank" do
-          %span.ion-social-github
+        - if profile.github.present?
+          = link_to "#{profile.github}", :class => "btn btn-github", target: "_blank" do
+            %span.ion-social-github
 
-      - if profile.twitter.present?
-        = link_to "#{profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
-          %span.ion-social-twitter
+        - if profile.twitter.present?
+          = link_to "#{profile.twitter}", :class => "btn btn-twitter", target: "_blank" do
+            %span.ion-social-twitter
 
-      - if profile.linkedin.present?
-        = link_to "#{profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
-          %span.ion-social-linkedin
+        - if profile.linkedin.present?
+          = link_to "#{profile.linkedin}", :class => "btn btn-linkedin", target: "_blank" do
+            %span.ion-social-linkedin
+      -else
+        - if profile.facebook.present?
+          = link_to "#{signup_path}", :class => "btn btn-facebook", target: "_blank" do
+            %span.ion-social-facebook
 
+        - if profile.github.present?
+          = link_to "#{signup_path}", :class => "btn btn-github", target: "_blank" do
+            %span.ion-social-github
+
+        - if profile.twitter.present?
+          = link_to "#{signup_path}", :class => "btn btn-twitter", target: "_blank" do
+            %span.ion-social-twitter
+
+        - if profile.linkedin.present?
+          = link_to "#{signup_path}", :class => "btn btn-linkedin", target: "_blank" do
+            %span.ion-social-linkedin
   .bio
     = profile.bio
   #box-skills

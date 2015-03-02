@@ -6,21 +6,14 @@ class Profile < ActiveRecord::Base
   has_many :skills, through: :profile_skills
   belongs_to :domain
 
-  # has_many :privacies, through: :user_privacies
-  # has_many :user_privacies, dependent: :destroy
-
   accepts_nested_attributes_for :skills, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :profile_skills, :reject_if => :all_blank, :allow_destroy => true
 
   accepts_nested_attributes_for :user
 
-  # accepts_nested_attributes_for :user_privacies, :reject_if => :all_blank, :allow_destroy => true
-  # accepts_nested_attributes_for :privacies, :reject_if => :all_blank, :allow_destroy => true
-
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode, :if => :address_changed?
-
 
   validates_presence_of :user
 
@@ -31,7 +24,7 @@ class Profile < ActiveRecord::Base
 
   validates :first_name, length: {maximum: 50}
 
-  validates_presence_of :first_name, on: [ :update ]
+  validates_presence_of :first_name
   validates_inclusion_of :gender, :in => [true, false], on: [ :update ]
   validates_presence_of :age, on: [ :update ]
 
@@ -40,26 +33,12 @@ class Profile < ActiveRecord::Base
                             :greater_than_or_equal_to =>0,
                             :message => "invalid age", on: [ :update ]
 
-  # validates :skills,      :presence => true, :if => :active_or_skills?
-  validates :address,     :presence => true, :if => :active_or_address?
+  validates :address, :presence => true
 
-  validate :has_skills, :if => :active_or_skills?
+  validate :has_skills
 
   def has_skills
     errors.add(:base, 'must add at least one skill') if self.profile_skills.blank?
-  end
-
-
-  def active?
-    status == 'active'
-  end
-
-  def active_or_skills?
-    status.include?('skills') || active?
-  end
-
-  def active_or_address?
-    status.include?('address') || active?
   end
 
   # validates_numericality_of :rank
