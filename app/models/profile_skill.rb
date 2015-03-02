@@ -7,6 +7,12 @@ class ProfileSkill < ActiveRecord::Base
   validates_uniqueness_of :skill_id, :scope => :profile_id
   validates_presence_of :skill_id, :experience_years, :profile
 
+  validates_numericality_of :experience_years, :only_integer =>true,
+                            length: {maximum: 4},
+                            :greater_than_or_equal_to =>0,
+                            :message => "invalid experience years", on: [ :update ]
+
+
   accepts_nested_attributes_for :skill, :reject_if => :all_blank
 
   def skill_name

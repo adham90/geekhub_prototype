@@ -35,6 +35,11 @@ class Profile < ActiveRecord::Base
   validates_inclusion_of :gender, :in => [true, false], on: [ :update ]
   validates_presence_of :age, on: [ :update ]
 
+  validates_numericality_of :age, :only_integer =>true,
+                            length: {maximum: 4},
+                            :greater_than_or_equal_to =>0,
+                            :message => "invalid age", on: [ :update ]
+
   # validates :skills,      :presence => true, :if => :active_or_skills?
   validates :address,     :presence => true, :if => :active_or_address?
 

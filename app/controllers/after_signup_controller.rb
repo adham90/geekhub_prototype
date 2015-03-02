@@ -9,18 +9,10 @@ class AfterSignupController < ApplicationController
 
   def show
     @user = current_user
+    @profile = current_user.profile
     case step
-    when :confirm_profile
-      @profile = current_user.profile
-    when :confirm_address
-      @profile = current_user.profile
     when :confirm_skills
       current_user.profile.profile_skills.build
-      @profile = current_user.profile
-    when :linked_accounts
-      @profile = current_user.profile
-    when :work_and_education
-      @profile = current_user.profile
     end
     render_wizard
   end
