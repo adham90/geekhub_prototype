@@ -29,4 +29,5 @@
 //= require intlTelInput
 //= require geolocator.min
 //= require cocoon
+//= require bootstrap-tour.min
 //= require_tree .
