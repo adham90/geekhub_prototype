@@ -1,4 +1,7 @@
 class Profile < ActiveRecord::Base
+  before_create :set_defaults
+  acts_as_votable
+  acts_as_voter
   attr_accessor :valid
   belongs_to :user
 
@@ -50,6 +53,10 @@ class Profile < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  def set_defaults
+    self.age = 0 unless self.age.present?
+    self.gender = true unless self.gender.present?
+  end
 
   def name
     "#{first_name} #{last_name}"

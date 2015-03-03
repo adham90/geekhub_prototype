@@ -1,3 +1,5 @@
+@import "mixins";
+
 .search-item-box{
   border-bottom: 1px solid #ECF0F1;
   .item-img{
@@ -80,7 +82,8 @@
   .linked_accounts-btn{
     display: table-cell;
     vertical-align: top;
-    max-width: 180px;
+    // max-width: 180px;
+    width: auto;
     height: 60px;
     padding: 5px;
     padding-top: 7px;
@@ -112,4 +115,36 @@
       vertical-align:middle;
     }
   }
+}
+.upvote{
+  display: table-cell;
+  width: 50px;
+  .btn{
+    padding-top: 0px;
+    padding-bottom: 4px;
+  }
+}
+
+.ion-arrow-up-b{
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: -3px;
+}
+
+.dislike-btn{
+  @include box-shadow;
+
+  background-color: #EDECEB;
+  float: right;
+  margin-right: 5px;
+  color: #DB6161;
+}
+
+.like-btn{
+  @include box-shadow;
+  
+  background-color: #EDECEB;
+  float: right;
+  margin-right: 5px;
+  color: #3b87c7;
 }

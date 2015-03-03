@@ -1,0 +1,3 @@
+$("#like-count-<%= @profile.id %>").text("<%= @profile.cached_votes_up %>");
+$("#like-<%= @profile.id %>").removeClass("like-btn");
+$("#like-<%= @profile.id %>").addClass("dislike-btn");

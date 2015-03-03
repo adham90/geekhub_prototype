@@ -54,6 +54,9 @@ gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'acts_as_votable'
+
+
 gem 'rails_12factor', group: :production
 gem 'pg', group: :production
 

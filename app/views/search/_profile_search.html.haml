@@ -48,6 +48,22 @@
         - if profile.linkedin.present?
           = link_to "#{signup_path}", :class => "btn btn-linkedin", target: "_blank" do
             %span.ion-social-linkedin
+    -if user_signed_in?
+      .upvote
+        - if current_user.profile.liked? profile
+          = link_to like_profile_path(profile.username),remote: true , method: :put, class: "btn dislike-btn", id: "like-#{profile.id}" do
+            .ion-arrow-up-b
+            %span{id: "like-count-#{profile.id}"}= profile.cached_votes_up
+        - else
+          = link_to like_profile_path(profile.username),remote: true , method: :put, class: "btn like-btn", id: "like-#{profile.id}" do
+            .ion-arrow-up-b
+            %span{id: "like-count-#{profile.id}"}= profile.cached_votes_up
+    - else
+      .upvote
+        = link_to "#",remote: true , class: "btn like-btn", id: "like-#{profile.id}" do
+          .ion-arrow-up-b
+          %span{id: "like-count-#{profile.id}"}= profile.cached_votes_up
+
   .bio
     = profile.bio
   #box-skills

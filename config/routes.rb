@@ -12,15 +12,10 @@ Rails.application.routes.draw do
       get 'linked_accounts', to: 'profiles#linked_accounts'
       get 'work_and_education', to: 'profiles#work_and_education'
       get 'skills', to: 'profiles#skills'
-      # get 'privacy', to: 'profiles#privacy'
     end
   end
-
-  ## pair
-  # resources :pairs do
-  #   get 'set_status'
-  #   get 'navigator_edit'
-  # end
+  put 'profile/like/:username' => 'profiles#like', as: "like_profile"
+  put 'profile/unlike/:username' => 'profiles#unlike', as: "unlike_profile"
 
 
   resources :jobs do

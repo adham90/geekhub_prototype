@@ -21,8 +21,6 @@ class AfterSignupController < ApplicationController
 
   def update
     if profile_params.present? && current_user.profile.present?
-      current_user.profile.status = step
-      current_user.profile.status = 'active' if step == steps.last
       if current_user.profile.update(profile_params)
         flash[:notice] = "Update success."
         render_wizard current_user.profile
@@ -32,8 +30,6 @@ class AfterSignupController < ApplicationController
       end
     else
       current_user.build_profile
-      current_user.profile.status = step
-      current_user.profile.status = 'active' if step == steps.last
       if current_user.profile.update(profile_params)
         flash[:notice] = "Update success."
         render_wizard current_user.profile

@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
   before_filter :valid_notice
 
   before_action :set_domains
-  before_action :set_profile, only: [:privacy, :skills, :linked_accounts, :edit_address ,:show, :edit, :update, :destroy, :add_skill, :work_and_education]
+  before_action :set_profile, except: [:index, :about, :new]
 
   before_action :authenticate_user!, except: [:index, :show, :new, :create, :autocomplete_university_name, :locations]
   autocomplete  :university, :name
@@ -93,6 +93,23 @@ class ProfilesController < ApplicationController
     respond_with(@profile)
   end
 
+  def like
+    if @profile == current_user.profile
+      return
+    else
+      if current_user.profile.liked? @profile
+        current_user.profile.dislikes @profile
+        respond_to do |format|
+          format.js { render "like.js.erb" }
+        end
+      else
+        current_user.profile.likes @profile
+        respond_to do |format|
+          format.js { render "dislike.js.erb" }
+        end
+      end
+    end
+  end
 
   def edit_address
     render :address, :locals => {profile: @profile}
